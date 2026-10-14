@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>12篇 · 詞解選擇</title>
+<style>
+:root{--ink:#2a1840;--vio:#5b2d86;--ok:#2f8f62;--bad:#c4455a;--muted:#8a7496;--paper:#f7f1fb}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;overflow-x:hidden;background:var(--paper);color:var(--ink);
+  font-family:"Iwanami Mincho","Noto Serif TC","Songti TC","PingFang HK",serif;color-scheme:light}.unitview{display:none}.unitview:target{display:block}.unitview:target~#home{display:none}a.cardlink,a.card{display:block;color:inherit;text-decoration:none}html{-webkit-text-size-adjust:100%}button,.opt{touch-action:manipulation}main{min-height:50vh}
+button{font-family:-apple-system,"PingFang HK","Noto Sans TC","Microsoft JhengHei",sans-serif}
+header{position:sticky;top:0;z-index:10;display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+  padding:10px 12px;padding-top:max(10px,env(safe-area-inset-top));
+  background:rgba(247,241,251,.94);border-bottom:1px solid #e5d4f3}
+header h1{margin:0;font-size:18px;color:var(--vio);cursor:pointer;white-space:nowrap}
+.brand{font-size:14px;color:#fff;background:var(--vio);border-radius:999px;padding:6px 10px;font-family:-apple-system,"PingFang HK","Noto Sans TC",sans-serif;font-weight:700}
+nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+nav button,.ghost,.pri{border:0;border-radius:999px;padding:8px 12px;cursor:pointer;font-size:14px;min-height:40px}
+nav button,.ghost{background:transparent;color:var(--vio)}
+nav button.on,.pri{background:linear-gradient(180deg,#8a58bc,var(--vio));color:#fff}
+#pill{font-size:13px;background:#efe3f8;color:var(--vio);padding:6px 10px;border-radius:999px;font-weight:700}
+main{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:16px 12px 80px;min-height:60vh;background:transparent}
+.hero,.panel{background:#fffafd;border:1px solid #eadff4;border-radius:22px;padding:18px;box-shadow:0 16px 40px rgba(91,45,134,.08)}
+.hero h2{margin:0 0 8px;font-size:28px;color:var(--vio)}
+h2{font-size:18px;margin:18px 0 8px;color:var(--vio)}
+.hero p{margin:0 0 14px;line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px}
+.card{background:#fff;border:1px solid #eadff4;border-radius:16px;padding:14px;cursor:pointer}
+.card .no{font-size:11px;letter-spacing:.12em;color:var(--muted)}
+.card h3{margin:6px 0 4px;font-size:18px}
+.bar{height:6px;background:#efe3f8;border-radius:99px;margin-top:8px;overflow:hidden}
+.bar i{display:block;height:100%;background:#8a58bc;width:0}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.chip{background:#efe3f8;color:var(--vio);border-radius:999px;padding:6px 10px;font-size:13px}
+.q{background:#fff;border:1px solid #eadff4;border-radius:16px;padding:14px;margin:0 0 14px;position:relative}
+.star{position:absolute;top:8px;right:8px;border:0;background:transparent;color:#c9b3d8;font-size:22px;cursor:pointer;line-height:1;padding:6px}
+.star.on{color:#e2a100}
+.stem{font-family:-apple-system,"PingFang HK","Noto Sans TC",sans-serif;margin-bottom:8px;color:#6d5a78;font-size:13px}
+.quote{margin:8px 0 12px;padding:10px 12px;background:#f6ecff;border-left:4px solid #7b4aa8;border-radius:0 12px 12px 0;line-height:1.85;font-size:18px}
+u.mark{text-decoration:none;border-bottom:2px solid #7b4aa8;color:var(--vio);font-weight:700}
+.opt{display:block;width:100%;text-align:left;border:1px solid #eadff4;background:#fbf7fd;color:var(--ink);
+  border-radius:12px;padding:12px 14px;margin:0 0 8px;font-size:16px;min-height:46px}
+.opt.ok{background:#e5f6ec;border-color:#2f8f62;color:#1d6b46}
+.opt.bad{background:#fdecef;border-color:#c4455a;color:#8d2436}
+.feedback{margin-top:8px;font-family:-apple-system,"PingFang HK","Noto Sans TC",sans-serif;font-size:15px;min-height:22px}
+.feedback.ok{color:var(--ok)}.feedback.bad{color:var(--bad)}
+.result{margin:0 0 12px;padding:16px;border-radius:16px;background:#fff;border:1px solid #eadff4;text-align:center}
+.result b{display:block;font-size:22px;color:var(--vio);margin:0 0 6px}
+.result span{color:var(--muted);font-size:14px}
+.mixrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid #f0e6f6}
+.mixrow label{flex:1;min-width:140px}
+.mixrow input[type=number]{width:72px;min-height:40px;border:1px solid #eadff4;border-radius:10px;padding:6px 8px;font-size:16px}
+.footer{max-width:980px;margin:0 auto 30px;padding:0 16px;color:var(--muted);font-size:12px}
+
+.egg{position:fixed;inset:0;z-index:80;background:rgba(42,24,64,.55);display:flex;align-items:center;justify-content:center;padding:20px}
+.egg box{background:#fffafd;border:1px solid #eadff4;border-radius:22px;padding:22px 18px;max-width:360px;width:100%;text-align:center;box-shadow:0 20px 50px rgba(42,24,64,.25)}
+.egg b{display:block;font-size:22px;color:#5b2d86;line-height:1.6;margin:0 0 16px}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Laurence</div>
+  <h1 id="goHome">12篇 · 詞解選擇</h1>
+  <nav>
+    <button data-v="home" class="on">篇章</button>
+    <button data-v="mix">抽題</button>
+    <button data-v="wrong">錯題</button>
+    <button data-v="star">標記</button>
+    <button id="resetAll" class="ghost">重設</button>
+  </nav>
+  <div id="pill">12篇 0%</div>
+</header>
+<main id="app"><section class='unitview' id='u-lunyu'><p><a href='#home'>返回</a></p><h2>01　論仁、論孝、論君子</h2><div class='q'><div class='stem'>1. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>惡</u>乎成名</blockquote><div class='opt'>A. 醜惡</div><div class='opt'>B. 怎麼</div><div class='opt'>C. 憎惡</div><div class='opt'>D. 憎厭</div></div><div class='q'><div class='stem'>2. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不可以久處<u>約</u></blockquote><div class='opt'>A. 約定</div><div class='opt'>B. 窮困</div><div class='opt'>C. 安逸</div><div class='opt'>D. 約束</div></div><div class='q'><div class='stem'>3. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>君子<u>病</u>無能焉</blockquote><div class='opt'>A. 疾病</div><div class='opt'>B. 困苦</div><div class='opt'>C. 缺點</div><div class='opt'>D. 擔憂</div></div><div class='q'><div class='stem'>4. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>知者<u>利</u>仁</blockquote><div class='opt'>A. 利用</div><div class='opt'>B. 利益</div><div class='opt'>C. 鋒利</div><div class='opt'>D. 便利</div></div><div class='q'><div class='stem'>5. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不以其<u>道</u>得之</blockquote><div class='opt'>A. 方法</div><div class='opt'>B. 道路</div><div class='opt'>C. 原因</div><div class='opt'>D. 學問</div></div><div class='q'><div class='stem'>6. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不<u>處</u>也</blockquote><div class='opt'>A. 處理</div><div class='opt'>B. 處所</div><div class='opt'>C. 接受</div><div class='opt'>D. 處於</div></div><div class='q'><div class='stem'>7. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不<u>去</u>也</blockquote><div class='opt'>A. 除去</div><div class='opt'>B. 離開</div><div class='opt'>C. 擺脫</div><div class='opt'>D. 拋棄</div></div><div class='q'><div class='stem'>8. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>君子無終食之間<u>違</u>仁</blockquote><div class='opt'>A. 遵守</div><div class='opt'>B. 違背</div><div class='opt'>C. 避開</div><div class='opt'>D. 捨棄</div></div><div class='q'><div class='stem'>9. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>造次</u>必於是</blockquote><div class='opt'>A. 製造</div><div class='opt'>B. 魯莽</div><div class='opt'>C. 倉卒</div><div class='opt'>D. 焦急</div></div><div class='q'><div class='stem'>10. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>克</u>己復禮為仁</blockquote><div class='opt'>A. 能夠</div><div class='opt'>B. 戰勝</div><div class='opt'>C. 剋期</div><div class='opt'>D. 約束</div></div><div class='q'><div class='stem'>11. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>為</u>仁由己</blockquote><div class='opt'>A. 作為</div><div class='opt'>B. 實踐</div><div class='opt'>C. 製作</div><div class='opt'>D. 因為</div></div><div class='q'><div class='stem'>12. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>為仁<u>由</u>己</blockquote><div class='opt'>A. 從</div><div class='opt'>B. 原因</div><div class='opt'>C. 憑</div><div class='opt'>D. 經由</div></div><div class='q'><div class='stem'>13. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>請問其<u>目</u></blockquote><div class='opt'>A. 目的</div><div class='opt'>B. 看待</div><div class='opt'>C. 綱目</div><div class='opt'>D. 眼睛</div></div><div class='q'><div class='stem'>14. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>請<u>事</u>斯語矣</blockquote><div class='opt'>A. 事情</div><div class='opt'>B. 事業</div><div class='opt'>C. 實踐</div><div class='opt'>D. 侍奉</div></div><div class='q'><div class='stem'>15. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>無求生以<u>害</u>仁</blockquote><div class='opt'>A. 災害</div><div class='opt'>B. 忌妒</div><div class='opt'>C. 離棄</div><div class='opt'>D. 損害</div></div><div class='q'><div class='stem'>16. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>有殺身以<u>成</u>仁</blockquote><div class='opt'>A. 完成</div><div class='opt'>B. 盛</div><div class='opt'>C. 成全</div><div class='opt'>D. 成為</div></div><div class='q'><div class='stem'>17. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>樊遲<u>御</u></blockquote><div class='opt'>A. 抵禦</div><div class='opt'>B. 駕駛車馬</div><div class='opt'>C. 御用</div><div class='opt'>D. 治理</div></div><div class='q'><div class='stem'>18. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>無</u>違</blockquote><div class='opt'>A. 無非</div><div class='opt'>B. 不要</div><div class='opt'>C. 無論</div><div class='opt'>D. 沒有</div></div><div class='q'><div class='stem'>19. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>無<u>違</u></blockquote><div class='opt'>A. 違背</div><div class='opt'>B. 離開</div><div class='opt'>C. 觸忤</div><div class='opt'>D. 避開</div></div><div class='q'><div class='stem'>20. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>生<u>事</u>之以禮</blockquote><div class='opt'>A. 侍奉</div><div class='opt'>B. 事業</div><div class='opt'>C. 事情</div><div class='opt'>D. 實踐</div></div><div class='q'><div class='stem'>21. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>是謂能<u>養</u></blockquote><div class='opt'>A. 修養</div><div class='opt'>B. 養育</div><div class='opt'>C. 飼養</div><div class='opt'>D. 供養</div></div><div class='q'><div class='stem'>22. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>皆能有<u>養</u></blockquote><div class='opt'>A. 養育</div><div class='opt'>B. 修養</div><div class='opt'>C. 供養</div><div class='opt'>D. 飼養</div></div><div class='q'><div class='stem'>23. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>事父母<u>幾</u>諫</blockquote><div class='opt'>A. 幾乎</div><div class='opt'>B. 接近</div><div class='opt'>C. 幾次</div><div class='opt'>D. 委婉</div></div><div class='q'><div class='stem'>24. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>又敬不<u>違</u></blockquote><div class='opt'>A. 避開</div><div class='opt'>B. 遺留</div><div class='opt'>C. 離開</div><div class='opt'>D. 違反</div></div><div class='q'><div class='stem'>25. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>勞</u>而不怨</blockquote><div class='opt'>A. 功勞</div><div class='opt'>B. 擔憂</div><div class='opt'>C. 勞苦</div><div class='opt'>D. 疾病</div></div><div class='q'><div class='stem'>26. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>父母之<u>年</u></blockquote><div class='opt'>A. 年成</div><div class='opt'>B. 年份</div><div class='opt'>C. 歲時</div><div class='opt'>D. 年紀</div></div><div class='q'><div class='stem'>27. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>君子不<u>重</u>則不威</blockquote><div class='opt'>A. 貴重</div><div class='opt'>B. 再</div><div class='opt'>C. 重複</div><div class='opt'>D. 莊重</div></div><div class='q'><div class='stem'>28. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>君子不重則不<u>威</u></blockquote><div class='opt'>A. 威勢</div><div class='opt'>B. 威嚇</div><div class='opt'>C. 威力</div><div class='opt'>D. 威儀</div></div><div class='q'><div class='stem'>29. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>學則不<u>固</u></blockquote><div class='opt'>A. 堅固</div><div class='opt'>B. 堅決</div><div class='opt'>C. 鞏固</div><div class='opt'>D. 本來</div></div><div class='q'><div class='stem'>30. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>無友不<u>如</u>己者</blockquote><div class='opt'>A. 及</div><div class='opt'>B. 如果</div><div class='opt'>C. 如同</div><div class='opt'>D. 及得上</div></div><div class='q'><div class='stem'>31. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>過</u>則勿憚改</blockquote><div class='opt'>A. 過錯</div><div class='opt'>B. 過去</div><div class='opt'>C. 經過</div><div class='opt'>D. 超過</div></div><div class='q'><div class='stem'>32. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>過則勿<u>憚</u>改</blockquote><div class='opt'>A. 忌憚</div><div class='opt'>B. 憚煩</div><div class='opt'>C. 害怕</div><div class='opt'>D. 勞苦</div></div><div class='q'><div class='stem'>33. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>小人長<u>戚</u>戚</blockquote><div class='opt'>A. 憂愁</div><div class='opt'>B. 親戚</div><div class='opt'>C. 悲哀</div><div class='opt'>D. 妒忌</div></div><div class='q'><div class='stem'>34. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>斯</u>謂之君子矣乎</blockquote><div class='opt'>A. 你</div><div class='opt'>B. 則</div><div class='opt'>C. 這樣</div><div class='opt'>D. 無意</div></div><div class='q'><div class='stem'>35. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>君子<u>成</u>人之美</blockquote><div class='opt'>A. 完成</div><div class='opt'>B. 成全</div><div class='opt'>C. 成為</div><div class='opt'>D. 盛</div></div><div class='q'><div class='stem'>36. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>小人<u>反</u>是</blockquote><div class='opt'>A. 反省</div><div class='opt'>B. 相反</div><div class='opt'>C. 返回</div><div class='opt'>D. 造反</div></div><div class='q'><div class='stem'>37. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>君子義以為<u>質</u></blockquote><div class='opt'>A. 抵押</div><div class='opt'>B. 質地</div><div class='opt'>C. 原則</div><div class='opt'>D. 質問</div></div><div class='q'><div class='stem'>38. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>禮以<u>行</u>之</blockquote><div class='opt'>A. 行為</div><div class='opt'>B. 行走</div><div class='opt'>C. 德行</div><div class='opt'>D. 實行</div></div><div class='q'><div class='stem'>39. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>孫</u>以出之</blockquote><div class='opt'>A. 後代</div><div class='opt'>B. 孫兒</div><div class='opt'>C. 出奔</div><div class='opt'>D. 謙遜</div></div><div class='q'><div class='stem'>40. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>孫以<u>出</u>之</blockquote><div class='opt'>A. 超出</div><div class='opt'>B. 外出</div><div class='opt'>C. 說出</div><div class='opt'>D. 產生</div></div><div class='q'><div class='stem'>41. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>信</u>以成之</blockquote><div class='opt'>A. 相信</div><div class='opt'>B. 書信</div><div class='opt'>C. 訊息</div><div class='opt'>D. 誠實</div></div><div class='q'><div class='stem'>42. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>信以<u>成</u>之</blockquote><div class='opt'>A. 完成</div><div class='opt'>B. 成為</div><div class='opt'>C. 盛</div><div class='opt'>D. 成全</div></div><div class='q'><div class='stem'>43. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>君子<u>求</u>諸己</blockquote><div class='opt'>A. 徵求</div><div class='opt'>B. 責求</div><div class='opt'>C. 尋求</div><div class='opt'>D. 請求</div></div></section><section class='unitview' id='u-yusuo'><p><a href='#home'>返回</a></p><h2>02　魚我所欲也</h2><div class='q'><div class='stem'>1. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>是亦不可以<u>已</u>乎</blockquote><div class='opt'>A. 停止</div><div class='opt'>B. 自己</div><div class='opt'>C. 已經</div><div class='opt'>D. 太</div></div><div class='q'><div class='stem'>2. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>鄉</u>為身死而不受</blockquote><div class='opt'>A. 鄉里</div><div class='opt'>B. 面向</div><div class='opt'>C. 過往</div><div class='opt'>D. 故鄉</div></div><div class='q'><div class='stem'>3. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>舍</u>魚而取熊掌者也</blockquote><div class='opt'>A. 安置</div><div class='opt'>B. 施捨</div><div class='opt'>C. 房舍</div><div class='opt'>D. 捨棄</div></div><div class='q'><div class='stem'>4. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>故不為<u>苟</u>得也</blockquote><div class='opt'>A. 如果</div><div class='opt'>B. 隨便</div><div class='opt'>C. 草名</div><div class='opt'>D. 假如</div></div><div class='q'><div class='stem'>5. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>死亦我所<u>惡</u></blockquote><div class='opt'>A. 醜惡</div><div class='opt'>B. 怎麼</div><div class='opt'>C. 憎厭</div><div class='opt'>D. 兇惡</div></div><div class='q'><div class='stem'>6. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>故<u>患</u>有所不辟也</blockquote><div class='opt'>A. 擔憂</div><div class='opt'>B. 禍患</div><div class='opt'>C. 憂慮</div><div class='opt'>D. 疾病</div></div><div class='q'><div class='stem'>7. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>故患有所不<u>辟</u>也</blockquote><div class='opt'>A. 君王</div><div class='opt'>B. 開闢</div><div class='opt'>C. 避</div><div class='opt'>D. 刑法</div></div><div class='q'><div class='stem'>8. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>非獨</u>賢者有是心也</blockquote><div class='opt'>A. 唯獨不是</div><div class='opt'>B. 因此</div><div class='opt'>C. 然而</div><div class='opt'>D. 不僅</div></div><div class='q'><div class='stem'>9. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>弗</u>得則死</blockquote><div class='opt'>A. 不能</div><div class='opt'>B. 拂逆</div><div class='opt'>C. 不</div><div class='opt'>D. 否</div></div><div class='q'><div class='stem'>10. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>嘑</u>爾而與之</blockquote><div class='opt'>A. 呼喝</div><div class='opt'>B. 呼吸</div><div class='opt'>C. 辱罵</div><div class='opt'>D. 踐踏</div></div><div class='q'><div class='stem'>11. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>嘑爾而<u>與</u>之</blockquote><div class='opt'>A. 參與</div><div class='opt'>B. 給與</div><div class='opt'>C. 和</div><div class='opt'>D. 幫助</div></div><div class='q'><div class='stem'>12. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>蹴</u>爾而與之</blockquote><div class='opt'>A. 踐踏</div><div class='opt'>B. 速</div><div class='opt'>C. 踢</div><div class='opt'>D. 倉促</div></div><div class='q'><div class='stem'>13. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>萬鍾則不<u>辯</u>禮義而受之</blockquote><div class='opt'>A. 爭辯</div><div class='opt'>B. 辨別</div><div class='opt'>C. 辯論</div><div class='opt'>D. 巧言</div></div><div class='q'><div class='stem'>14. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>萬鍾於我何<u>加</u>焉</blockquote><div class='opt'>A. 增加</div><div class='opt'>B. 加以</div><div class='opt'>C. 增益</div><div class='opt'>D. 超過</div></div><div class='q'><div class='stem'>15. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>妻妾之<u>奉</u></blockquote><div class='opt'>A. 奉獻</div><div class='opt'>B. 捧</div><div class='opt'>C. 侍奉</div><div class='opt'>D. 接受</div></div><div class='q'><div class='stem'>16. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>所識窮乏者<u>得</u>我與</blockquote><div class='opt'>A. 感嘆</div><div class='opt'>B. 能夠</div><div class='opt'>C. 獲得</div><div class='opt'>D. 感激</div></div></section><section class='unitview' id='u-xiaoyao'><p><a href='#home'>返回</a></p><h2>03　逍遙遊</h2><div class='q'><div class='stem'>1. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>衆所同<u>去</u>也</blockquote><div class='opt'>A. 離開</div><div class='opt'>B. 擺脫</div><div class='opt'>C. 除去</div><div class='opt'>D. 拋棄</div></div><div class='q'><div class='stem'>2. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>我<u>樹</u>之成而實五石</blockquote><div class='opt'>A. 樹木</div><div class='opt'>B. 樹立</div><div class='opt'>C. 種植</div><div class='opt'>D. 建立</div></div><div class='q'><div class='stem'>3. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>患</u>其無用</blockquote><div class='opt'>A. 禍患</div><div class='opt'>B. 缺點</div><div class='opt'>C. 疾病</div><div class='opt'>D. 擔憂</div></div><div class='q'><div class='stem'>4. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>今一朝而<u>鬻</u>技百金</blockquote><div class='opt'>A. 粥食</div><div class='opt'>B. 買</div><div class='opt'>C. 養育</div><div class='opt'>D. 賣</div></div><div class='q'><div class='stem'>5. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>魏王<u>貽</u>我大瓠之種</blockquote><div class='opt'>A. 貽誤</div><div class='opt'>B. 贈</div><div class='opt'>C. 怠</div><div class='opt'>D. 遺留</div></div><div class='q'><div class='stem'>6. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>我樹<u>之</u>成而實五石</blockquote><div class='opt'>A. 的</div><div class='opt'>B. 他，指子女</div><div class='opt'>C. 客人</div><div class='opt'>D. 大瓠之種</div></div><div class='q'><div class='stem'>7. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>我樹之成而<u>實</u>五石</blockquote><div class='opt'>A. 誠實</div><div class='opt'>B. 忠實</div><div class='opt'>C. 果實</div><div class='opt'>D. 充實</div></div><div class='q'><div class='stem'>8. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>其堅不能自<u>舉</u>也</blockquote><div class='opt'>A. 舉薦</div><div class='opt'>B. 舉起</div><div class='opt'>C. 皆</div><div class='opt'>D. 支撐</div></div><div class='q'><div class='stem'>9. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>剖</u>之以為瓢</blockquote><div class='opt'>A. 剖白</div><div class='opt'>B. 批判</div><div class='opt'>C. 分析</div><div class='opt'>D. 割開</div></div><div class='q'><div class='stem'>10. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>則瓠落無所<u>容</u></blockquote><div class='opt'>A. 存放</div><div class='opt'>B. 允許</div><div class='opt'>C. 容貌</div><div class='opt'>D. 容器</div></div><div class='q'><div class='stem'>11. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>吾為其無用而<u>掊</u>之</blockquote><div class='opt'>A. 聚斂</div><div class='opt'>B. 擊破</div><div class='opt'>C. 丟棄</div><div class='opt'>D. 拿起</div></div><div class='q'><div class='stem'>12. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>夫子固<u>拙</u>於用大矣</blockquote><div class='opt'>A. 拙劣文章</div><div class='opt'>B. 笨拙</div><div class='opt'>C. 謙稱</div><div class='opt'>D. 不善於</div></div><div class='q'><div class='stem'>13. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>宋人有善<u>為</u>不龜手之藥者</blockquote><div class='opt'>A. 製作</div><div class='opt'>B. 實踐</div><div class='opt'>C. 作為</div><div class='opt'>D. 售賣</div></div><div class='q'><div class='stem'>14. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>世世以<u>洴澼</u>絖為事</blockquote><div class='opt'>A. 漂泊</div><div class='opt'>B. 浮游</div><div class='opt'>C. 漂洗</div><div class='opt'>D. 擊水</div></div><div class='q'><div class='stem'>15. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>世世以洴澼<u>絖</u>為事</blockquote><div class='opt'>A. 絲綿</div><div class='opt'>B. 棉絮</div><div class='opt'>C. 細棉</div><div class='opt'>D. 光亮</div></div><div class='q'><div class='stem'>16. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>世世以洴澼絖為<u>事</u></blockquote><div class='opt'>A. 侍奉</div><div class='opt'>B. 實踐</div><div class='opt'>C. 事業</div><div class='opt'>D. 事情</div></div><div class='q'><div class='stem'>17. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>請買其<u>方</u>百金</blockquote><div class='opt'>A. 配方</div><div class='opt'>B. 方法</div><div class='opt'>C. 正在</div><div class='opt'>D. 方向</div></div><div class='q'><div class='stem'>18. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>聚族而<u>謀</u>曰</blockquote><div class='opt'>A. 計劃</div><div class='opt'>B. 謀劃</div><div class='opt'>C. 計謀</div><div class='opt'>D. 圖謀</div></div><div class='q'><div class='stem'>19. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>請<u>與</u>之</blockquote><div class='opt'>A. 幫助</div><div class='opt'>B. 參與</div><div class='opt'>C. 和</div><div class='opt'>D. 給與</div></div><div class='q'><div class='stem'>20. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>以<u>說</u>吳王</blockquote><div class='opt'>A. 喜悅</div><div class='opt'>B. 解說</div><div class='opt'>C. 言論</div><div class='opt'>D. 遊說</div></div><div class='q'><div class='stem'>21. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>越有<u>難</u></blockquote><div class='opt'>A. 亂事</div><div class='opt'>B. 災難</div><div class='opt'>C. 困難</div><div class='opt'>D. 責難</div></div><div class='q'><div class='stem'>22. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>吳王<u>使</u>之將</blockquote><div class='opt'>A. 使者</div><div class='opt'>B. 作為使者</div><div class='opt'>C. 派遣</div><div class='opt'>D. 出使</div></div><div class='q'><div class='stem'>23. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>吳王使<u>之</u>將</blockquote><div class='opt'>A. 客人</div><div class='opt'>B. 他，指子女</div><div class='opt'>C. 的</div><div class='opt'>D. 大瓠之種</div></div><div class='q'><div class='stem'>24. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>吳王使之<u>將</u></blockquote><div class='opt'>A. 出使</div><div class='opt'>B. 領兵</div><div class='opt'>C. 將要</div><div class='opt'>D. 和</div></div><div class='q'><div class='stem'>25. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>裂</u>地而封之</blockquote><div class='opt'>A. 割裂</div><div class='opt'>B. 割</div><div class='opt'>C. 破裂</div><div class='opt'>D. 分裂</div></div><div class='q'><div class='stem'>26. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>能不龜手<u>一</u>也</blockquote><div class='opt'>A. 一樣</div><div class='opt'>B. 一旦</div><div class='opt'>C. 專一</div><div class='opt'>D. 統一</div></div><div class='q'><div class='stem'>27. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>或<u>以</u>封</blockquote><div class='opt'>A. 因為</div><div class='opt'>B. 用</div><div class='opt'>C. 因此</div><div class='opt'>D. 認為</div></div><div class='q'><div class='stem'>28. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>則所用之<u>異</u>也</blockquote><div class='opt'>A. 不同</div><div class='opt'>B. 分開</div><div class='opt'>C. 奇特</div><div class='opt'>D. 怪異</div></div><div class='q'><div class='stem'>29. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>何不<u>慮</u>以為大樽而浮於江湖</blockquote><div class='opt'>A. 拿</div><div class='opt'>B. 憂慮</div><div class='opt'>C. 考慮</div><div class='opt'>D. 打算</div></div><div class='q'><div class='stem'>30. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>則夫子<u>猶</u>有蓬之心也夫</blockquote><div class='opt'>A. 仍然</div><div class='opt'>B. 尚且</div><div class='opt'>C. 如同</div><div class='opt'>D. 像</div></div><div class='q'><div class='stem'>31. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>其<u>大本</u>擁腫而不中繩墨</blockquote><div class='opt'>A. 資本</div><div class='opt'>B. 根本</div><div class='opt'>C. 年輪</div><div class='opt'>D. 樹幹</div></div><div class='q'><div class='stem'>32. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>其大本擁腫而不<u>中</u>繩墨</blockquote><div class='opt'>A. 射中</div><div class='opt'>B. 合乎</div><div class='opt'>C. 內心</div><div class='opt'>D. 中間</div></div><div class='q'><div class='stem'>33. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>其小枝<u>卷</u>曲而不中規矩</blockquote><div class='opt'>A. 凹凸不平</div><div class='opt'>B. 屈曲</div><div class='opt'>C. 書卷</div><div class='opt'>D. 考卷</div></div><div class='q'><div class='stem'>34. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>立之<u>塗</u></blockquote><div class='opt'>A. 塗抹</div><div class='opt'>B. 泥塗</div><div class='opt'>C. 道路</div><div class='opt'>D. 塗飾</div></div><div class='q'><div class='stem'>35. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>子</u>獨不見狸狌乎</blockquote><div class='opt'>A. 你</div><div class='opt'>B. 男子美稱</div><div class='opt'>C. 兒子</div><div class='opt'>D. 夫子</div></div><div class='q'><div class='stem'>36. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>子<u>獨</u>不見狸狌乎</blockquote><div class='opt'>A. 難道</div><div class='opt'>B. 獨自</div><div class='opt'>C. 單獨</div><div class='opt'>D. 唯獨</div></div><div class='q'><div class='stem'>37. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>以候<u>敖</u>者</blockquote><div class='opt'>A. 傲慢</div><div class='opt'>B. 遊逛</div><div class='opt'>C. 出遊</div><div class='opt'>D. 喧噪</div></div><div class='q'><div class='stem'>38. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>東西<u>跳梁</u></blockquote><div class='opt'>A. 樑上</div><div class='opt'>B. 跋扈</div><div class='opt'>C. 跳踉</div><div class='opt'>D. 跳躍</div></div><div class='q'><div class='stem'>39. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不<u>辟</u>高下</blockquote><div class='opt'>A. 避開</div><div class='opt'>B. 開闢</div><div class='opt'>C. 逃避</div><div class='opt'>D. 君王</div></div><div class='q'><div class='stem'>40. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>死於<u>罔罟</u></blockquote><div class='opt'>A. 法網</div><div class='opt'>B. 欺罔</div><div class='opt'>C. 迷惘</div><div class='opt'>D. 捕獸網</div></div><div class='q'><div class='stem'>41. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>其大<u>若</u>垂天之雲</blockquote><div class='opt'>A. 如同</div><div class='opt'>B. 好像</div><div class='opt'>C. 如果</div><div class='opt'>D. 及</div></div><div class='q'><div class='stem'>42. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>此<u>能</u>為大矣</blockquote><div class='opt'>A. 善於</div><div class='opt'>B. 能夠</div><div class='opt'>C. 才能</div><div class='opt'>D. 功能</div></div><div class='q'><div class='stem'>43. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>而不能<u>執</u>鼠</blockquote><div class='opt'>A. 捕捉</div><div class='opt'>B. 看守</div><div class='opt'>C. 執行</div><div class='opt'>D. 執持</div></div><div class='q'><div class='stem'>44. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>何不<u>樹</u>之於無何有之鄉</blockquote><div class='opt'>A. 建立</div><div class='opt'>B. 樹立</div><div class='opt'>C. 種植</div><div class='opt'>D. 樹木</div></div><div class='q'><div class='stem'>45. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>彷徨</u>乎無為其側</blockquote><div class='opt'>A. 匆遽</div><div class='opt'>B. 心神不定</div><div class='opt'>C. 縱任不拘</div><div class='opt'>D. 猶豫不決</div></div><div class='q'><div class='stem'>46. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不<u>夭</u>斤斧</blockquote><div class='opt'>A. 屈抑</div><div class='opt'>B. 夭折</div><div class='opt'>C. 天</div><div class='opt'>D. 摧折</div></div></section><section class='unitview' id='u-quanxue'><p><a href='#home'>返回</a></p><h2>04　勸學</h2><div class='q'><div class='stem'>1. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不如<u>須臾</u>之所學也</blockquote><div class='opt'>A. 片刻</div><div class='opt'>B. 少頃</div><div class='opt'>C. 等待</div><div class='opt'>D. 片刻之後</div></div><div class='q'><div class='stem'>2. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>學不可以<u>已</u></blockquote><div class='opt'>A. 太</div><div class='opt'>B. 已經</div><div class='opt'>C. 自己</div><div class='opt'>D. 止</div></div><div class='q'><div class='stem'>3. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>木直<u>中</u>繩</blockquote><div class='opt'>A. 射中</div><div class='opt'>B. 合乎</div><div class='opt'>C. 內心</div><div class='opt'>D. 中間</div></div><div class='q'><div class='stem'>4. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>輮</u>以為輪</blockquote><div class='opt'>A. 屈曲</div><div class='opt'>B. 柔軟</div><div class='opt'>C. 用火烤彎</div><div class='opt'>D. 車輪</div></div><div class='q'><div class='stem'>5. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>其曲中<u>規</u></blockquote><div class='opt'>A. 規模</div><div class='opt'>B. 圓規</div><div class='opt'>C. 規則</div><div class='opt'>D. 規勸</div></div><div class='q'><div class='stem'>6. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>雖有<u>槁</u>暴</blockquote><div class='opt'>A. 枯乾</div><div class='opt'>B. 槁木</div><div class='opt'>C. 乾枯</div><div class='opt'>D. 憔悴</div></div><div class='q'><div class='stem'>7. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>雖有槁<u>暴</u></blockquote><div class='opt'>A. 曬乾</div><div class='opt'>B. 暴露</div><div class='opt'>C. 曬</div><div class='opt'>D. 殘暴</div></div><div class='q'><div class='stem'>8. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不復<u>挺</u>者</blockquote><div class='opt'>A. 挺立</div><div class='opt'>B. 挺直</div><div class='opt'>C. 支持</div><div class='opt'>D. 挺出</div></div><div class='q'><div class='stem'>9. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>金<u>就</u>礪則利</blockquote><div class='opt'>A. 就是</div><div class='opt'>B. 完成</div><div class='opt'>C. 依靠</div><div class='opt'>D. 靠近</div></div><div class='q'><div class='stem'>10. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>金就<u>礪</u>則利</blockquote><div class='opt'>A. 磨鍊</div><div class='opt'>B. 磨礪</div><div class='opt'>C. 激勵</div><div class='opt'>D. 磨刀石</div></div><div class='q'><div class='stem'>11. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>君子博學而日<u>參</u>省乎己</blockquote><div class='opt'>A. 參與</div><div class='opt'>B. 多次</div><div class='opt'>C. 三次</div><div class='opt'>D. 反省</div></div><div class='q'><div class='stem'>12. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>君子博學而日參<u>省</u>乎己</blockquote><div class='opt'>A. 省察</div><div class='opt'>B. 減少</div><div class='opt'>C. 減省</div><div class='opt'>D. 反省</div></div><div class='q'><div class='stem'>13. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>則<u>知</u>明而行無過矣</blockquote><div class='opt'>A. 知覺</div><div class='opt'>B. 知道</div><div class='opt'>C. 知遇</div><div class='opt'>D. 智慧</div></div><div class='q'><div class='stem'>14. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>則知明而<u>行</u>無過矣</blockquote><div class='opt'>A. 行走</div><div class='opt'>B. 行為</div><div class='opt'>C. 實行</div><div class='opt'>D. 踐行</div></div><div class='q'><div class='stem'>15. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>吾嘗<u>跂</u>而望矣</blockquote><div class='opt'>A. 分岔</div><div class='opt'>B. 提起腳跟</div><div class='opt'>C. 企望</div><div class='opt'>D. 提起腳尖</div></div><div class='q'><div class='stem'>16. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>聲非加<u>疾</u>也</blockquote><div class='opt'>A. 宏亮</div><div class='opt'>B. 急速</div><div class='opt'>C. 遮擋</div><div class='opt'>D. 疾病</div></div><div class='q'><div class='stem'>17. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>而聞者<u>彰</u></blockquote><div class='opt'>A. 清楚</div><div class='opt'>B. 揭示</div><div class='opt'>C. 明顯</div><div class='opt'>D. 表彰</div></div><div class='q'><div class='stem'>18. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>假</u>輿馬者</blockquote><div class='opt'>A. 虛假</div><div class='opt'>B. 假期</div><div class='opt'>C. 借助</div><div class='opt'>D. 借</div></div><div class='q'><div class='stem'>19. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>假<u>輿</u>馬者</blockquote><div class='opt'>A. 車</div><div class='opt'>B. 輿論</div><div class='opt'>C. 魚</div><div class='opt'>D. 馬</div></div><div class='q'><div class='stem'>20. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>非<u>利</u>足也</blockquote><div class='opt'>A. 便利</div><div class='opt'>B. 利用</div><div class='opt'>C. 利益</div><div class='opt'>D. 鋒利</div></div><div class='q'><div class='stem'>21. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>而<u>致</u>千里</blockquote><div class='opt'>A. 表達</div><div class='opt'>B. 到達</div><div class='opt'>C. 極盡</div><div class='opt'>D. 招致</div></div><div class='q'><div class='stem'>22. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>非<u>能</u>水也</blockquote><div class='opt'>A. 功能</div><div class='opt'>B. 能夠</div><div class='opt'>C. 善於</div><div class='opt'>D. 才能</div></div><div class='q'><div class='stem'>23. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>非能<u>水</u>也</blockquote><div class='opt'>A. 河流</div><div class='opt'>B. 水災</div><div class='opt'>C. 渡河</div><div class='opt'>D. 游泳</div></div><div class='q'><div class='stem'>24. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>而<u>絕</u>江河</blockquote><div class='opt'>A. 橫渡</div><div class='opt'>B. 隔絕</div><div class='opt'>C. 斷絕</div><div class='opt'>D. 極</div></div><div class='q'><div class='stem'>25. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>君子<u>生</u>非異也</blockquote><div class='opt'>A. 天性</div><div class='opt'>B. 生長</div><div class='opt'>C. 產生</div><div class='opt'>D. 天生</div></div><div class='q'><div class='stem'>26. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>聖心<u>備</u>焉</blockquote><div class='opt'>A. 準備</div><div class='opt'>B. 防備</div><div class='opt'>C. 具備</div><div class='opt'>D. 全</div></div><div class='q'><div class='stem'>27. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>故不積<u>跬步</u></blockquote><div class='opt'>A. 半步</div><div class='opt'>B. 步伐</div><div class='opt'>C. 一步</div><div class='opt'>D. 寸步</div></div><div class='q'><div class='stem'>28. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>功在不<u>舍</u></blockquote><div class='opt'>A. 放棄</div><div class='opt'>B. 房舍</div><div class='opt'>C. 犧牲</div><div class='opt'>D. 安置</div></div><div class='q'><div class='stem'>29. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>鍥</u>而舍之</blockquote><div class='opt'>A. 截斷</div><div class='opt'>B. 金石</div><div class='opt'>C. 雕刻</div><div class='opt'>D. 堅持</div></div><div class='q'><div class='stem'>30. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>金石可<u>鏤</u></blockquote><div class='opt'>A. 腐朽</div><div class='opt'>B. 雕刻</div><div class='opt'>C. 鋼</div><div class='opt'>D. 鏤空</div></div><div class='q'><div class='stem'>31. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>螾</u>無爪牙之利</blockquote><div class='opt'>A. 微蟲</div><div class='opt'>B. 引伸</div><div class='opt'>C. 蚯蚓</div><div class='opt'>D. 蜈蚣</div></div><div class='q'><div class='stem'>32. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>用心<u>躁</u>也</blockquote><div class='opt'>A. 不安靜</div><div class='opt'>B. 浮躁</div><div class='opt'>C. 乾燥</div><div class='opt'>D. 吃醋</div></div></section><section class='unitview' id='u-lianpo'><p><a href='#home'>返回</a></p><h2>05　廉頗藺相如列傳</h2><div class='q'><div class='stem'>1. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>大王必欲<u>急</u>臣</blockquote><div class='opt'>A. 急忙</div><div class='opt'>B. 危急</div><div class='opt'>C. 緊急</div><div class='opt'>D. 逼迫</div></div><div class='q'><div class='stem'>2. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>乃使其從者<u>衣</u>褐</blockquote><div class='opt'>A. 穿著</div><div class='opt'>B. 衣服</div><div class='opt'>C. 平民</div><div class='opt'>D. 更換</div></div><div class='q'><div class='stem'>3. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>禮節甚<u>倨</u></blockquote><div class='opt'>A. 倨傲待人</div><div class='opt'>B. 傲慢</div><div class='opt'>C. 蹲踞</div><div class='opt'>D. 箕踞</div></div><div class='q'><div class='stem'>4. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>竊</u>計欲亡走燕</blockquote><div class='opt'>A. 私下</div><div class='opt'>B. 竊位</div><div class='opt'>C. 盜竊</div><div class='opt'>D. 間接</div></div><div class='q'><div class='stem'>5. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>且相如素<u>賤</u>人</blockquote><div class='opt'>A. 賤人</div><div class='opt'>B. 地位卑下</div><div class='opt'>C. 輕視</div><div class='opt'>D. 下賤</div></div><div class='q'><div class='stem'>6. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>廉頗<u>為</u>趙將伐齊</blockquote><div class='opt'>A. 製作</div><div class='opt'>B. 做</div><div class='opt'>C. 作為</div><div class='opt'>D. 實踐</div></div><div class='q'><div class='stem'>7. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>拜</u>為上卿</blockquote><div class='opt'>A. 行禮</div><div class='opt'>B. 拜祭</div><div class='opt'>C. 授予職位</div><div class='opt'>D. 拜見</div></div><div class='q'><div class='stem'>8. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>以勇氣<u>聞</u>於諸侯</blockquote><div class='opt'>A. 聽見</div><div class='opt'>B. 懂得</div><div class='opt'>C. 聞名</div><div class='opt'>D. 見聞</div></div><div class='q'><div class='stem'>9. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>為趙宦者令繆賢<u>舍人</u></blockquote><div class='opt'>A. 侍從</div><div class='opt'>B. 門客</div><div class='opt'>C. 屋主</div><div class='opt'>D. 官名近侍</div></div><div class='q'><div class='stem'>10. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>使人<u>遺</u>趙王書</blockquote><div class='opt'>A. 遺漏</div><div class='opt'>B. 遺留</div><div class='opt'>C. 留下</div><div class='opt'>D. 送給</div></div><div class='q'><div class='stem'>11. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>願以十五城請<u>易</u>璧</blockquote><div class='opt'>A. 交換</div><div class='opt'>B. 改變</div><div class='opt'>C. 簡易</div><div class='opt'>D. 容易</div></div><div class='q'><div class='stem'>12. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>趙王與大將軍廉頗諸大臣<u>謀</u></blockquote><div class='opt'>A. 商議</div><div class='opt'>B. 計劃</div><div class='opt'>C. 計謀</div><div class='opt'>D. 圖謀</div></div><div class='q'><div class='stem'>13. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>徒</u>見欺</blockquote><div class='opt'>A. 白白地</div><div class='opt'>B. 只</div><div class='opt'>C. 同志</div><div class='opt'>D. 門徒</div></div><div class='q'><div class='stem'>14. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>徒<u>見</u>欺</blockquote><div class='opt'>A. 看見</div><div class='opt'>B. 被</div><div class='opt'>C. 顯現</div><div class='opt'>D. 見解</div></div><div class='q'><div class='stem'>15. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>徒見<u>欺</u></blockquote><div class='opt'>A. 欺負</div><div class='opt'>B. 欺凌</div><div class='opt'>C. 欺誑</div><div class='opt'>D. 欺騙</div></div><div class='q'><div class='stem'>16. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>即<u>患</u>秦兵之來</blockquote><div class='opt'>A. 導致</div><div class='opt'>B. 禍患</div><div class='opt'>C. 憂慮</div><div class='opt'>D. 疾病</div></div><div class='q'><div class='stem'>17. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>求</u>人可使報秦者</blockquote><div class='opt'>A. 乞求</div><div class='opt'>B. 徵求</div><div class='opt'>C. 責求</div><div class='opt'>D. 請求</div></div><div class='q'><div class='stem'>18. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>求人可使<u>報</u>秦者</blockquote><div class='opt'>A. 報仇</div><div class='opt'>B. 報答</div><div class='opt'>C. 報告</div><div class='opt'>D. 答覆</div></div><div class='q'><div class='stem'>19. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>臣舍人藺相如可<u>使</u></blockquote><div class='opt'>A. 出使</div><div class='opt'>B. 命令</div><div class='opt'>C. 使者</div><div class='opt'>D. 派遣</div></div><div class='q'><div class='stem'>20. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>臣<u>嘗</u>有罪</blockquote><div class='opt'>A. 嘗試</div><div class='opt'>B. 品嘗</div><div class='opt'>C. 曾經</div><div class='opt'>D. 試探</div></div><div class='q'><div class='stem'>21. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>竊計欲<u>亡</u>走燕</blockquote><div class='opt'>A. 逃亡</div><div class='opt'>B. 失去</div><div class='opt'>C. 出走</div><div class='opt'>D. 死亡</div></div><div class='q'><div class='stem'>22. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>臣<u>語</u>曰</blockquote><div class='opt'>A. 話語</div><div class='opt'>B. 告訴</div><div class='opt'>C. 議論</div><div class='opt'>D. 談論</div></div><div class='q'><div class='stem'>23. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>臣嘗<u>從</u>大王與燕王會境上</blockquote><div class='opt'>A. 自從</div><div class='opt'>B. 仿效</div><div class='opt'>C. 跟從</div><div class='opt'>D. 聽從</div></div><div class='q'><div class='stem'>24. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>臣嘗從大王與燕王<u>會</u>境上</blockquote><div class='opt'>A. 恰巧</div><div class='opt'>B. 會面</div><div class='opt'>C. 集會</div><div class='opt'>D. 會合</div></div><div class='q'><div class='stem'>25. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>夫趙<u>彊</u>而燕弱</blockquote><div class='opt'>A. 強</div><div class='opt'>B. 僵持</div><div class='opt'>C. 強迫</div><div class='opt'>D. 堅強</div></div><div class='q'><div class='stem'>26. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>而君<u>幸</u>於趙王</blockquote><div class='opt'>A. 僥倖</div><div class='opt'>B. 寵幸</div><div class='opt'>C. 幸運</div><div class='opt'>D. 希望</div></div><div class='q'><div class='stem'>27. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>而<u>束</u>君歸趙矣</blockquote><div class='opt'>A. 約束</div><div class='opt'>B. 迅速</div><div class='opt'>C. 一束</div><div class='opt'>D. 綁縛</div></div><div class='q'><div class='stem'>28. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>君不如肉<u>袒</u>伏斧質請罪</blockquote><div class='opt'>A. 袒露</div><div class='opt'>B. 脫</div><div class='opt'>C. 坦誠</div><div class='opt'>D. 偏袒</div></div><div class='q'><div class='stem'>29. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不可不<u>許</u></blockquote><div class='opt'>A. 承諾</div><div class='opt'>B. 許配</div><div class='opt'>C. 答應</div><div class='opt'>D. 處所</div></div><div class='q'><div class='stem'>30. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>曲</u>在趙</blockquote><div class='opt'>A. 理虧</div><div class='opt'>B. 曲折</div><div class='opt'>C. 局部</div><div class='opt'>D. 歌曲</div></div><div class='q'><div class='stem'>31. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>均</u>之二策</blockquote><div class='opt'>A. 均勻</div><div class='opt'>B. 平均</div><div class='opt'>C. 公平</div><div class='opt'>D. 衡量</div></div><div class='q'><div class='stem'>32. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>寧</u>許以負秦曲</blockquote><div class='opt'>A. 寧願</div><div class='opt'>B. 安寧</div><div class='opt'>C. 豈</div><div class='opt'>D. 應該</div></div><div class='q'><div class='stem'>33. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>寧<u>許</u>以負秦曲</blockquote><div class='opt'>A. 承諾</div><div class='opt'>B. 許配</div><div class='opt'>C. 答應</div><div class='opt'>D. 處所</div></div><div class='q'><div class='stem'>34. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>寧許以<u>負</u>秦曲</blockquote><div class='opt'>A. 辜負</div><div class='opt'>B. 負面</div><div class='opt'>C. 承擔</div><div class='opt'>D. 倚仗</div></div><div class='q'><div class='stem'>35. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>王<u>必</u>無人</blockquote><div class='opt'>A. 一定</div><div class='opt'>B. 迫切</div><div class='opt'>C. 找</div><div class='opt'>D. 如果</div></div><div class='q'><div class='stem'>36. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>臣願<u>奉</u>璧往使</blockquote><div class='opt'>A. 侍奉</div><div class='opt'>B. 供奉</div><div class='opt'>C. 捧</div><div class='opt'>D. 接受</div></div><div class='q'><div class='stem'>37. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>臣<u>請</u>完璧歸趙</blockquote><div class='opt'>A. 請求</div><div class='opt'>B. 請示</div><div class='opt'>C. 宴請</div><div class='opt'>D. 邀請</div></div><div class='q'><div class='stem'>38. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>相如奉璧<u>奏</u>秦王</blockquote><div class='opt'>A. 演奏</div><div class='opt'>B. 奏效</div><div class='opt'>C. 展示</div><div class='opt'>D. 獻給</div></div><div class='q'><div class='stem'>39. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>卻</u>立</blockquote><div class='opt'>A. 擊退</div><div class='opt'>B. 拒絕</div><div class='opt'>C. 但是</div><div class='opt'>D. 退後</div></div><div class='q'><div class='stem'>40. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>怒髮上衝<u>冠</u></blockquote><div class='opt'>A. 加冠</div><div class='opt'>B. 超群</div><div class='opt'>C. 帽子</div><div class='opt'>D. 冠軍</div></div><div class='q'><div class='stem'>41. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>趙王<u>悉</u>召羣臣議</blockquote><div class='opt'>A. 熟悉</div><div class='opt'>B. 全部</div><div class='opt'>C. 詳知</div><div class='opt'>D. 盡心</div></div><div class='q'><div class='stem'>42. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>負</u>其彊</blockquote><div class='opt'>A. 倚仗</div><div class='opt'>B. 背負</div><div class='opt'>C. 辜負</div><div class='opt'>D. 承擔</div></div><div class='q'><div class='stem'>43. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>臣以為布衣之交<u>尚</u>不相欺</blockquote><div class='opt'>A. 尚且</div><div class='opt'>B. 上</div><div class='opt'>C. 崇尚</div><div class='opt'>D. 還</div></div><div class='q'><div class='stem'>44. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>且以一璧之故<u>逆</u>彊秦之驩</blockquote><div class='opt'>A. 拂逆</div><div class='opt'>B. 迎合</div><div class='opt'>C. 預先</div><div class='opt'>D. 迎接</div></div><div class='q'><div class='stem'>45. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>且以一璧之故逆彊秦之<u>驩</u></blockquote><div class='opt'>A. 歡樂</div><div class='opt'>B. 關係</div><div class='opt'>C. 歡心</div><div class='opt'>D. 交歡</div></div><div class='q'><div class='stem'>46. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>嚴</u>大國之威以修敬也</blockquote><div class='opt'>A. 嚴厲</div><div class='opt'>B. 嚴謹</div><div class='opt'>C. 嚴密</div><div class='opt'>D. 尊重</div></div><div class='q'><div class='stem'>47. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>大王<u>必</u>欲急臣</blockquote><div class='opt'>A. 執意</div><div class='opt'>B. 迫切</div><div class='opt'>C. 假如</div><div class='opt'>D. 一定</div></div><div class='q'><div class='stem'>48. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>臣頭<u>今</u>與璧俱碎於柱矣</blockquote><div class='opt'>A. 即將</div><div class='opt'>B. 堅定</div><div class='opt'>C. 今天</div><div class='opt'>D. 當今</div></div><div class='q'><div class='stem'>49. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>相如持其璧<u>睨</u>柱</blockquote><div class='opt'>A. 偏視</div><div class='opt'>B. 斜視</div><div class='opt'>C. 傲視</div><div class='opt'>D. 顧視</div></div><div class='q'><div class='stem'>50. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>乃<u>辭謝</u>固請</blockquote><div class='opt'>A. 婉言道歉</div><div class='opt'>B. 謝罪</div><div class='opt'>C. 辭讓</div><div class='opt'>D. 告辭道謝</div></div><div class='q'><div class='stem'>51. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>乃辭謝<u>固</u>請</blockquote><div class='opt'>A. 堅固</div><div class='opt'>B. 堅決</div><div class='opt'>C. 本來</div><div class='opt'>D. 鞏固</div></div><div class='q'><div class='stem'>52. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>召有司<u>案</u>圖</blockquote><div class='opt'>A. 查考</div><div class='opt'>B. 按</div><div class='opt'>C. 案件</div><div class='opt'>D. 几案</div></div><div class='q'><div class='stem'>53. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>相如<u>度</u>秦王特以詐佯為予趙城</blockquote><div class='opt'>A. 量度</div><div class='opt'>B. 揣度</div><div class='opt'>C. 法度</div><div class='opt'>D. 次</div></div><div class='q'><div class='stem'>54. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>相如度秦王<u>特</u>以詐佯為予趙城</blockquote><div class='opt'>A. 迎合</div><div class='opt'>B. 只是</div><div class='opt'>C. 特別</div><div class='opt'>D. 特立</div></div><div class='q'><div class='stem'>55. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>相如度秦王特以詐<u>佯</u>為予趙城</blockquote><div class='opt'>A. 陽奉</div><div class='opt'>B. 徜徉</div><div class='opt'>C. 假裝</div><div class='opt'>D. 類似</div></div><div class='q'><div class='stem'>56. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>舍</u>相如廣成傳</blockquote><div class='opt'>A. 捨棄</div><div class='opt'>B. 房舍</div><div class='opt'>C. 捨</div><div class='opt'>D. 安置</div></div><div class='q'><div class='stem'>57. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>乃<u>使</u>其從者衣褐</blockquote><div class='opt'>A. 使者</div><div class='opt'>B. 出使</div><div class='opt'>C. 派遣</div><div class='opt'>D. 行使</div></div><div class='q'><div class='stem'>58. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>從徑道<u>亡</u></blockquote><div class='opt'>A. 亡國</div><div class='opt'>B. 出走</div><div class='opt'>C. 死亡</div><div class='opt'>D. 失去</div></div><div class='q'><div class='stem'>59. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>未嘗有堅明<u>約束</u>者也</blockquote><div class='opt'>A. 纏縛</div><div class='opt'>B. 限制</div><div class='opt'>C. 信約</div><div class='opt'>D. 盟約</div></div><div class='q'><div class='stem'>60. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>臣誠恐見欺於王而<u>負</u>趙</blockquote><div class='opt'>A. 承擔</div><div class='opt'>B. 倚仗</div><div class='opt'>C. 辜負</div><div class='opt'>D. 背負</div></div><div class='q'><div class='stem'>61. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>間</u>至趙矣</blockquote><div class='opt'>A. 間或</div><div class='opt'>B. 間道</div><div class='opt'>C. 中間</div><div class='opt'>D. 離間</div></div><div class='q'><div class='stem'>62. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>大王遣一<u>介</u>之使至趙</blockquote><div class='opt'>A. 介意</div><div class='opt'>B. 個</div><div class='opt'>C. 介紹</div><div class='opt'>D. 介乎</div></div><div class='q'><div class='stem'>63. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>唯大王與羣臣<u>孰</u>計議之</blockquote><div class='opt'>A. 一起</div><div class='opt'>B. 成熟</div><div class='opt'>C. 詳細</div><div class='opt'>D. 誰</div></div><div class='q'><div class='stem'>64. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>唯大王與羣臣孰計<u>議</u>之</blockquote><div class='opt'>A. 意見</div><div class='opt'>B. 商議</div><div class='opt'>C. 評議</div><div class='opt'>D. 會議</div></div><div class='q'><div class='stem'>65. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>左右<u>或</u>欲引相如去</blockquote><div class='opt'>A. 偶爾</div><div class='opt'>B. 或許</div><div class='opt'>C. 有人</div><div class='opt'>D. 或者</div></div><div class='q'><div class='stem'>66. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>秦王<u>因</u>曰</blockquote><div class='opt'>A. 憑藉</div><div class='opt'>B. 沿襲</div><div class='opt'>C. 因為</div><div class='opt'>D. 於是</div></div><div class='q'><div class='stem'>67. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>趙王豈以一璧之<u>故</u>欺秦邪</blockquote><div class='opt'>A. 所以</div><div class='opt'>B. 舊時</div><div class='opt'>C. 緣故</div><div class='opt'>D. 舊的</div></div><div class='q'><div class='stem'>68. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>卒</u>廷見相如</blockquote><div class='opt'>A. 終於</div><div class='opt'>B. 兵卒</div><div class='opt'>C. 突然</div><div class='opt'>D. 士兵</div></div><div class='q'><div class='stem'>69. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>拔</u>石城</blockquote><div class='opt'>A. 攻取</div><div class='opt'>B. 選拔</div><div class='opt'>C. 提拔</div><div class='opt'>D. 抽出</div></div><div class='q'><div class='stem'>70. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>欲<u>毋</u>行</blockquote><div class='opt'>A. 不</div><div class='opt'>B. 毋寧</div><div class='opt'>C. 沒有</div><div class='opt'>D. 拒絕</div></div><div class='q'><div class='stem'>71. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>與王<u>訣</u>曰</blockquote><div class='opt'>A. 請辭</div><div class='opt'>B. 口訣</div><div class='opt'>C. 秘訣</div><div class='opt'>D. 告別</div></div><div class='q'><div class='stem'>72. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>度</u>道里會遇之禮畢</blockquote><div class='opt'>A. 次</div><div class='opt'>B. 法度</div><div class='opt'>C. 估計</div><div class='opt'>D. 小道</div></div><div class='q'><div class='stem'>73. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>度<u>道里</u>會遇之禮畢</blockquote><div class='opt'>A. 道理</div><div class='opt'>B. 里程</div><div class='opt'>C. 里巷</div><div class='opt'>D. 路程</div></div><div class='q'><div class='stem'>74. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>秦御史前<u>書</u>曰</blockquote><div class='opt'>A. 書籍</div><div class='opt'>B. 文書</div><div class='opt'>C. 書寫</div><div class='opt'>D. 信件</div></div><div class='q'><div class='stem'>75. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>左右欲<u>刃</u>相如</blockquote><div class='opt'>A. 用刀刺</div><div class='opt'>B. 刀鋒</div><div class='opt'>C. 殺害</div><div class='opt'>D. 鋒利</div></div><div class='q'><div class='stem'>76. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>左右皆<u>靡</u></blockquote><div class='opt'>A. 退卻</div><div class='opt'>B. 沒有</div><div class='opt'>C. 浪費</div><div class='opt'>D. 前進</div></div><div class='q'><div class='stem'>77. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>於是秦王不<u>懌</u></blockquote><div class='opt'>A. 不悅</div><div class='opt'>B. 解釋</div><div class='opt'>C. 高興</div><div class='opt'>D. 選擇</div></div><div class='q'><div class='stem'>78. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>請以趙十五城為秦王<u>壽</u></blockquote><div class='opt'>A. 年壽</div><div class='opt'>B. 祝壽</div><div class='opt'>C. 壽命</div><div class='opt'>D. 酒器</div></div><div class='q'><div class='stem'>79. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>秦王<u>竟</u>酒</blockquote><div class='opt'>A. 了結</div><div class='opt'>B. 竟然</div><div class='opt'>C. 完畢</div><div class='opt'>D. 追究</div></div><div class='q'><div class='stem'>80. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>而藺相如<u>徒</u>以口舌為勞</blockquote><div class='opt'>A. 白白地</div><div class='opt'>B. 只</div><div class='opt'>C. 門徒</div><div class='opt'>D. 同志</div></div><div class='q'><div class='stem'>81. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>且</u>相如素賤人</blockquote><div class='opt'>A. 而且</div><div class='opt'>B. 將要</div><div class='opt'>C. 暫且</div><div class='opt'>D. 並</div></div><div class='q'><div class='stem'>82. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>且相如<u>素</u>賤人</blockquote><div class='opt'>A. 白色</div><div class='opt'>B. 樸素</div><div class='opt'>C. 本來</div><div class='opt'>D. 素食</div></div><div class='q'><div class='stem'>83. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不<u>忍</u>為之下</blockquote><div class='opt'>A. 忍心</div><div class='opt'>B. 殘忍</div><div class='opt'>C. 忍受</div><div class='opt'>D. 刺殺</div></div><div class='q'><div class='stem'>84. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>已而</u>相如出</blockquote><div class='opt'>A. 隨後</div><div class='opt'>B. 然後</div><div class='opt'>C. 不久</div><div class='opt'>D. 而已</div></div><div class='q'><div class='stem'>85. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>臣所以<u>去</u>親戚而事君者</blockquote><div class='opt'>A. 離開</div><div class='opt'>B. 拋棄</div><div class='opt'>C. 擺脫</div><div class='opt'>D. 除去</div></div><div class='q'><div class='stem'>86. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>徒<u>慕</u>君之高義也</blockquote><div class='opt'>A. 羨慕</div><div class='opt'>B. 仰慕</div><div class='opt'>C. 思念</div><div class='opt'>D. 愛慕</div></div><div class='q'><div class='stem'>87. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>臣等<u>不肖</u></blockquote><div class='opt'>A. 不才</div><div class='opt'>B. 不孝順</div><div class='opt'>C. 不賢</div><div class='opt'>D. 不像樣</div></div><div class='q'><div class='stem'>88. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不<u>若</u>也</blockquote><div class='opt'>A. 如果</div><div class='opt'>B. 好像</div><div class='opt'>C. 及</div><div class='opt'>D. 如同</div></div><div class='q'><div class='stem'>89. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>相如雖<u>駑</u></blockquote><div class='opt'>A. 地位低下</div><div class='opt'>B. 愚鈍無能</div><div class='opt'>C. 努力</div><div class='opt'>D. 竭盡</div></div><div class='q'><div class='stem'>90. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>顧</u>吾念之</blockquote><div class='opt'>A. 回顧</div><div class='opt'>B. 照顧</div><div class='opt'>C. 只是</div><div class='opt'>D. 回頭看</div></div><div class='q'><div class='stem'>91. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>其<u>勢</u>不俱生</blockquote><div class='opt'>A. 氣勢</div><div class='opt'>B. 形勢</div><div class='opt'>C. 權勢</div><div class='opt'>D. 姿勢</div></div><div class='q'><div class='stem'>92. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>以先國家之急而後私<u>讎</u>也</blockquote><div class='opt'>A. 應答</div><div class='opt'>B. 仇敵</div><div class='opt'>C. 恩怨</div><div class='opt'>D. 校對</div></div><div class='q'><div class='stem'>93. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>因</u>賓客至藺相如門謝罪</blockquote><div class='opt'>A. 憑藉</div><div class='opt'>B. 於是</div><div class='opt'>C. 沿襲</div><div class='opt'>D. 因為</div></div><div class='q'><div class='stem'>94. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不知將軍<u>寬</u>之至此也</blockquote><div class='opt'>A. 喜歡</div><div class='opt'>B. 寬宏</div><div class='opt'>C. 寬闊</div><div class='opt'>D. 寬緩</div></div><div class='q'><div class='stem'>95. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>卒</u>相與驩</blockquote><div class='opt'>A. 結束</div><div class='opt'>B. 突然</div><div class='opt'>C. 最終</div><div class='opt'>D. 兵卒</div></div></section><section class='unitview' id='u-chushi'><p><a href='#home'>返回</a></p><h2>06　出師表</h2><div class='q'><div class='stem'>1. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>先帝不以臣<u>卑</u>鄙</blockquote><div class='opt'>A. 低下</div><div class='opt'>B. 出身低微</div><div class='opt'>C. 謙卑</div><div class='opt'>D. 卑鄙</div></div><div class='q'><div class='stem'>2. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>此<u>悉</u>貞良死節之臣</blockquote><div class='opt'>A. 詳知</div><div class='opt'>B. 全部</div><div class='opt'>C. 盡心</div><div class='opt'>D. 熟悉</div></div><div class='q'><div class='stem'>3. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>躬</u>耕於南陽</blockquote><div class='opt'>A. 自身</div><div class='opt'>B. 彎身</div><div class='opt'>C. 親自</div><div class='opt'>D. 身體</div></div><div class='q'><div class='stem'>4. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>陟罰臧<u>否</u></blockquote><div class='opt'>A. 惡</div><div class='opt'>B. 閉塞</div><div class='opt'>C. 是否</div><div class='opt'>D. 否定</div></div><div class='q'><div class='stem'>5. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>而<u>中道</u>崩殂</blockquote><div class='opt'>A. 中年</div><div class='opt'>B. 中庸之道</div><div class='opt'>C. 中途</div><div class='opt'>D. 道路中央</div></div><div class='q'><div class='stem'>6. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>而中道崩<u>殂</u></blockquote><div class='opt'>A. 往</div><div class='opt'>B. 死亡</div><div class='opt'>C. 衰落</div><div class='opt'>D. 殂謝</div></div><div class='q'><div class='stem'>7. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>益州<u>疲</u>弊</blockquote><div class='opt'>A. 疲態</div><div class='opt'>B. 厭倦</div><div class='opt'>C. 疲勞</div><div class='opt'>D. 疲於奔命</div></div><div class='q'><div class='stem'>8. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>益州疲<u>弊</u></blockquote><div class='opt'>A. 害處</div><div class='opt'>B. 疲弊</div><div class='opt'>C. 過失</div><div class='opt'>D. 困乏</div></div><div class='q'><div class='stem'>9. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>此<u>誠</u>危急存亡之秋也</blockquote><div class='opt'>A. 誠意</div><div class='opt'>B. 告誡</div><div class='opt'>C. 確實</div><div class='opt'>D. 真誠</div></div><div class='q'><div class='stem'>10. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>此誠危急存亡之<u>秋</u>也</blockquote><div class='opt'>A. 蕭殺</div><div class='opt'>B. 秋季</div><div class='opt'>C. 關頭</div><div class='opt'>D. 困局</div></div><div class='q'><div class='stem'>11. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不<u>懈</u>於內</blockquote><div class='opt'>A. 休息</div><div class='opt'>B. 鬆弛</div><div class='opt'>C. 懈怠</div><div class='opt'>D. 努力</div></div><div class='q'><div class='stem'>12. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>蓋</u>追先帝之殊遇</blockquote><div class='opt'>A. 蓋子</div><div class='opt'>B. 因為</div><div class='opt'>C. 覆蓋</div><div class='opt'>D. 大概</div></div><div class='q'><div class='stem'>13. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>蓋<u>追</u>先帝之殊遇</blockquote><div class='opt'>A. 追求</div><div class='opt'>B. 追念</div><div class='opt'>C. 追逐</div><div class='opt'>D. 補救</div></div><div class='q'><div class='stem'>14. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>蓋追先帝之<u>殊</u>遇</blockquote><div class='opt'>A. 特殊</div><div class='opt'>B. 不同</div><div class='opt'>C. 斷絕</div><div class='opt'>D. 公平</div></div><div class='q'><div class='stem'>15. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>誠宜<u>開張</u>聖聽</blockquote><div class='opt'>A. 公開</div><div class='opt'>B. 伸展</div><div class='opt'>C. 開展</div><div class='opt'>D. 開店</div></div><div class='q'><div class='stem'>16. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>以<u>光</u>先帝遺德</blockquote><div class='opt'>A. 光榮</div><div class='opt'>B. 光亮</div><div class='opt'>C. 光滑</div><div class='opt'>D. 發揚</div></div><div class='q'><div class='stem'>17. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>以光先帝<u>遺</u>德</blockquote><div class='opt'>A. 送給</div><div class='opt'>B. 遺願</div><div class='opt'>C. 遺留</div><div class='opt'>D. 遺漏</div></div><div class='q'><div class='stem'>18. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>恢弘</u>志士之氣</blockquote><div class='opt'>A. 寬宏</div><div class='opt'>B. 充滿</div><div class='opt'>C. 發揚</div><div class='opt'>D. 恢復</div></div><div class='q'><div class='stem'>19. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不宜<u>妄</u>自菲薄</blockquote><div class='opt'>A. 虛妄</div><div class='opt'>B. 胡亂地</div><div class='opt'>C. 狂妄</div><div class='opt'>D. 為非作歹</div></div><div class='q'><div class='stem'>20. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不宜妄自<u>菲薄</u></blockquote><div class='opt'>A. 微薄</div><div class='opt'>B. 輕視</div><div class='opt'>C. 自視過高</div><div class='opt'>D. 菲菜</div></div><div class='q'><div class='stem'>21. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>引喻失<u>義</u></blockquote><div class='opt'>A. 情義</div><div class='opt'>B. 意義</div><div class='opt'>C. 道義</div><div class='opt'>D. 合宜的道理</div></div><div class='q'><div class='stem'>22. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>以<u>塞</u>忠諫之路也</blockquote><div class='opt'>A. 充滿</div><div class='opt'>B. 堵塞</div><div class='opt'>C. 邊塞</div><div class='opt'>D. 閉塞</div></div><div class='q'><div class='stem'>23. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>陟</u>罰臧否</blockquote><div class='opt'>A. 晉升</div><div class='opt'>B. 進用</div><div class='opt'>C. 登高</div><div class='opt'>D. 處罰</div></div><div class='q'><div class='stem'>24. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>陟<u>罰</u>臧否</blockquote><div class='opt'>A. 惡</div><div class='opt'>B. 罰款</div><div class='opt'>C. 罰酒</div><div class='opt'>D. 處罰</div></div><div class='q'><div class='stem'>25. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>陟罰<u>臧</u>否</blockquote><div class='opt'>A. 晉升</div><div class='opt'>B. 收藏</div><div class='opt'>C. 德行</div><div class='opt'>D. 善</div></div><div class='q'><div class='stem'>26. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>若有作<u>姦</u>、犯科</blockquote><div class='opt'>A. 邪惡</div><div class='opt'>B. 壞事</div><div class='opt'>C. 姦淫</div><div class='opt'>D. 詐偽</div></div><div class='q'><div class='stem'>27. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>若有作姦、犯<u>科</u></blockquote><div class='opt'>A. 目的</div><div class='opt'>B. 正當</div><div class='opt'>C. 科目</div><div class='opt'>D. 法律條文</div></div><div class='q'><div class='stem'>28. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>宜<u>付</u>有司</blockquote><div class='opt'>A. 交付</div><div class='opt'>B. 付款</div><div class='opt'>C. 對付</div><div class='opt'>D. 命令</div></div><div class='q'><div class='stem'>29. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>論</u>其刑賞</blockquote><div class='opt'>A. 議論</div><div class='opt'>B. 言論</div><div class='opt'>C. 評定</div><div class='opt'>D. 討論</div></div><div class='q'><div class='stem'>30. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>以<u>昭</u>陛下平明之治</blockquote><div class='opt'>A. 彰顯</div><div class='opt'>B. 顯明</div><div class='opt'>C. 昭雪</div><div class='opt'>D. 明亮</div></div><div class='q'><div class='stem'>31. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>以昭陛下平明之<u>治</u></blockquote><div class='opt'>A. 治辦</div><div class='opt'>B. 安定</div><div class='opt'>C. 醫治</div><div class='opt'>D. 治理</div></div><div class='q'><div class='stem'>32. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>此皆<u>良</u>實</blockquote><div class='opt'>A. 良好</div><div class='opt'>B. 賢良</div><div class='opt'>C. 善良</div><div class='opt'>D. 很</div></div><div class='q'><div class='stem'>33. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>此皆良<u>實</u></blockquote><div class='opt'>A. 誠實</div><div class='opt'>B. 充實</div><div class='opt'>C. 忠實</div><div class='opt'>D. 果實</div></div><div class='q'><div class='stem'>34. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>志</u>慮忠純</blockquote><div class='opt'>A. 記住</div><div class='opt'>B. 記述</div><div class='opt'>C. 囑咐</div><div class='opt'>D. 志向</div></div><div class='q'><div class='stem'>35. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>志<u>慮</u>忠純</blockquote><div class='opt'>A. 思慮</div><div class='opt'>B. 考慮</div><div class='opt'>C. 憂慮</div><div class='opt'>D. 打算</div></div><div class='q'><div class='stem'>36. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>是以</u>先帝簡拔以遺陛下</blockquote><div class='opt'>A. 所以</div><div class='opt'>B. 認為此</div><div class='opt'>C. 故意</div><div class='opt'>D. 用此</div></div><div class='q'><div class='stem'>37. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>是以先帝<u>簡拔</u>以遺陛下</blockquote><div class='opt'>A. 交付</div><div class='opt'>B. 提拔</div><div class='opt'>C. 選拔</div><div class='opt'>D. 簡慢拔除</div></div><div class='q'><div class='stem'>38. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>是以先帝簡拔以<u>遺</u>陛下</blockquote><div class='opt'>A. 遺漏</div><div class='opt'>B. 留下</div><div class='opt'>C. 交付</div><div class='opt'>D. 送給</div></div><div class='q'><div class='stem'>39. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>悉</u>以咨之</blockquote><div class='opt'>A. 全部</div><div class='opt'>B. 盡心</div><div class='opt'>C. 熟悉</div><div class='opt'>D. 詳知</div></div><div class='q'><div class='stem'>40. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>悉以<u>咨</u>之</blockquote><div class='opt'>A. 官吏</div><div class='opt'>B. 咨文</div><div class='opt'>C. 咨嗟</div><div class='opt'>D. 詢問</div></div><div class='q'><div class='stem'>41. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>必能<u>裨</u>補闕漏</blockquote><div class='opt'>A. 副將</div><div class='opt'>B. 彌補</div><div class='opt'>C. 小</div><div class='opt'>D. 補益</div></div><div class='q'><div class='stem'>42. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>必能裨補<u>闕</u>漏</blockquote><div class='opt'>A. 缺德</div><div class='opt'>B. 遺憾</div><div class='opt'>C. 宮闕</div><div class='opt'>D. 缺失</div></div><div class='q'><div class='stem'>43. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>性<u>行</u>淑均</blockquote><div class='opt'>A. 行為</div><div class='opt'>B. 踐行</div><div class='opt'>C. 行走</div><div class='opt'>D. 實行</div></div><div class='q'><div class='stem'>44. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>性行<u>淑</u>均</blockquote><div class='opt'>A. 美好</div><div class='opt'>B. 清澈</div><div class='opt'>C. 善良</div><div class='opt'>D. 賢淑</div></div><div class='q'><div class='stem'>45. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>性行淑<u>均</u></blockquote><div class='opt'>A. 平均</div><div class='opt'>B. 公平</div><div class='opt'>C. 均勻</div><div class='opt'>D. 衡量</div></div><div class='q'><div class='stem'>46. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>是以眾議<u>舉</u>寵為督</blockquote><div class='opt'>A. 舉薦</div><div class='opt'>B. 皆</div><div class='opt'>C. 舉起</div><div class='opt'>D. 支撐</div></div><div class='q'><div class='stem'>47. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>親</u>賢臣</blockquote><div class='opt'>A. 親自</div><div class='opt'>B. 親戚</div><div class='opt'>C. 父母</div><div class='opt'>D. 親近</div></div><div class='q'><div class='stem'>48. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>遠</u>小人</blockquote><div class='opt'>A. 疏遠</div><div class='opt'>B. 深遠</div><div class='opt'>C. 遙遠</div><div class='opt'>D. 長遠</div></div><div class='q'><div class='stem'>49. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>苟</u>全性命於亂世</blockquote><div class='opt'>A. 尚且</div><div class='opt'>B. 如果</div><div class='opt'>C. 草率</div><div class='opt'>D. 苟且</div></div><div class='q'><div class='stem'>50. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>苟<u>全</u>性命於亂世</blockquote><div class='opt'>A. 完全</div><div class='opt'>B. 保全</div><div class='opt'>C. 全部</div><div class='opt'>D. 齊全</div></div><div class='q'><div class='stem'>51. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不求<u>聞</u>達於諸侯</blockquote><div class='opt'>A. 見聞</div><div class='opt'>B. 懂得</div><div class='opt'>C. 聽見</div><div class='opt'>D. 聞名</div></div><div class='q'><div class='stem'>52. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不求聞<u>達</u>於諸侯</blockquote><div class='opt'>A. 顯赫</div><div class='opt'>B. 到達</div><div class='opt'>C. 通達</div><div class='opt'>D. 顯貴</div></div><div class='q'><div class='stem'>53. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>先帝不<u>以</u>臣卑鄙</blockquote><div class='opt'>A. 因為</div><div class='opt'>B. 因此</div><div class='opt'>C. 認為</div><div class='opt'>D. 用</div></div><div class='q'><div class='stem'>54. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>猥</u>自枉屈</blockquote><div class='opt'>A. 委婉</div><div class='opt'>B. 鄙陋</div><div class='opt'>C. 瑣碎</div><div class='opt'>D. 委曲</div></div><div class='q'><div class='stem'>55. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>遂</u>許先帝以驅馳</blockquote><div class='opt'>A. 於是</div><div class='opt'>B. 完成</div><div class='opt'>C. 遂心</div><div class='opt'>D. 成功</div></div><div class='q'><div class='stem'>56. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>遂<u>許</u>先帝以驅馳</blockquote><div class='opt'>A. 應允</div><div class='opt'>B. 許配</div><div class='opt'>C. 承諾</div><div class='opt'>D. 處所</div></div><div class='q'><div class='stem'>57. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>遂許先帝以<u>驅馳</u></blockquote><div class='opt'>A. 策馬奔馳</div><div class='opt'>B. 奔走效法</div><div class='opt'>C. 奔走效勞</div><div class='opt'>D. 驅趕</div></div><div class='q'><div class='stem'>58. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>後<u>值</u>傾覆</blockquote><div class='opt'>A. 遇上</div><div class='opt'>B. 數值</div><div class='opt'>C. 當值</div><div class='opt'>D. 價值</div></div><div class='q'><div class='stem'>59. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>後值<u>傾覆</u></blockquote><div class='opt'>A. 翻倒</div><div class='opt'>B. 傾慕</div><div class='opt'>C. 兵敗</div><div class='opt'>D. 滅亡</div></div><div class='q'><div class='stem'>60. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>爾來二十<u>有</u>一年矣</blockquote><div class='opt'>A. 有的</div><div class='opt'>B. 佔有</div><div class='opt'>C. 存在</div><div class='opt'>D. 又</div></div><div class='q'><div class='stem'>61. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>故臨崩<u>寄</u>臣以大事也</blockquote><div class='opt'>A. 託付</div><div class='opt'>B. 寄居</div><div class='opt'>C. 寄望</div><div class='opt'>D. 郵寄</div></div><div class='q'><div class='stem'>62. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>夙</u>夜憂歎</blockquote><div class='opt'>A. 平素</div><div class='opt'>B. 素來</div><div class='opt'>C. 夜</div><div class='opt'>D. 早</div></div><div class='q'><div class='stem'>63. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>以<u>傷</u>先帝之明</blockquote><div class='opt'>A. 哀傷</div><div class='opt'>B. 損益</div><div class='opt'>C. 損害</div><div class='opt'>D. 損傷</div></div><div class='q'><div class='stem'>64. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>庶<u>竭</u>駑鈍</blockquote><div class='opt'>A. 竭盡</div><div class='opt'>B. 竭力</div><div class='opt'>C. 枯竭</div><div class='opt'>D. 歇息</div></div><div class='q'><div class='stem'>65. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>攘</u>除姦凶</blockquote><div class='opt'>A. 擾攘</div><div class='opt'>B. 排除</div><div class='opt'>C. 攘臂</div><div class='opt'>D. 搶奪</div></div><div class='q'><div class='stem'>66. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>至於斟酌<u>損</u>益</blockquote><div class='opt'>A. 減少</div><div class='opt'>B. 損害</div><div class='opt'>C. 反復</div><div class='opt'>D. 謙遜</div></div><div class='q'><div class='stem'>67. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>至於斟酌損<u>益</u></blockquote><div class='opt'>A. 利益</div><div class='opt'>B. 增加</div><div class='opt'>C. 反復</div><div class='opt'>D. 更加</div></div><div class='q'><div class='stem'>68. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>願陛下託臣以討賊興復之<u>效</u></blockquote><div class='opt'>A. 效力</div><div class='opt'>B. 任務</div><div class='opt'>C. 仿效</div><div class='opt'>D. 效果</div></div><div class='q'><div class='stem'>69. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>若無<u>興</u>德之言</blockquote><div class='opt'>A. 興盛</div><div class='opt'>B. 興起</div><div class='opt'>C. 興趣</div><div class='opt'>D. 發揚</div></div><div class='q'><div class='stem'>70. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>則責攸之、禕、允等之<u>慢</u></blockquote><div class='opt'>A. 輕慢</div><div class='opt'>B. 怠慢</div><div class='opt'>C. 傲慢</div><div class='opt'>D. 緩慢</div></div><div class='q'><div class='stem'>71. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>以<u>彰</u>其咎</blockquote><div class='opt'>A. 清楚</div><div class='opt'>B. 表彰</div><div class='opt'>C. 揭示</div><div class='opt'>D. 明顯</div></div><div class='q'><div class='stem'>72. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>以彰其<u>咎</u></blockquote><div class='opt'>A. 過失</div><div class='opt'>B. 追究</div><div class='opt'>C. 罪過</div><div class='opt'>D. 災禍</div></div><div class='q'><div class='stem'>73. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>以<u>諮諏</u>善道</blockquote><div class='opt'>A. 咨文</div><div class='opt'>B. 訪求</div><div class='opt'>C. 言論</div><div class='opt'>D. 詢問</div></div><div class='q'><div class='stem'>74. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>臨表<u>涕</u>零</blockquote><div class='opt'>A. 鼻涕</div><div class='opt'>B. 哭泣</div><div class='opt'>C. 眼淚</div><div class='opt'>D. 流涕</div></div><div class='q'><div class='stem'>75. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>臨表涕<u>零</u></blockquote><div class='opt'>A. 凋零</div><div class='opt'>B. 零碎</div><div class='opt'>C. 零落</div><div class='opt'>D. 落下</div></div></section><section class='unitview' id='u-shishuo'><p><a href='#home'>返回</a></p><h2>07　師說</h2><div class='q'><div class='stem'>1. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>夫<u>庸</u>知其年之先後生於吾乎</blockquote><div class='opt'>A. 豈</div><div class='opt'>B. 沒有</div><div class='opt'>C. 必須</div><div class='opt'>D. 平庸</div></div><div class='q'><div class='stem'>2. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>孰</u>能無惑</blockquote><div class='opt'>A. 仔細</div><div class='opt'>B. 成熟</div><div class='opt'>C. 詳細</div><div class='opt'>D. 誰</div></div><div class='q'><div class='stem'>3. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>擇師而教<u>之</u></blockquote><div class='opt'>A. 大瓠之種</div><div class='opt'>B. 客人</div><div class='opt'>C. 的</div><div class='opt'>D. 他，指子女</div></div><div class='q'><div class='stem'>4. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>所以傳道、<u>受</u>業、解惑也</blockquote><div class='opt'>A. 講授</div><div class='opt'>B. 遭受</div><div class='opt'>C. 授予</div><div class='opt'>D. 接受</div></div><div class='q'><div class='stem'>5. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>其<u>聞</u>道也</blockquote><div class='opt'>A. 聽見</div><div class='opt'>B. 懂得</div><div class='opt'>C. 聞名</div><div class='opt'>D. 見聞</div></div><div class='q'><div class='stem'>6. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>固</u>先乎吾</blockquote><div class='opt'>A. 鞏固</div><div class='opt'>B. 堅決</div><div class='opt'>C. 本來</div><div class='opt'>D. 堅固</div></div><div class='q'><div class='stem'>7. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>吾<u>從</u>而師之</blockquote><div class='opt'>A. 學習</div><div class='opt'>B. 聽從</div><div class='opt'>C. 順從</div><div class='opt'>D. 跟從</div></div><div class='q'><div class='stem'>8. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>夫庸<u>知</u>其年之先後生於吾乎</blockquote><div class='opt'>A. 智慧</div><div class='opt'>B. 知覺</div><div class='opt'>C. 知遇</div><div class='opt'>D. 知道</div></div><div class='q'><div class='stem'>9. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>是故無<u>貴</u>、無賤、無長、無少</blockquote><div class='opt'>A. 貴重</div><div class='opt'>B. 貴族</div><div class='opt'>C. 高貴</div><div class='opt'>D. 崇尚</div></div><div class='q'><div class='stem'>10. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>是故無貴、無<u>賤</u>、無長、無少</blockquote><div class='opt'>A. 年幼</div><div class='opt'>B. 卑賤</div><div class='opt'>C. 輕視</div><div class='opt'>D. 犯賤</div></div><div class='q'><div class='stem'>11. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>師之所<u>存</u>也</blockquote><div class='opt'>A. 保存</div><div class='opt'>B. 存在</div><div class='opt'>C. 思念</div><div class='opt'>D. 生存</div></div><div class='q'><div class='stem'>12. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>其<u>出</u>人也遠矣</blockquote><div class='opt'>A. 產生</div><div class='opt'>B. 外出</div><div class='opt'>C. 說出</div><div class='opt'>D. 超出</div></div><div class='q'><div class='stem'>13. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>猶且</u>從師而問焉</blockquote><div class='opt'>A. 猶如</div><div class='opt'>B. 還是</div><div class='opt'>C. 仍然</div><div class='opt'>D. 尚且</div></div><div class='q'><div class='stem'>14. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>其</u>皆出於此乎</blockquote><div class='opt'>A. 大概</div><div class='opt'>B. 他的</div><div class='opt'>C. 其中</div><div class='opt'>D. 難道</div></div><div class='q'><div class='stem'>15. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>惑</u>矣</blockquote><div class='opt'>A. 可悲</div><div class='opt'>B. 迷惑</div><div class='opt'>C. 糊塗</div><div class='opt'>D. 遺憾</div></div><div class='q'><div class='stem'>16. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>小學而大<u>遺</u></blockquote><div class='opt'>A. 留下</div><div class='opt'>B. 遺漏</div><div class='opt'>C. 送給</div><div class='opt'>D. 遺留</div></div><div class='q'><div class='stem'>17. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>吾未見其<u>明</u>也</blockquote><div class='opt'>A. 明亮</div><div class='opt'>B. 明白</div><div class='opt'>C. 明智</div><div class='opt'>D. 照耀</div></div><div class='q'><div class='stem'>18. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不恥<u>相</u>師</blockquote><div class='opt'>A. 相貌</div><div class='opt'>B. 宰相</div><div class='opt'>C. 互相</div><div class='opt'>D. 看</div></div><div class='q'><div class='stem'>19. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不恥相<u>師</u></blockquote><div class='opt'>A. 眾人</div><div class='opt'>B. 學習</div><div class='opt'>C. 軍隊</div><div class='opt'>D. 老師</div></div><div class='q'><div class='stem'>20. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>士大夫之<u>族</u></blockquote><div class='opt'>A. 類</div><div class='opt'>B. 滅族</div><div class='opt'>C. 家族</div><div class='opt'>D. 宗族</div></div><div class='q'><div class='stem'>21. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>道</u>相似也</blockquote><div class='opt'>A. 原因</div><div class='opt'>B. 道路</div><div class='opt'>C. 方法</div><div class='opt'>D. 學問</div></div><div class='q'><div class='stem'>22. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>位<u>卑</u>則足羞</blockquote><div class='opt'>A. 謙卑</div><div class='opt'>B. 卑鄙</div><div class='opt'>C. 出身低微</div><div class='opt'>D. 低下</div></div><div class='q'><div class='stem'>23. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>位卑則足<u>羞</u></blockquote><div class='opt'>A. 羞澀</div><div class='opt'>B. 不屑</div><div class='opt'>C. 羞恥</div><div class='opt'>D. 進獻</div></div><div class='q'><div class='stem'>24. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>官<u>盛</u>則近諛</blockquote><div class='opt'>A. 旺盛</div><div class='opt'>B. 盛裝</div><div class='opt'>C. 顯赫</div><div class='opt'>D. 盛大</div></div><div class='q'><div class='stem'>25. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>官盛則近<u>諛</u></blockquote><div class='opt'>A. 諂媚</div><div class='opt'>B. 須臾</div><div class='opt'>C. 諛辭</div><div class='opt'>D. 片刻</div></div><div class='q'><div class='stem'>26. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>師道之不<u>復</u></blockquote><div class='opt'>A. 報復</div><div class='opt'>B. 返回</div><div class='opt'>C. 再</div><div class='opt'>D. 恢復</div></div><div class='q'><div class='stem'>27. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>君子<u>不齒</u></blockquote><div class='opt'>A. 不屑同列</div><div class='opt'>B. 恥與為伍</div><div class='opt'>C. 不提及牙齒</div><div class='opt'>D. 不屑提及</div></div><div class='q'><div class='stem'>28. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>今其智乃反不能<u>及</u></blockquote><div class='opt'>A. 比得上</div><div class='opt'>B. 到達</div><div class='opt'>C. 和</div><div class='opt'>D. 趁着</div></div><div class='q'><div class='stem'>29. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>聖人無<u>常</u>師</blockquote><div class='opt'>A. 常常</div><div class='opt'>B. 固定</div><div class='opt'>C. 常道</div><div class='opt'>D. 平常</div></div><div class='q'><div class='stem'>30. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>術業有<u>專攻</u></blockquote><div class='opt'>A. 專一</div><div class='opt'>B. 專長</div><div class='opt'>C. 功績</div><div class='opt'>D. 學問</div></div><div class='q'><div class='stem'>31. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不<u>拘</u>於時</blockquote><div class='opt'>A. 拘捕</div><div class='opt'>B. 約束</div><div class='opt'>C. 羞恥</div><div class='opt'>D. 拘限</div></div><div class='q'><div class='stem'>32. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不拘於<u>時</u></blockquote><div class='opt'>A. 時機</div><div class='opt'>B. 時常</div><div class='opt'>C. 季節</div><div class='opt'>D. 時俗</div></div><div class='q'><div class='stem'>33. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>余<u>嘉</u>其能行古道</blockquote><div class='opt'>A. 尊敬</div><div class='opt'>B. 卓越</div><div class='opt'>C. 讚許</div><div class='opt'>D. 美好</div></div><div class='q'><div class='stem'>34. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>余嘉其能<u>行</u>古道</blockquote><div class='opt'>A. 行走</div><div class='opt'>B. 踐行</div><div class='opt'>C. 踐踏</div><div class='opt'>D. 行為</div></div><div class='q'><div class='stem'>35. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>作《師說》以<u>貽</u>之</blockquote><div class='opt'>A. 贈送</div><div class='opt'>B. 嘉許</div><div class='opt'>C. 貽誤</div><div class='opt'>D. 遺留</div></div></section><section class='unitview' id='u-xishan'><p><a href='#home'>返回</a></p><h2>08　始得西山宴遊記</h2><div class='q'><div class='stem'>1. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>故為之文以<u>志</u></blockquote><div class='opt'>A. 記述</div><div class='opt'>B. 志向</div><div class='opt'>C. 歌頌</div><div class='opt'>D. 記住</div></div><div class='q'><div class='stem'>2. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>居<u>是</u>州</blockquote><div class='opt'>A. 於是</div><div class='opt'>B. 對</div><div class='opt'>C. 正確</div><div class='opt'>D. 此</div></div><div class='q'><div class='stem'>3. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>然後知吾<u>嚮</u>之未始遊</blockquote><div class='opt'>A. 鄉里</div><div class='opt'>B. 向</div><div class='opt'>C. 面向</div><div class='opt'>D. 過往</div></div><div class='q'><div class='stem'>4. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>自余為<u>僇</u>人</blockquote><div class='opt'>A. 刑辱</div><div class='opt'>B. 獲罪</div><div class='opt'>C. 殺戮</div><div class='opt'>D. 侮辱</div></div><div class='q'><div class='stem'>5. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>恒</u>惴慄</blockquote><div class='opt'>A. 永恆</div><div class='opt'>B. 極度</div><div class='opt'>C. 平常</div><div class='opt'>D. 恆常</div></div><div class='q'><div class='stem'>6. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>恒<u>惴慄</u></blockquote><div class='opt'>A. 恐懼不安</div><div class='opt'>B. 憂傷</div><div class='opt'>C. 坐立不安</div><div class='opt'>D. 顫抖</div></div><div class='q'><div class='stem'>7. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>其<u>隙</u>也</blockquote><div class='opt'>A. 空間</div><div class='opt'>B. 嫌隙</div><div class='opt'>C. 縫隙</div><div class='opt'>D. 空閒</div></div><div class='q'><div class='stem'>8. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>日與其<u>徒</u>上高山</blockquote><div class='opt'>A. 白白地</div><div class='opt'>B. 只</div><div class='opt'>C. 僕人</div><div class='opt'>D. 同伴</div></div><div class='q'><div class='stem'>9. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>窮</u>迴溪</blockquote><div class='opt'>A. 窮究</div><div class='opt'>B. 盡頭</div><div class='opt'>C. 困厄</div><div class='opt'>D. 走盡</div></div><div class='q'><div class='stem'>10. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>窮<u>迴</u>溪</blockquote><div class='opt'>A. 曲折</div><div class='opt'>B. 返回</div><div class='opt'>C. 迂迴曲折</div><div class='opt'>D. 迴旋</div></div><div class='q'><div class='stem'>11. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>幽</u>泉怪石</blockquote><div class='opt'>A. 深遠</div><div class='opt'>B. 幽靜</div><div class='opt'>C. 囚禁</div><div class='opt'>D. 幽暗</div></div><div class='q'><div class='stem'>12. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>到則<u>披</u>草而坐</blockquote><div class='opt'>A. 撥開</div><div class='opt'>B. 穿上</div><div class='opt'>C. 披露</div><div class='opt'>D. 披散</div></div><div class='q'><div class='stem'>13. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>意有所<u>極</u></blockquote><div class='opt'>A. 至</div><div class='opt'>B. 極點</div><div class='opt'>C. 盡頭</div><div class='opt'>D. 極端</div></div><div class='q'><div class='stem'>14. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>夢亦同<u>趣</u></blockquote><div class='opt'>A. 趨向</div><div class='opt'>B. 旨趣</div><div class='opt'>C. 意趣</div><div class='opt'>D. 催促</div></div><div class='q'><div class='stem'>15. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>覺</u>而起</blockquote><div class='opt'>A. 覺醒</div><div class='opt'>B. 醒來</div><div class='opt'>C. 感覺</div><div class='opt'>D. 覺察</div></div><div class='q'><div class='stem'>16. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>緣</u>染溪</blockquote><div class='opt'>A. 沿着</div><div class='opt'>B. 貼近</div><div class='opt'>C. 緣故</div><div class='opt'>D. 緣分</div></div><div class='q'><div class='stem'>17. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>斫</u>榛莽</blockquote><div class='opt'>A. 撥開</div><div class='opt'>B. 攻擊</div><div class='opt'>C. 砍伐</div><div class='opt'>D. 收集</div></div><div class='q'><div class='stem'>18. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>窮</u>山之高而止</blockquote><div class='opt'>A. 窮究</div><div class='opt'>B. 窮盡</div><div class='opt'>C. 困厄</div><div class='opt'>D. 盡頭</div></div><div class='q'><div class='stem'>19. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>箕踞而<u>遨</u></blockquote><div class='opt'>A. 放縱</div><div class='opt'>B. 遊蕩</div><div class='opt'>C. 遨遊</div><div class='opt'>D. 遊賞</div></div><div class='q'><div class='stem'>20. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>皆在<u>衽席</u>之下</blockquote><div class='opt'>A. 枕席</div><div class='opt'>B. 坐席</div><div class='opt'>C. 宴席</div><div class='opt'>D. 臥席</div></div><div class='q'><div class='stem'>21. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>攢</u>蹙累積</blockquote><div class='opt'>A. 簇擁</div><div class='opt'>B. 湊集</div><div class='opt'>C. 聚集</div><div class='opt'>D. 積蓄</div></div><div class='q'><div class='stem'>22. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>攢<u>蹙</u>累積</blockquote><div class='opt'>A. 皺眉</div><div class='opt'>B. 迫促</div><div class='opt'>C. 緊迫</div><div class='opt'>D. 緊縮</div></div><div class='q'><div class='stem'>23. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>攢蹙<u>累</u>積</blockquote><div class='opt'>A. 累積</div><div class='opt'>B. 牽連</div><div class='opt'>C. 勞累</div><div class='opt'>D. 堆疊</div></div><div class='q'><div class='stem'>24. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>莫得<u>遯</u>隱</blockquote><div class='opt'>A. 逃隱</div><div class='opt'>B. 遁</div><div class='opt'>C. 迴避</div><div class='opt'>D. 退隱</div></div><div class='q'><div class='stem'>25. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>縈</u>青繚白</blockquote><div class='opt'>A. 牽掛</div><div class='opt'>B. 環繞</div><div class='opt'>C. 繚繞</div><div class='opt'>D. 纏縛</div></div><div class='q'><div class='stem'>26. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>縈青<u>繚</u>白</blockquote><div class='opt'>A. 繚繞</div><div class='opt'>B. 繚亂</div><div class='opt'>C. 纏縛</div><div class='opt'>D. 圍</div></div><div class='q'><div class='stem'>27. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>外與天<u>際</u></blockquote><div class='opt'>A. 交接</div><div class='opt'>B. 邊際</div><div class='opt'>C. 時機</div><div class='opt'>D. 會合處</div></div><div class='q'><div class='stem'>28. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>引</u>觴滿酌</blockquote><div class='opt'>A. 倒酒</div><div class='opt'>B. 引誘</div><div class='opt'>C. 拿取</div><div class='opt'>D. 引用</div></div><div class='q'><div class='stem'>29. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>引<u>觴</u>滿酌</blockquote><div class='opt'>A. 拿取</div><div class='opt'>B. 酒杯</div><div class='opt'>C. 倒酒</div><div class='opt'>D. 受傷</div></div><div class='q'><div class='stem'>30. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>心<u>凝</u>形釋</blockquote><div class='opt'>A. 凝視</div><div class='opt'>B. 凝固</div><div class='opt'>C. 專注</div><div class='opt'>D. 凝聚</div></div><div class='q'><div class='stem'>31. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>心凝形<u>釋</u></blockquote><div class='opt'>A. 釋懷</div><div class='opt'>B. 放下</div><div class='opt'>C. 解釋</div><div class='opt'>D. 釋放</div></div></section><section class='unitview' id='u-yueyang'><p><a href='#home'>返回</a></p><h2>09　岳陽樓記</h2><div class='q'><div class='stem'>1. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>屬</u>予作文以記之</blockquote><div class='opt'>A. 囑咐</div><div class='opt'>B. 隸屬</div><div class='opt'>C. 類別</div><div class='opt'>D. 委託</div></div><div class='q'><div class='stem'>2. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>滕子京<u>謫</u>守巴陵郡</blockquote><div class='opt'>A. 譴責</div><div class='opt'>B. 責罰</div><div class='opt'>C. 貶官</div><div class='opt'>D. 流放</div></div><div class='q'><div class='stem'>3. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>越</u>明年</blockquote><div class='opt'>A. 到了</div><div class='opt'>B. 之後</div><div class='opt'>C. 超越</div><div class='opt'>D. 墜越</div></div><div class='q'><div class='stem'>4. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>百廢<u>具</u>興</blockquote><div class='opt'>A. 極</div><div class='opt'>B. 器具</div><div class='opt'>C. 俱</div><div class='opt'>D. 具備</div></div><div class='q'><div class='stem'>5. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>增其舊<u>制</u></blockquote><div class='opt'>A. 制度</div><div class='opt'>B. 規模</div><div class='opt'>C. 製作</div><div class='opt'>D. 控制</div></div><div class='q'><div class='stem'>6. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>予觀夫巴陵<u>勝</u>狀</blockquote><div class='opt'>A. 引人入勝</div><div class='opt'>B. 勝利</div><div class='opt'>C. 優美</div><div class='opt'>D. 勝過</div></div><div class='q'><div class='stem'>7. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>予觀夫巴陵勝<u>狀</u></blockquote><div class='opt'>A. 情狀</div><div class='opt'>B. 壯闊</div><div class='opt'>C. 狀貌</div><div class='opt'>D. 上訴</div></div><div class='q'><div class='stem'>8. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>前人之述<u>備</u>矣</blockquote><div class='opt'>A. 具備</div><div class='opt'>B. 防備</div><div class='opt'>C. 完備</div><div class='opt'>D. 準備</div></div><div class='q'><div class='stem'>9. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>遷</u>客騷人</blockquote><div class='opt'>A. 變遷</div><div class='opt'>B. 遷移</div><div class='opt'>C. 變化</div><div class='opt'>D. 遷謫</div></div><div class='q'><div class='stem'>10. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>若夫<u>霪</u>雨霏霏</blockquote><div class='opt'>A. 過雨</div><div class='opt'>B. 過量</div><div class='opt'>C. 沉溺</div><div class='opt'>D. 連綿</div></div><div class='q'><div class='stem'>11. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>連月不<u>開</u></blockquote><div class='opt'>A. 開闢</div><div class='opt'>B. 開啓</div><div class='opt'>C. 放晴</div><div class='opt'>D. 打開</div></div><div class='q'><div class='stem'>12. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>陰風怒<u>號</u></blockquote><div class='opt'>A. 呼嘯</div><div class='opt'>B. 吹</div><div class='opt'>C. 號令</div><div class='opt'>D. 名號</div></div><div class='q'><div class='stem'>13. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>檣</u>傾楫摧</blockquote><div class='opt'>A. 旗杆</div><div class='opt'>B. 牆壁</div><div class='opt'>C. 牆垣</div><div class='opt'>D. 船桅</div></div><div class='q'><div class='stem'>14. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>檣<u>傾</u>楫摧</blockquote><div class='opt'>A. 倒塌</div><div class='opt'>B. 傾側</div><div class='opt'>C. 傾慕</div><div class='opt'>D. 傾盡</div></div><div class='q'><div class='stem'>15. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>檣傾<u>楫</u>摧</blockquote><div class='opt'>A. 聚集</div><div class='opt'>B. 船槳</div><div class='opt'>C. 舟楫</div><div class='opt'>D. 划槳</div></div><div class='q'><div class='stem'>16. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>檣傾楫<u>摧</u></blockquote><div class='opt'>A. 傾側</div><div class='opt'>B. 划槳</div><div class='opt'>C. 摧毀</div><div class='opt'>D. 挫敗</div></div><div class='q'><div class='stem'>17. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>薄</u>暮冥冥</blockquote><div class='opt'>A. 稀薄</div><div class='opt'>B. 迫近</div><div class='opt'>C. 淡</div><div class='opt'>D. 矇矓</div></div><div class='q'><div class='stem'>18. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>薄<u>暮</u>冥冥</blockquote><div class='opt'>A. 傍晚</div><div class='opt'>B. 昏暗</div><div class='opt'>C. 暮色</div><div class='opt'>D. 深夜</div></div><div class='q'><div class='stem'>19. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>薄暮<u>冥冥</u></blockquote><div class='opt'>A. 昏昧</div><div class='opt'>B. 昏暗</div><div class='opt'>C. 陰間</div><div class='opt'>D. 默默</div></div><div class='q'><div class='stem'>20. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>則有<u>去</u>國懷鄉</blockquote><div class='opt'>A. 離開</div><div class='opt'>B. 除去</div><div class='opt'>C. 拋棄</div><div class='opt'>D. 擺脫</div></div><div class='q'><div class='stem'>21. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>至若春和<u>景</u>明</blockquote><div class='opt'>A. 大</div><div class='opt'>B. 日光</div><div class='opt'>C. 影</div><div class='opt'>D. 景色</div></div><div class='q'><div class='stem'>22. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>至若春和景<u>明</u></blockquote><div class='opt'>A. 明白</div><div class='opt'>B. 明亮</div><div class='opt'>C. 明智</div><div class='opt'>D. 照耀</div></div><div class='q'><div class='stem'>23. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>波瀾不<u>驚</u></blockquote><div class='opt'>A. 震動</div><div class='opt'>B. 驚擾</div><div class='opt'>C. 起</div><div class='opt'>D. 害怕</div></div><div class='q'><div class='stem'>24. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>沙鷗<u>翔</u>集</blockquote><div class='opt'>A. 詳盡</div><div class='opt'>B. 飛翔</div><div class='opt'>C. 安詳</div><div class='opt'>D. 迴飛</div></div><div class='q'><div class='stem'>25. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>沙鷗翔<u>集</u></blockquote><div class='opt'>A. 編集</div><div class='opt'>B. 聚集</div><div class='opt'>C. 集會</div><div class='opt'>D. 停歇</div></div><div class='q'><div class='stem'>26. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>岸芷<u>汀</u>蘭</blockquote><div class='opt'>A. 香草</div><div class='opt'>B. 水邊平地</div><div class='opt'>C. 小洲</div><div class='opt'>D. 汀線</div></div><div class='q'><div class='stem'>27. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>郁郁</u>青青</blockquote><div class='opt'>A. 茂盛</div><div class='opt'>B. 文采</div><div class='opt'>C. 香氣濃盛</div><div class='opt'>D. 憂鬱</div></div><div class='q'><div class='stem'>28. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>而或長煙一<u>空</u></blockquote><div class='opt'>A. 空洞</div><div class='opt'>B. 天空</div><div class='opt'>C. 消散</div><div class='opt'>D. 空虛</div></div><div class='q'><div class='stem'>29. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>則有心<u>曠</u>神怡</blockquote><div class='opt'>A. 開朗</div><div class='opt'>B. 空曠</div><div class='opt'>C. 曠廢</div><div class='opt'>D. 荒廢</div></div><div class='q'><div class='stem'>30. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>則有心曠神<u>怡</u></blockquote><div class='opt'>A. 適合</div><div class='opt'>B. 輕鬆</div><div class='opt'>C. 平靜</div><div class='opt'>D. 愉快</div></div><div class='q'><div class='stem'>31. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>寵</u>辱皆忘</blockquote><div class='opt'>A. 榮寵</div><div class='opt'>B. 尊崇</div><div class='opt'>C. 寵愛</div><div class='opt'>D. 得寵</div></div><div class='q'><div class='stem'>32. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>寵<u>辱</u>皆忘</blockquote><div class='opt'>A. 委屈</div><div class='opt'>B. 受辱</div><div class='opt'>C. 侮辱</div><div class='opt'>D. 恥辱</div></div><div class='q'><div class='stem'>33. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>把</u>酒臨風</blockquote><div class='opt'>A. 將</div><div class='opt'>B. 把守</div><div class='opt'>C. 持</div><div class='opt'>D. 把持</div></div><div class='q'><div class='stem'>34. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>把酒<u>臨</u>風</blockquote><div class='opt'>A. 臨時</div><div class='opt'>B. 到</div><div class='opt'>C. 迎</div><div class='opt'>D. 抵抗</div></div><div class='q'><div class='stem'>35. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>或</u>異二者之為</blockquote><div class='opt'>A. 有人</div><div class='opt'>B. 不同</div><div class='opt'>C. 或許</div><div class='opt'>D. 偶爾</div></div><div class='q'><div class='stem'>36. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不<u>以</u>物喜</blockquote><div class='opt'>A. 因此</div><div class='opt'>B. 用</div><div class='opt'>C. 因為</div><div class='opt'>D. 認為</div></div><div class='q'><div class='stem'>37. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>微</u>斯人</blockquote><div class='opt'>A. 如果</div><div class='opt'>B. 沒有</div><div class='opt'>C. 稍微</div><div class='opt'>D. 微小</div></div><div class='q'><div class='stem'>38. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>吾誰與<u>歸</u></blockquote><div class='opt'>A. 跟從</div><div class='opt'>B. 返回</div><div class='opt'>C. 歸還</div><div class='opt'>D. 歸依</div></div></section><section class='unitview' id='u-liuguo'><p><a href='#home'>返回</a></p><h2>10　六國論</h2><div class='q'><div class='stem'>1. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>率</u>賂秦耶</blockquote><div class='opt'>A. 一概</div><div class='opt'>B. 全部</div><div class='opt'>C. 輕率</div><div class='opt'>D. 帶領</div></div><div class='q'><div class='stem'>2. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>固</u>不在戰矣</blockquote><div class='opt'>A. 堅固</div><div class='opt'>B. 本來</div><div class='opt'>C. 堅決</div><div class='opt'>D. 鞏固</div></div><div class='q'><div class='stem'>3. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>非<u>兵</u>不利</blockquote><div class='opt'>A. 兵器</div><div class='opt'>B. 戰爭</div><div class='opt'>C. 軍事</div><div class='opt'>D. 士兵</div></div><div class='q'><div class='stem'>4. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>非兵不<u>利</u></blockquote><div class='opt'>A. 利益</div><div class='opt'>B. 鋒利</div><div class='opt'>C. 便利</div><div class='opt'>D. 利用</div></div><div class='q'><div class='stem'>5. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>戰</u>不善</blockquote><div class='opt'>A. 戰慄</div><div class='opt'>B. 打仗</div><div class='opt'>C. 作戰</div><div class='opt'>D. 爭鬥</div></div><div class='q'><div class='stem'>6. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>戰不<u>善</u></blockquote><div class='opt'>A. 友好</div><div class='opt'>B. 善良</div><div class='opt'>C. 擅長</div><div class='opt'>D. 優勝</div></div><div class='q'><div class='stem'>7. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>弊</u>在賂秦</blockquote><div class='opt'>A. 困乏</div><div class='opt'>B. 滅亡</div><div class='opt'>C. 疲弊</div><div class='opt'>D. 弊端</div></div><div class='q'><div class='stem'>8. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>弊在<u>賂</u>秦</blockquote><div class='opt'>A. 賄賂</div><div class='opt'>B. 贈賄</div><div class='opt'>C. 財物</div><div class='opt'>D. 贈送</div></div><div class='q'><div class='stem'>9. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>賂秦而<u>力</u>虧</blockquote><div class='opt'>A. 氣力</div><div class='opt'>B. 努力</div><div class='opt'>C. 國力</div><div class='opt'>D. 力量</div></div><div class='q'><div class='stem'>10. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>賂秦而力<u>虧</u></blockquote><div class='opt'>A. 虧缺</div><div class='opt'>B. 疲弱</div><div class='opt'>C. 虧欠</div><div class='opt'>D. 損耗</div></div><div class='q'><div class='stem'>11. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>破滅之<u>道</u>也</blockquote><div class='opt'>A. 原因</div><div class='opt'>B. 方法</div><div class='opt'>C. 學問</div><div class='opt'>D. 道路</div></div><div class='q'><div class='stem'>12. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>六國<u>互</u>喪</blockquote><div class='opt'>A. 互相</div><div class='opt'>B. 交錯</div><div class='opt'>C. 相繼</div><div class='opt'>D. 交替</div></div><div class='q'><div class='stem'>13. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>六國互<u>喪</u></blockquote><div class='opt'>A. 喪失</div><div class='opt'>B. 滅亡</div><div class='opt'>C. 喪事</div><div class='opt'>D. 哀傷</div></div><div class='q'><div class='stem'>14. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不賂者<u>以</u>賂者喪</blockquote><div class='opt'>A. 認為</div><div class='opt'>B. 因為</div><div class='opt'>C. 因此</div><div class='opt'>D. 用</div></div><div class='q'><div class='stem'>15. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不能<u>獨</u>完</blockquote><div class='opt'>A. 難道</div><div class='opt'>B. 獨自</div><div class='opt'>C. 孤獨</div><div class='opt'>D. 唯獨</div></div><div class='q'><div class='stem'>16. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>不能獨<u>完</u></blockquote><div class='opt'>A. 保全</div><div class='opt'>B. 完好</div><div class='opt'>C. 完成</div><div class='opt'>D. 完備</div></div><div class='q'><div class='stem'>17. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>諸侯之所<u>亡</u>與戰敗而亡者</blockquote><div class='opt'>A. 逃亡</div><div class='opt'>B. 死亡</div><div class='opt'>C. 出走</div><div class='opt'>D. 失去</div></div><div class='q'><div class='stem'>18. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>思<u>厥</u>先祖父</blockquote><div class='opt'>A. 氣厥</div><div class='opt'>B. 厥疾</div><div class='opt'>C. 其</div><div class='opt'>D. 六國後人的</div></div><div class='q'><div class='stem'>19. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>暴</u>霜露</blockquote><div class='opt'>A. 曬乾</div><div class='opt'>B. 曬</div><div class='opt'>C. 暴露</div><div class='opt'>D. 殘暴</div></div><div class='q'><div class='stem'>20. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>舉</u>以予人</blockquote><div class='opt'>A. 舉起</div><div class='opt'>B. 支撐</div><div class='opt'>C. 舉薦</div><div class='opt'>D. 皆</div></div><div class='q'><div class='stem'>21. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>暴秦之欲無<u>厭</u></blockquote><div class='opt'>A. 厭倦</div><div class='opt'>B. 嫌棄</div><div class='opt'>C. 厭惡</div><div class='opt'>D. 滿足</div></div><div class='q'><div class='stem'>22. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>奉之<u>彌</u>繁</blockquote><div class='opt'>A. 越加</div><div class='opt'>B. 頻繁</div><div class='opt'>C. 彌縫</div><div class='opt'>D. 滿</div></div><div class='q'><div class='stem'>23. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>故不戰而強弱勝負已<u>判</u>矣</blockquote><div class='opt'>A. 分辨</div><div class='opt'>B. 判決</div><div class='opt'>C. 判定</div><div class='opt'>D. 分明</div></div><div class='q'><div class='stem'>24. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>至於<u>顛覆</u></blockquote><div class='opt'>A. 滅亡</div><div class='opt'>B. 傾倒</div><div class='opt'>C. 推翻</div><div class='opt'>D. 顛倒</div></div><div class='q'><div class='stem'>25. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>猶</u>抱薪救火</blockquote><div class='opt'>A. 像</div><div class='opt'>B. 還</div><div class='opt'>C. 猶豫</div><div class='opt'>D. 尚且</div></div><div class='q'><div class='stem'>26. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>與</u>嬴而不助五國也</blockquote><div class='opt'>A. 和</div><div class='opt'>B. 親附</div><div class='opt'>C. 約定</div><div class='opt'>D. 給予</div></div><div class='q'><div class='stem'>27. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>始有<u>遠</u>略</blockquote><div class='opt'>A. 影響深遠</div><div class='opt'>B. 疏遠</div><div class='opt'>C. 遙遠</div><div class='opt'>D. 長遠</div></div><div class='q'><div class='stem'>28. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>始有遠<u>略</u></blockquote><div class='opt'>A. 簡略</div><div class='opt'>B. 計策</div><div class='opt'>C. 省略</div><div class='opt'>D. 侵奪</div></div><div class='q'><div class='stem'>29. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>斯</u>用兵之效也</blockquote><div class='opt'>A. 是非</div><div class='opt'>B. 則</div><div class='opt'>C. 這樣</div><div class='opt'>D. 他(燕國)</div></div><div class='q'><div class='stem'>30. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>始</u>速禍焉</blockquote><div class='opt'>A. 開始</div><div class='opt'>B. 加速</div><div class='opt'>C. 才</div><div class='opt'>D. 當初</div></div><div class='q'><div class='stem'>31. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>始<u>速</u>禍焉</blockquote><div class='opt'>A. 催促</div><div class='opt'>B. 招災</div><div class='opt'>C. 加速</div><div class='opt'>D. 迅速</div></div><div class='q'><div class='stem'>32. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>李牧<u>連</u>卻之</blockquote><div class='opt'>A. 聯合</div><div class='opt'>B. 接連</div><div class='opt'>C. 牽連</div><div class='opt'>D. 斷斷續續</div></div><div class='q'><div class='stem'>33. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>李牧連<u>卻</u>之</blockquote><div class='opt'>A. 擊退</div><div class='opt'>B. 退後</div><div class='opt'>C. 拒絕</div><div class='opt'>D. 但是</div></div><div class='q'><div class='stem'>34. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>洎</u>牧以讒誅</blockquote><div class='opt'>A. 自</div><div class='opt'>B. 及至</div><div class='opt'>C. 注入</div><div class='opt'>D. 因為</div></div><div class='q'><div class='stem'>35. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>惜其用武而<u>不終</u>也</blockquote><div class='opt'>A. 不能堅持到底</div><div class='opt'>B. 不能堅守盟約</div><div class='opt'>C. 不得善終</div><div class='opt'>D. 最後沒有結束</div></div><div class='q'><div class='stem'>36. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>向使</u>三國各愛其地</blockquote><div class='opt'>A. 一向使令</div><div class='opt'>B. 假使</div><div class='opt'>C. 治國者</div><div class='opt'>D. 面向</div></div><div class='q'><div class='stem'>37. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>向使三國各<u>愛</u>其地</blockquote><div class='opt'>A. 愛惜</div><div class='opt'>B. 吝惜</div><div class='opt'>C. 愛好</div><div class='opt'>D. 親愛</div></div><div class='q'><div class='stem'>38. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>則勝負之<u>數</u></blockquote><div class='opt'>A. 數目</div><div class='opt'>B. 屢次</div><div class='opt'>C. 命運</div><div class='opt'>D. 責難</div></div><div class='q'><div class='stem'>39. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>當</u>與秦相較</blockquote><div class='opt'>A. 假使</div><div class='opt'>B. 應當</div><div class='opt'>C. 當下</div><div class='opt'>D. 面對</div></div><div class='q'><div class='stem'>40. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>或未易<u>量</u></blockquote><div class='opt'>A. 量力</div><div class='opt'>B. 容量</div><div class='opt'>C. 氣量</div><div class='opt'>D. 估量</div></div><div class='q'><div class='stem'>41. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>禮</u>天下之奇才</blockquote><div class='opt'>A. 禮物</div><div class='opt'>B. 禮儀</div><div class='opt'>C. 禮待</div><div class='opt'>D. 禮節</div></div><div class='q'><div class='stem'>42. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>并力西<u>嚮</u></blockquote><div class='opt'>A. 面向</div><div class='opt'>B. 從前</div><div class='opt'>C. 向</div><div class='opt'>D. 過往</div></div><div class='q'><div class='stem'>43. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>則吾恐秦人食之不得下<u>嚥</u>也</blockquote><div class='opt'>A. 燕國</div><div class='opt'>B. 吞嚥</div><div class='opt'>C. 哽咽</div><div class='opt'>D. 咽住</div></div><div class='q'><div class='stem'>44. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>而為秦人積威之所<u>劫</u></blockquote><div class='opt'>A. 威脅</div><div class='opt'>B. 搶奪</div><div class='opt'>C. 災難</div><div class='opt'>D. 命運</div></div><div class='q'><div class='stem'>45. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>下而從六國破亡之<u>故事</u></blockquote><div class='opt'>A. 事情</div><div class='opt'>B. 故事</div><div class='opt'>C. 典故</div><div class='opt'>D. 舊事</div></div></section><section class='unitview' id='u-tangshi'><p><a href='#home'>返回</a></p><h2>11　詩三首</h2><div class='q'><div class='stem'>1. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>山居秋<u>暝</u></blockquote><div class='opt'>A. 暮色</div><div class='opt'>B. 昏暗</div><div class='opt'>C. 閉眼</div><div class='opt'>D. 黃昏</div></div><div class='q'><div class='stem'>2. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>竹喧歸<u>浣女</u></blockquote><div class='opt'>A. 浣紗女史</div><div class='opt'>B. 婢女</div><div class='opt'>C. 洗碗女</div><div class='opt'>D. 洗衣女</div></div><div class='q'><div class='stem'>3. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>隨意</u>春芳歇</blockquote><div class='opt'>A. 哪怕</div><div class='opt'>B. 任憑</div><div class='opt'>C. 隨手</div><div class='opt'>D. 隨便</div></div><div class='q'><div class='stem'>4. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>隨意春芳<u>歇</u></blockquote><div class='opt'>A. 停歇</div><div class='opt'>B. 凋謝</div><div class='opt'>C. 停息</div><div class='opt'>D. 休息</div></div><div class='q'><div class='stem'>5. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>王孫自可<u>留</u></blockquote><div class='opt'>A. 收留</div><div class='opt'>B. 挽留</div><div class='opt'>C. 留守</div><div class='opt'>D. 停留</div></div><div class='q'><div class='stem'>6. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>獨<u>酌</u>無相親</blockquote><div class='opt'>A. 斟酌</div><div class='opt'>B. 斟酌事態</div><div class='opt'>C. 斟酒</div><div class='opt'>D. 飲酒</div></div><div class='q'><div class='stem'>7. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>獨酌無<u>相親</u></blockquote><div class='opt'>A. 彼此親近</div><div class='opt'>B. 互相親愛</div><div class='opt'>C. 親族</div><div class='opt'>D. 議婚相見</div></div><div class='q'><div class='stem'>8. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>月既不<u>解</u>飲</blockquote><div class='opt'>A. 解除</div><div class='opt'>B. 解散</div><div class='opt'>C. 懂得</div><div class='opt'>D. 解開</div></div><div class='q'><div class='stem'>9. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>影<u>徒</u>隨我身</blockquote><div class='opt'>A. 門徒</div><div class='opt'>B. 徒然</div><div class='opt'>C. 白白地</div><div class='opt'>D. 同志</div></div><div class='q'><div class='stem'>10. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>暫伴月<u>將</u>影</blockquote><div class='opt'>A. 和</div><div class='opt'>B. 領兵</div><div class='opt'>C. 率領</div><div class='opt'>D. 將要</div></div><div class='q'><div class='stem'>11. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>行樂須<u>及</u>春</blockquote><div class='opt'>A. 到達</div><div class='opt'>B. 和</div><div class='opt'>C. 趁着</div><div class='opt'>D. 比得上</div></div><div class='q'><div class='stem'>12. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>相期</u>邈雲漢</blockquote><div class='opt'>A. 期望</div><div class='opt'>B. 相約</div><div class='opt'>C. 期限</div><div class='opt'>D. 相待</div></div><div class='q'><div class='stem'>13. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>相期<u>邈</u>雲漢</blockquote><div class='opt'>A. 渺茫</div><div class='opt'>B. 輕視</div><div class='opt'>C. 遠隔</div><div class='opt'>D. 遙遠</div></div><div class='q'><div class='stem'>14. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>北極朝廷<u>終</u>不改</blockquote><div class='opt'>A. 死亡</div><div class='opt'>B. 始終</div><div class='opt'>C. 終於</div><div class='opt'>D. 終竟</div></div><div class='q'><div class='stem'>15. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>日暮<u>聊</u>為梁甫吟</blockquote><div class='opt'>A. 談天</div><div class='opt'>B. 姑且</div><div class='opt'>C. 閒談</div><div class='opt'>D. 依靠</div></div></section><section class='unitview' id='u-songci'><p><a href='#home'>返回</a></p><h2>12　詞三首</h2><div class='q'><div class='stem'>1. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>早生<u>華</u>髮</blockquote><div class='opt'>A. 光華</div><div class='opt'>B. 花白</div><div class='opt'>C. 精華</div><div class='opt'>D. 華麗</div></div><div class='q'><div class='stem'>2. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>千古<u>風流</u>人物</blockquote><div class='opt'>A. 放蕩</div><div class='opt'>B. 傑出不凡</div><div class='opt'>C. 不羈</div><div class='opt'>D. 流風</div></div><div class='q'><div class='stem'>3. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>故</u>壘西邊</blockquote><div class='opt'>A. 所以</div><div class='opt'>B. 緣故</div><div class='opt'>C. 舊時</div><div class='opt'>D. 殘舊</div></div><div class='q'><div class='stem'>4. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>檣</u>櫓灰飛煙滅</blockquote><div class='opt'>A. 牆垣</div><div class='opt'>B. 牆壁</div><div class='opt'>C. 船桅</div><div class='opt'>D. 旗杆</div></div><div class='q'><div class='stem'>5. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>檣<u>櫓</u>灰飛煙滅</blockquote><div class='opt'>A. 櫓船</div><div class='opt'>B. 船槳</div><div class='opt'>C. 望樓</div><div class='opt'>D. 大盾</div></div><div class='q'><div class='stem'>6. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>一<u>尊</u>還酹江月</blockquote><div class='opt'>A. 尊敬</div><div class='opt'>B. 倒酒</div><div class='opt'>C. 尊貴</div><div class='opt'>D. 樽</div></div><div class='q'><div class='stem'>7. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>乍</u>煖還寒時候</blockquote><div class='opt'>A. 剛</div><div class='opt'>B. 忽然</div><div class='opt'>C. 初看</div><div class='opt'>D. 欺詐</div></div><div class='q'><div class='stem'>8. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>最難<u>將息</u></blockquote><div class='opt'>A. 即將休息</div><div class='opt'>B. 調養</div><div class='opt'>C. 即將停止</div><div class='opt'>D. 歇息</div></div><div class='q'><div class='stem'>9. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>怎<u>敵</u>他晚來風急</blockquote><div class='opt'>A. 對抗</div><div class='opt'>B. 仇敵</div><div class='opt'>C. 匹敵</div><div class='opt'>D. 抵擋</div></div><div class='q'><div class='stem'>10. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>如今有<u>誰</u>堪摘</blockquote><div class='opt'>A. 哪個</div><div class='opt'>B. 誰人</div><div class='opt'>C. 何</div><div class='opt'>D. 作者</div></div><div class='q'><div class='stem'>11. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>如今有誰<u>堪</u>摘</blockquote><div class='opt'>A. 難堪</div><div class='opt'>B. 勝任</div><div class='opt'>C. 可以</div><div class='opt'>D. 承受</div></div><div class='q'><div class='stem'>12. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>這<u>次第</u></blockquote><div class='opt'>A. 規模排場</div><div class='opt'>B. 次序</div><div class='opt'>C. 依次</div><div class='opt'>D. 光景</div></div><div class='q'><div class='stem'>13. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>眾裏尋他千百<u>度</u></blockquote><div class='opt'>A. 估計</div><div class='opt'>B. 法度</div><div class='opt'>C. 次</div><div class='opt'>D. 揣度</div></div><div class='q'><div class='stem'>14. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'><u>驀然</u>迴首</blockquote><div class='opt'>A. 猛然</div><div class='opt'>B. 不經意</div><div class='opt'>C. 茫然</div><div class='opt'>D. 突然</div></div><div class='q'><div class='stem'>15. 解釋下列句子中有標示的詞語。</div><blockquote class='quote'>燈火<u>闌珊</u>處</blockquote><div class='opt'>A. 暗淡</div><div class='opt'>B. 欄杆</div><div class='opt'>C. 興盛</div><div class='opt'>D. 熄滅</div></div></section><div id='home'><section class='hero'><h2>12篇 · 詞解選擇</h2><p>題目取自教育局12篇章pdf</p><p>撳篇章就入去，唔使裝 App。</p></section><div class='grid'><a class='card' href='#u-lunyu'><div class='no'>UNIT 01</div><h3>論仁、論孝、論君子</h3><p>《論語》 · 43 題</p></a><a class='card' href='#u-yusuo'><div class='no'>UNIT 02</div><h3>魚我所欲也</h3><p>《孟子》 · 16 題</p></a><a class='card' href='#u-xiaoyao'><div class='no'>UNIT 03</div><h3>逍遙遊</h3><p>《莊子》 · 46 題</p></a><a class='card' href='#u-quanxue'><div class='no'>UNIT 04</div><h3>勸學</h3><p>《荀子》 · 32 題</p></a><a class='card' href='#u-lianpo'><div class='no'>UNIT 05</div><h3>廉頗藺相如列傳</h3><p>《史記》 · 95 題</p></a><a class='card' href='#u-chushi'><div class='no'>UNIT 06</div><h3>出師表</h3><p>諸葛亮 · 75 題</p></a><a class='card' href='#u-shishuo'><div class='no'>UNIT 07</div><h3>師說</h3><p>韓愈 · 35 題</p></a><a class='card' href='#u-xishan'><div class='no'>UNIT 08</div><h3>始得西山宴遊記</h3><p>柳宗元 · 31 題</p></a><a class='card' href='#u-yueyang'><div class='no'>UNIT 09</div><h3>岳陽樓記</h3><p>范仲淹 · 38 題</p></a><a class='card' href='#u-liuguo'><div class='no'>UNIT 10</div><h3>六國論</h3><p>蘇洵 · 45 題</p></a><a class='card' href='#u-tangshi'><div class='no'>UNIT 11</div><h3>詩三首</h3><p>唐詩 · 15 題</p></a><a class='card' href='#u-songci'><div class='no'>UNIT 12</div><h3>詞三首</h3><p>宋詞 · 15 題</p></a></div></div></main>
+<p class="footer">詞解題幹與答案對應練習冊。文言原文屬公有領域。進度只存在本機瀏覽器。</p>
+<script>
+</script>
+<script>window.UNITS=[{"id":"lunyu","no":"01","title":"論仁、論孝、論君子","from":"《論語》","items":[{"s":"惡乎成名","w":"惡","a":"怎麼","t":["憎厭","憎惡","醜惡"]},{"s":"不可以久處約","w":"約","a":"窮困","t":["約束","約定","安逸"]},{"s":"君子病無能焉","w":"病","a":"擔憂","t":["疾病","缺點","困苦"]},{"s":"知者利仁","w":"利","a":"利用","t":["便利","鋒利","利益"]},{"s":"不以其道得之","w":"道","a":"方法","t":["學問","原因","道路"]},{"s":"不處也","w":"處","a":"接受","t":["處於","處理","處所"]},{"s":"不去也","w":"去","a":"擺脫","t":["拋棄","離開","除去"]},{"s":"君子無終食之間違仁","w":"違","a":"違背","t":["遵守","捨棄","避開"]},{"s":"造次必於是","w":"造次","a":"倉卒","t":["魯莽","焦急","製造"]},{"s":"克己復禮為仁","w":"克","a":"約束","t":["能夠","戰勝","剋期"]},{"s":"為仁由己","w":"為","a":"實踐","t":["製作","作為","因為"]},{"s":"為仁由己","w":"由","a":"憑","t":["從","原因","經由"]},{"s":"請問其目","w":"目","a":"綱目","t":["目的","眼睛","看待"]},{"s":"請事斯語矣","w":"事","a":"實踐","t":["侍奉","事業","事情"]},{"s":"無求生以害仁","w":"害","a":"損害","t":["災害","忌妒","離棄"]},{"s":"有殺身以成仁","w":"成","a":"成全","t":["完成","成為","盛"]},{"s":"樊遲御","w":"御","a":"駕駛車馬","t":["御用","抵禦","治理"]},{"s":"無違","w":"無","a":"不要","t":["沒有","無論","無非"]},{"s":"無違","w":"違","a":"違背","t":["離開","觸忤","避開"]},{"s":"生事之以禮","w":"事","a":"侍奉","t":["實踐","事業","事情"]},{"s":"是謂能養","w":"養","a":"供養","t":["飼養","修養","養育"]},{"s":"皆能有養","w":"養","a":"飼養","t":["供養","修養","養育"]},{"s":"事父母幾諫","w":"幾","a":"委婉","t":["幾乎","幾次","接近"]},{"s":"又敬不違","w":"違","a":"違反","t":["離開","遺留","避開"]},{"s":"勞而不怨","w":"勞","a":"擔憂","t":["功勞","勞苦","疾病"]},{"s":"父母之年","w":"年","a":"年紀","t":["年成","年份","歲時"]},{"s":"君子不重則不威","w":"重","a":"莊重","t":["貴重","再","重複"]},{"s":"君子不重則不威","w":"威","a":"威儀","t":["威嚇","威勢","威力"]},{"s":"學則不固","w":"固","a":"鞏固","t":["堅決","本來","堅固"]},{"s":"無友不如己者","w":"如","a":"及","t":["及得上","如同","如果"]},{"s":"過則勿憚改","w":"過","a":"過錯","t":["經過","超過","過去"]},{"s":"過則勿憚改","w":"憚","a":"害怕","t":["勞苦","忌憚","憚煩"]},{"s":"小人長戚戚","w":"戚","a":"憂愁","t":["親戚","悲哀","妒忌"]},{"s":"斯謂之君子矣乎","w":"斯","a":"這樣","t":["你","無意","則"]},{"s":"君子成人之美","w":"成","a":"成全","t":["完成","成為","盛"]},{"s":"小人反是","w":"反","a":"相反","t":["返回","造反","反省"]},{"s":"君子義以為質","w":"質","a":"原則","t":["質地","抵押","質問"]},{"s":"禮以行之","w":"行","a":"實行","t":["行為","德行","行走"]},{"s":"孫以出之","w":"孫","a":"謙遜","t":["孫兒","出奔","後代"]},{"s":"孫以出之","w":"出","a":"說出","t":["超出","外出","產生"]},{"s":"信以成之","w":"信","a":"誠實","t":["書信","相信","訊息"]},{"s":"信以成之","w":"成","a":"完成","t":["成全","成為","盛"]},{"s":"君子求諸己","w":"求","a":"責求","t":["徵求","尋求","請求"]}]},{"id":"yusuo","no":"02","title":"魚我所欲也","from":"《孟子》","items":[{"s":"是亦不可以已乎","w":"已","a":"停止","t":["已經","太","自己"]},{"s":"鄉為身死而不受","w":"鄉","a":"過往","t":["鄉里","面向","故鄉"]},{"s":"舍魚而取熊掌者也","w":"舍","a":"捨棄","t":["安置","房舍","施捨"]},{"s":"故不為苟得也","w":"苟","a":"隨便","t":["如果","草名","假如"]},{"s":"死亦我所惡","w":"惡","a":"憎厭","t":["怎麼","醜惡","兇惡"]},{"s":"故患有所不辟也","w":"患","a":"禍患","t":["擔憂","憂慮","疾病"]},{"s":"故患有所不辟也","w":"辟","a":"避","t":["開闢","君王","刑法"]},{"s":"非獨賢者有是心也","w":"非獨","a":"不僅","t":["然而","唯獨不是","因此"]},{"s":"弗得則死","w":"弗","a":"不","t":["不能","拂逆","否"]},{"s":"嘑爾而與之","w":"嘑","a":"呼喝","t":["呼吸","辱罵","踐踏"]},{"s":"嘑爾而與之","w":"與","a":"給與","t":["幫助","和","參與"]},{"s":"蹴爾而與之","w":"蹴","a":"踐踏","t":["踢","倉促","速"]},{"s":"萬鍾則不辯禮義而受之","w":"辯","a":"辨別","t":["辯論","巧言","爭辯"]},{"s":"萬鍾於我何加焉","w":"加","a":"增益","t":["加以","超過","增加"]},{"s":"妻妾之奉","w":"奉","a":"侍奉","t":["捧","接受","奉獻"]},{"s":"所識窮乏者得我與","w":"得","a":"感激","t":["感嘆","獲得","能夠"]}]},{"id":"xiaoyao","no":"03","title":"逍遙遊","from":"《莊子》","items":[{"s":"衆所同去也","w":"去","a":"拋棄","t":["擺脫","離開","除去"]},{"s":"我樹之成而實五石","w":"樹","a":"種植","t":["樹木","建立","樹立"]},{"s":"患其無用","w":"患","a":"擔憂","t":["禍患","疾病","缺點"]},{"s":"今一朝而鬻技百金","w":"鬻","a":"賣","t":["養育","粥食","買"]},{"s":"魏王貽我大瓠之種","w":"貽","a":"贈","t":["遺留","貽誤","怠"]},{"s":"我樹之成而實五石","w":"之","a":"大瓠之種","t":["客人","他，指子女","的"]},{"s":"我樹之成而實五石","w":"實","a":"果實","t":["忠實","充實","誠實"]},{"s":"其堅不能自舉也","w":"舉","a":"支撐","t":["舉薦","皆","舉起"]},{"s":"剖之以為瓢","w":"剖","a":"割開","t":["分析","剖白","批判"]},{"s":"則瓠落無所容","w":"容","a":"存放","t":["容器","容貌","允許"]},{"s":"吾為其無用而掊之","w":"掊","a":"擊破","t":["聚斂","丟棄","拿起"]},{"s":"夫子固拙於用大矣","w":"拙","a":"不善於","t":["笨拙","謙稱","拙劣文章"]},{"s":"宋人有善為不龜手之藥者","w":"為","a":"製作","t":["實踐","作為","售賣"]},{"s":"世世以洴澼絖為事","w":"洴澼","a":"漂洗","t":["浮游","擊水","漂泊"]},{"s":"世世以洴澼絖為事","w":"絖","a":"棉絮","t":["絲綿","細棉","光亮"]},{"s":"世世以洴澼絖為事","w":"事","a":"事業","t":["實踐","侍奉","事情"]},{"s":"請買其方百金","w":"方","a":"配方","t":["方法","方向","正在"]},{"s":"聚族而謀曰","w":"謀","a":"謀劃","t":["計劃","計謀","圖謀"]},{"s":"請與之","w":"與","a":"給與","t":["幫助","和","參與"]},{"s":"以說吳王","w":"說","a":"遊說","t":["解說","喜悅","言論"]},{"s":"越有難","w":"難","a":"亂事","t":["災難","困難","責難"]},{"s":"吳王使之將","w":"使","a":"派遣","t":["作為使者","出使","使者"]},{"s":"吳王使之將","w":"之","a":"客人","t":["大瓠之種","他，指子女","的"]},{"s":"吳王使之將","w":"將","a":"領兵","t":["和","出使","將要"]},{"s":"裂地而封之","w":"裂","a":"割","t":["割裂","破裂","分裂"]},{"s":"能不龜手一也","w":"一","a":"一樣","t":["專一","一旦","統一"]},{"s":"或以封","w":"以","a":"因此","t":["因為","用","認為"]},{"s":"則所用之異也","w":"異","a":"不同","t":["怪異","分開","奇特"]},{"s":"何不慮以為大樽而浮於江湖","w":"慮","a":"考慮","t":["拿","憂慮","打算"]},{"s":"則夫子猶有蓬之心也夫","w":"猶","a":"仍然","t":["像","如同","尚且"]},{"s":"其大本擁腫而不中繩墨","w":"大本","a":"樹幹","t":["根本","資本","年輪"]},{"s":"其大本擁腫而不中繩墨","w":"中","a":"合乎","t":["中間","射中","內心"]},{"s":"其小枝卷曲而不中規矩","w":"卷","a":"屈曲","t":["凹凸不平","書卷","考卷"]},{"s":"立之塗","w":"塗","a":"道路","t":["塗抹","泥塗","塗飾"]},{"s":"子獨不見狸狌乎","w":"子","a":"你","t":["兒子","夫子","男子美稱"]},{"s":"子獨不見狸狌乎","w":"獨","a":"難道","t":["獨自","單獨","唯獨"]},{"s":"以候敖者","w":"敖","a":"出遊","t":["遊逛","傲慢","喧噪"]},{"s":"東西跳梁","w":"跳梁","a":"跳躍","t":["跋扈","樑上","跳踉"]},{"s":"不辟高下","w":"辟","a":"避開","t":["開闢","君王","逃避"]},{"s":"死於罔罟","w":"罔罟","a":"捕獸網","t":["迷惘","欺罔","法網"]},{"s":"其大若垂天之雲","w":"若","a":"好像","t":["及","如同","如果"]},{"s":"此能為大矣","w":"能","a":"功能","t":["善於","能夠","才能"]},{"s":"而不能執鼠","w":"執","a":"捕捉","t":["看守","執持","執行"]},{"s":"何不樹之於無何有之鄉","w":"樹","a":"種植","t":["樹木","建立","樹立"]},{"s":"彷徨乎無為其側","w":"彷徨","a":"縱任不拘","t":["猶豫不決","心神不定","匆遽"]},{"s":"不夭斤斧","w":"夭","a":"摧折","t":["天","夭折","屈抑"]}]},{"id":"quanxue","no":"04","title":"勸學","from":"《荀子》","items":[{"s":"不如須臾之所學也","w":"須臾","a":"片刻","t":["等待","片刻之後","少頃"]},{"s":"學不可以已","w":"已","a":"止","t":["已經","太","自己"]},{"s":"木直中繩","w":"中","a":"合乎","t":["中間","射中","內心"]},{"s":"輮以為輪","w":"輮","a":"屈曲","t":["用火烤彎","柔軟","車輪"]},{"s":"其曲中規","w":"規","a":"圓規","t":["規則","規勸","規模"]},{"s":"雖有槁暴","w":"槁","a":"枯乾","t":["槁木","憔悴","乾枯"]},{"s":"雖有槁暴","w":"暴","a":"曬乾","t":["暴露","曬","殘暴"]},{"s":"不復挺者","w":"挺","a":"挺直","t":["挺出","支持","挺立"]},{"s":"金就礪則利","w":"就","a":"靠近","t":["依靠","完成","就是"]},{"s":"金就礪則利","w":"礪","a":"磨刀石","t":["磨鍊","激勵","磨礪"]},{"s":"君子博學而日參省乎己","w":"參","a":"多次","t":["反省","參與","三次"]},{"s":"君子博學而日參省乎己","w":"省","a":"反省","t":["減少","省察","減省"]},{"s":"則知明而行無過矣","w":"知","a":"智慧","t":["知道","知遇","知覺"]},{"s":"則知明而行無過矣","w":"行","a":"行為","t":["實行","踐行","行走"]},{"s":"吾嘗跂而望矣","w":"跂","a":"提起腳跟","t":["分岔","企望","提起腳尖"]},{"s":"聲非加疾也","w":"疾","a":"宏亮","t":["遮擋","疾病","急速"]},{"s":"而聞者彰","w":"彰","a":"清楚","t":["揭示","明顯","表彰"]},{"s":"假輿馬者","w":"假","a":"借助","t":["借","虛假","假期"]},{"s":"假輿馬者","w":"輿","a":"車","t":["魚","馬","輿論"]},{"s":"非利足也","w":"利","a":"便利","t":["利用","鋒利","利益"]},{"s":"而致千里","w":"致","a":"到達","t":["招致","極盡","表達"]},{"s":"非能水也","w":"能","a":"善於","t":["功能","能夠","才能"]},{"s":"非能水也","w":"水","a":"游泳","t":["渡河","河流","水災"]},{"s":"而絕江河","w":"絕","a":"橫渡","t":["斷絕","極","隔絕"]},{"s":"君子生非異也","w":"生","a":"天性","t":["天生","產生","生長"]},{"s":"聖心備焉","w":"備","a":"具備","t":["全","防備","準備"]},{"s":"故不積跬步","w":"跬步","a":"半步","t":["一步","步伐","寸步"]},{"s":"功在不舍","w":"舍","a":"放棄","t":["安置","房舍","犧牲"]},{"s":"鍥而舍之","w":"鍥","a":"雕刻","t":["金石","截斷","堅持"]},{"s":"金石可鏤","w":"鏤","a":"雕刻","t":["腐朽","鏤空","鋼"]},{"s":"螾無爪牙之利","w":"螾","a":"蚯蚓","t":["蜈蚣","引伸","微蟲"]},{"s":"用心躁也","w":"躁","a":"浮躁","t":["吃醋","乾燥","不安靜"]}]},{"id":"lianpo","no":"05","title":"廉頗藺相如列傳","from":"《史記》","items":[{"s":"大王必欲急臣","w":"急","a":"逼迫","t":["急忙","危急","緊急"]},{"s":"乃使其從者衣褐","w":"衣","a":"穿著","t":["更換","衣服","平民"]},{"s":"禮節甚倨","w":"倨","a":"傲慢","t":["蹲踞","倨傲待人","箕踞"]},{"s":"竊計欲亡走燕","w":"竊","a":"私下","t":["間接","盜竊","竊位"]},{"s":"且相如素賤人","w":"賤","a":"地位卑下","t":["輕視","下賤","賤人"]},{"s":"廉頗為趙將伐齊","w":"為","a":"作為","t":["實踐","製作","做"]},{"s":"拜為上卿","w":"拜","a":"授予職位","t":["拜祭","拜見","行禮"]},{"s":"以勇氣聞於諸侯","w":"聞","a":"聞名","t":["懂得","聽見","見聞"]},{"s":"為趙宦者令繆賢舍人","w":"舍人","a":"門客","t":["官名近侍","屋主","侍從"]},{"s":"使人遺趙王書","w":"遺","a":"送給","t":["遺留","留下","遺漏"]},{"s":"願以十五城請易璧","w":"易","a":"交換","t":["容易","改變","簡易"]},{"s":"趙王與大將軍廉頗諸大臣謀","w":"謀","a":"商議","t":["計劃","計謀","圖謀"]},{"s":"徒見欺","w":"徒","a":"白白地","t":["只","同志","門徒"]},{"s":"徒見欺","w":"見","a":"被","t":["看見","顯現","見解"]},{"s":"徒見欺","w":"欺","a":"欺騙","t":["欺負","欺凌","欺誑"]},{"s":"即患秦兵之來","w":"患","a":"憂慮","t":["禍患","疾病","導致"]},{"s":"求人可使報秦者","w":"求","a":"徵求","t":["責求","乞求","請求"]},{"s":"求人可使報秦者","w":"報","a":"答覆","t":["報仇","報答","報告"]},{"s":"臣舍人藺相如可使","w":"使","a":"出使","t":["派遣","命令","使者"]},{"s":"臣嘗有罪","w":"嘗","a":"曾經","t":["品嘗","嘗試","試探"]},{"s":"竊計欲亡走燕","w":"亡","a":"逃亡","t":["出走","失去","死亡"]},{"s":"臣語曰","w":"語","a":"告訴","t":["話語","談論","議論"]},{"s":"臣嘗從大王與燕王會境上","w":"從","a":"跟從","t":["聽從","自從","仿效"]},{"s":"臣嘗從大王與燕王會境上","w":"會","a":"會面","t":["恰巧","集會","會合"]},{"s":"夫趙彊而燕弱","w":"彊","a":"強","t":["僵持","強迫","堅強"]},{"s":"而君幸於趙王","w":"幸","a":"寵幸","t":["幸運","希望","僥倖"]},{"s":"而束君歸趙矣","w":"束","a":"綁縛","t":["約束","一束","迅速"]},{"s":"君不如肉袒伏斧質請罪","w":"袒","a":"袒露","t":["坦誠","偏袒","脫"]},{"s":"不可不許","w":"許","a":"答應","t":["承諾","許配","處所"]},{"s":"曲在趙","w":"曲","a":"理虧","t":["曲折","歌曲","局部"]},{"s":"均之二策","w":"均","a":"衡量","t":["公平","平均","均勻"]},{"s":"寧許以負秦曲","w":"寧","a":"寧願","t":["應該","安寧","豈"]},{"s":"寧許以負秦曲","w":"許","a":"答應","t":["承諾","許配","處所"]},{"s":"寧許以負秦曲","w":"負","a":"承擔","t":["倚仗","辜負","負面"]},{"s":"王必無人","w":"必","a":"如果","t":["一定","迫切","找"]},{"s":"臣願奉璧往使","w":"奉","a":"捧","t":["侍奉","供奉","接受"]},{"s":"臣請完璧歸趙","w":"請","a":"請求","t":["請示","邀請","宴請"]},{"s":"相如奉璧奏秦王","w":"奏","a":"獻給","t":["展示","演奏","奏效"]},{"s":"卻立","w":"卻","a":"退後","t":["擊退","但是","拒絕"]},{"s":"怒髮上衝冠","w":"冠","a":"帽子","t":["超群","冠軍","加冠"]},{"s":"趙王悉召羣臣議","w":"悉","a":"全部","t":["熟悉","盡心","詳知"]},{"s":"負其彊","w":"負","a":"倚仗","t":["承擔","辜負","背負"]},{"s":"臣以為布衣之交尚不相欺","w":"尚","a":"尚且","t":["崇尚","還","上"]},{"s":"且以一璧之故逆彊秦之驩","w":"逆","a":"拂逆","t":["迎合","迎接","預先"]},{"s":"且以一璧之故逆彊秦之驩","w":"驩","a":"歡心","t":["歡樂","關係","交歡"]},{"s":"嚴大國之威以修敬也","w":"嚴","a":"尊重","t":["嚴謹","嚴厲","嚴密"]},{"s":"大王必欲急臣","w":"必","a":"假如","t":["一定","迫切","執意"]},{"s":"臣頭今與璧俱碎於柱矣","w":"今","a":"即將","t":["堅定","今天","當今"]},{"s":"相如持其璧睨柱","w":"睨","a":"斜視","t":["偏視","傲視","顧視"]},{"s":"乃辭謝固請","w":"辭謝","a":"婉言道歉","t":["告辭道謝","謝罪","辭讓"]},{"s":"乃辭謝固請","w":"固","a":"堅決","t":["鞏固","本來","堅固"]},{"s":"召有司案圖","w":"案","a":"按","t":["几案","查考","案件"]},{"s":"相如度秦王特以詐佯為予趙城","w":"度","a":"揣度","t":["次","法度","量度"]},{"s":"相如度秦王特以詐佯為予趙城","w":"特","a":"只是","t":["特別","特立","迎合"]},{"s":"相如度秦王特以詐佯為予趙城","w":"佯","a":"假裝","t":["類似","陽奉","徜徉"]},{"s":"舍相如廣成傳","w":"舍","a":"安置","t":["捨棄","捨","房舍"]},{"s":"乃使其從者衣褐","w":"使","a":"派遣","t":["行使","出使","使者"]},{"s":"從徑道亡","w":"亡","a":"出走","t":["亡國","失去","死亡"]},{"s":"未嘗有堅明約束者也","w":"約束","a":"信約","t":["纏縛","限制","盟約"]},{"s":"臣誠恐見欺於王而負趙","w":"負","a":"辜負","t":["承擔","倚仗","背負"]},{"s":"間至趙矣","w":"間","a":"間道","t":["間或","中間","離間"]},{"s":"大王遣一介之使至趙","w":"介","a":"個","t":["介紹","介意","介乎"]},{"s":"唯大王與羣臣孰計議之","w":"孰","a":"詳細","t":["誰","一起","成熟"]},{"s":"唯大王與羣臣孰計議之","w":"議","a":"商議","t":["會議","意見","評議"]},{"s":"左右或欲引相如去","w":"或","a":"有人","t":["或許","或者","偶爾"]},{"s":"秦王因曰","w":"因","a":"於是","t":["憑藉","因為","沿襲"]},{"s":"趙王豈以一璧之故欺秦邪","w":"故","a":"緣故","t":["舊的","舊時","所以"]},{"s":"卒廷見相如","w":"卒","a":"終於","t":["兵卒","突然","士兵"]},{"s":"拔石城","w":"拔","a":"攻取","t":["提拔","抽出","選拔"]},{"s":"欲毋行","w":"毋","a":"不","t":["拒絕","沒有","毋寧"]},{"s":"與王訣曰","w":"訣","a":"告別","t":["請辭","秘訣","口訣"]},{"s":"度道里會遇之禮畢","w":"度","a":"估計","t":["次","法度","小道"]},{"s":"度道里會遇之禮畢","w":"道里","a":"路程","t":["道理","里巷","里程"]},{"s":"秦御史前書曰","w":"書","a":"書寫","t":["信件","書籍","文書"]},{"s":"左右欲刃相如","w":"刃","a":"用刀刺","t":["刀鋒","殺害","鋒利"]},{"s":"左右皆靡","w":"靡","a":"退卻","t":["沒有","前進","浪費"]},{"s":"於是秦王不懌","w":"懌","a":"高興","t":["不悅","解釋","選擇"]},{"s":"請以趙十五城為秦王壽","w":"壽","a":"祝壽","t":["酒器","年壽","壽命"]},{"s":"秦王竟酒","w":"竟","a":"完畢","t":["了結","竟然","追究"]},{"s":"而藺相如徒以口舌為勞","w":"徒","a":"只","t":["白白地","同志","門徒"]},{"s":"且相如素賤人","w":"且","a":"而且","t":["將要","暫且","並"]},{"s":"且相如素賤人","w":"素","a":"本來","t":["素食","白色","樸素"]},{"s":"不忍為之下","w":"忍","a":"忍受","t":["刺殺","殘忍","忍心"]},{"s":"已而相如出","w":"已而","a":"不久","t":["然後","而已","隨後"]},{"s":"臣所以去親戚而事君者","w":"去","a":"離開","t":["擺脫","拋棄","除去"]},{"s":"徒慕君之高義也","w":"慕","a":"仰慕","t":["思念","羨慕","愛慕"]},{"s":"臣等不肖","w":"不肖","a":"不才","t":["不孝順","不像樣","不賢"]},{"s":"不若也","w":"若","a":"及","t":["好像","如同","如果"]},{"s":"相如雖駑","w":"駑","a":"愚鈍無能","t":["地位低下","竭盡","努力"]},{"s":"顧吾念之","w":"顧","a":"只是","t":["回頭看","照顧","回顧"]},{"s":"其勢不俱生","w":"勢","a":"形勢","t":["權勢","姿勢","氣勢"]},{"s":"以先國家之急而後私讎也","w":"讎","a":"恩怨","t":["校對","仇敵","應答"]},{"s":"因賓客至藺相如門謝罪","w":"因","a":"憑藉","t":["於是","因為","沿襲"]},{"s":"不知將軍寬之至此也","w":"寬","a":"寬宏","t":["喜歡","寬闊","寬緩"]},{"s":"卒相與驩","w":"卒","a":"最終","t":["兵卒","突然","結束"]}]},{"id":"chushi","no":"06","title":"出師表","from":"諸葛亮","items":[{"s":"先帝不以臣卑鄙","w":"卑","a":"出身低微","t":["低下","卑鄙","謙卑"]},{"s":"此悉貞良死節之臣","w":"悉","a":"全部","t":["熟悉","盡心","詳知"]},{"s":"躬耕於南陽","w":"躬","a":"親自","t":["身體","彎身","自身"]},{"s":"陟罰臧否","w":"否","a":"惡","t":["否定","閉塞","是否"]},{"s":"而中道崩殂","w":"中道","a":"中途","t":["中庸之道","道路中央","中年"]},{"s":"而中道崩殂","w":"殂","a":"死亡","t":["往","衰落","殂謝"]},{"s":"益州疲弊","w":"疲","a":"疲勞","t":["厭倦","疲態","疲於奔命"]},{"s":"益州疲弊","w":"弊","a":"困乏","t":["過失","害處","疲弊"]},{"s":"此誠危急存亡之秋也","w":"誠","a":"確實","t":["誠意","告誡","真誠"]},{"s":"此誠危急存亡之秋也","w":"秋","a":"關頭","t":["困局","秋季","蕭殺"]},{"s":"不懈於內","w":"懈","a":"懈怠","t":["鬆弛","休息","努力"]},{"s":"蓋追先帝之殊遇","w":"蓋","a":"因為","t":["大概","覆蓋","蓋子"]},{"s":"蓋追先帝之殊遇","w":"追","a":"追念","t":["追求","追逐","補救"]},{"s":"蓋追先帝之殊遇","w":"殊","a":"特殊","t":["不同","公平","斷絕"]},{"s":"誠宜開張聖聽","w":"開張","a":"開展","t":["開店","公開","伸展"]},{"s":"以光先帝遺德","w":"光","a":"發揚","t":["光亮","光榮","光滑"]},{"s":"以光先帝遺德","w":"遺","a":"遺留","t":["送給","遺願","遺漏"]},{"s":"恢弘志士之氣","w":"恢弘","a":"發揚","t":["寬宏","恢復","充滿"]},{"s":"不宜妄自菲薄","w":"妄","a":"胡亂地","t":["為非作歹","狂妄","虛妄"]},{"s":"不宜妄自菲薄","w":"菲薄","a":"輕視","t":["微薄","菲菜","自視過高"]},{"s":"引喻失義","w":"義","a":"合宜的道理","t":["道義","情義","意義"]},{"s":"以塞忠諫之路也","w":"塞","a":"堵塞","t":["邊塞","充滿","閉塞"]},{"s":"陟罰臧否","w":"陟","a":"晉升","t":["處罰","登高","進用"]},{"s":"陟罰臧否","w":"罰","a":"處罰","t":["罰款","罰酒","惡"]},{"s":"陟罰臧否","w":"臧","a":"善","t":["收藏","德行","晉升"]},{"s":"若有作姦、犯科","w":"姦","a":"壞事","t":["邪惡","姦淫","詐偽"]},{"s":"若有作姦、犯科","w":"科","a":"法律條文","t":["正當","科目","目的"]},{"s":"宜付有司","w":"付","a":"交付","t":["命令","付款","對付"]},{"s":"論其刑賞","w":"論","a":"評定","t":["討論","議論","言論"]},{"s":"以昭陛下平明之治","w":"昭","a":"彰顯","t":["顯明","昭雪","明亮"]},{"s":"以昭陛下平明之治","w":"治","a":"治理","t":["安定","醫治","治辦"]},{"s":"此皆良實","w":"良","a":"善良","t":["賢良","良好","很"]},{"s":"此皆良實","w":"實","a":"忠實","t":["果實","充實","誠實"]},{"s":"志慮忠純","w":"志","a":"志向","t":["記述","記住","囑咐"]},{"s":"志慮忠純","w":"慮","a":"思慮","t":["考慮","憂慮","打算"]},{"s":"是以先帝簡拔以遺陛下","w":"是以","a":"所以","t":["認為此","用此","故意"]},{"s":"是以先帝簡拔以遺陛下","w":"簡拔","a":"選拔","t":["簡慢拔除","提拔","交付"]},{"s":"是以先帝簡拔以遺陛下","w":"遺","a":"留下","t":["送給","交付","遺漏"]},{"s":"悉以咨之","w":"悉","a":"全部","t":["熟悉","盡心","詳知"]},{"s":"悉以咨之","w":"咨","a":"詢問","t":["咨嗟","官吏","咨文"]},{"s":"必能裨補闕漏","w":"裨","a":"彌補","t":["補益","副將","小"]},{"s":"必能裨補闕漏","w":"闕","a":"缺失","t":["遺憾","宮闕","缺德"]},{"s":"性行淑均","w":"行","a":"行為","t":["實行","踐行","行走"]},{"s":"性行淑均","w":"淑","a":"善良","t":["清澈","美好","賢淑"]},{"s":"性行淑均","w":"均","a":"公平","t":["衡量","平均","均勻"]},{"s":"是以眾議舉寵為督","w":"舉","a":"舉薦","t":["支撐","皆","舉起"]},{"s":"親賢臣","w":"親","a":"親近","t":["父母","親自","親戚"]},{"s":"遠小人","w":"遠","a":"疏遠","t":["長遠","遙遠","深遠"]},{"s":"苟全性命於亂世","w":"苟","a":"苟且","t":["如果","草率","尚且"]},{"s":"苟全性命於亂世","w":"全","a":"保全","t":["全部","完全","齊全"]},{"s":"不求聞達於諸侯","w":"聞","a":"聞名","t":["懂得","聽見","見聞"]},{"s":"不求聞達於諸侯","w":"達","a":"顯貴","t":["顯赫","到達","通達"]},{"s":"先帝不以臣卑鄙","w":"以","a":"因為","t":["因此","用","認為"]},{"s":"猥自枉屈","w":"猥","a":"委曲","t":["委婉","瑣碎","鄙陋"]},{"s":"遂許先帝以驅馳","w":"遂","a":"於是","t":["成功","完成","遂心"]},{"s":"遂許先帝以驅馳","w":"許","a":"應允","t":["承諾","許配","處所"]},{"s":"遂許先帝以驅馳","w":"驅馳","a":"奔走效勞","t":["奔走效法","策馬奔馳","驅趕"]},{"s":"後值傾覆","w":"值","a":"遇上","t":["當值","價值","數值"]},{"s":"後值傾覆","w":"傾覆","a":"兵敗","t":["滅亡","翻倒","傾慕"]},{"s":"爾來二十有一年矣","w":"有","a":"又","t":["佔有","存在","有的"]},{"s":"故臨崩寄臣以大事也","w":"寄","a":"託付","t":["寄居","郵寄","寄望"]},{"s":"夙夜憂歎","w":"夙","a":"早","t":["素來","夜","平素"]},{"s":"以傷先帝之明","w":"傷","a":"損害","t":["損益","哀傷","損傷"]},{"s":"庶竭駑鈍","w":"竭","a":"竭盡","t":["歇息","枯竭","竭力"]},{"s":"攘除姦凶","w":"攘","a":"排除","t":["搶奪","擾攘","攘臂"]},{"s":"至於斟酌損益","w":"損","a":"減少","t":["損害","謙遜","反復"]},{"s":"至於斟酌損益","w":"益","a":"增加","t":["更加","利益","反復"]},{"s":"願陛下託臣以討賊興復之效","w":"效","a":"任務","t":["效力","效果","仿效"]},{"s":"若無興德之言","w":"興","a":"發揚","t":["興起","興盛","興趣"]},{"s":"則責攸之、禕、允等之慢","w":"慢","a":"怠慢","t":["緩慢","傲慢","輕慢"]},{"s":"以彰其咎","w":"彰","a":"揭示","t":["清楚","明顯","表彰"]},{"s":"以彰其咎","w":"咎","a":"過失","t":["罪過","追究","災禍"]},{"s":"以諮諏善道","w":"諮諏","a":"詢問","t":["訪求","言論","咨文"]},{"s":"臨表涕零","w":"涕","a":"眼淚","t":["鼻涕","哭泣","流涕"]},{"s":"臨表涕零","w":"零","a":"落下","t":["零碎","凋零","零落"]}]},{"id":"shishuo","no":"07","title":"師說","from":"韓愈","items":[{"s":"夫庸知其年之先後生於吾乎","w":"庸","a":"豈","t":["平庸","必須","沒有"]},{"s":"孰能無惑","w":"孰","a":"誰","t":["詳細","仔細","成熟"]},{"s":"擇師而教之","w":"之","a":"他，指子女","t":["大瓠之種","客人","的"]},{"s":"所以傳道、受業、解惑也","w":"受","a":"講授","t":["授予","接受","遭受"]},{"s":"其聞道也","w":"聞","a":"懂得","t":["聞名","聽見","見聞"]},{"s":"固先乎吾","w":"固","a":"本來","t":["鞏固","堅決","堅固"]},{"s":"吾從而師之","w":"從","a":"跟從","t":["聽從","學習","順從"]},{"s":"夫庸知其年之先後生於吾乎","w":"知","a":"知道","t":["智慧","知遇","知覺"]},{"s":"是故無貴、無賤、無長、無少","w":"貴","a":"高貴","t":["貴族","貴重","崇尚"]},{"s":"是故無貴、無賤、無長、無少","w":"賤","a":"卑賤","t":["輕視","年幼","犯賤"]},{"s":"師之所存也","w":"存","a":"存在","t":["保存","思念","生存"]},{"s":"其出人也遠矣","w":"出","a":"超出","t":["說出","外出","產生"]},{"s":"猶且從師而問焉","w":"猶且","a":"尚且","t":["仍然","猶如","還是"]},{"s":"其皆出於此乎","w":"其","a":"大概","t":["他的","難道","其中"]},{"s":"惑矣","w":"惑","a":"糊塗","t":["遺憾","迷惑","可悲"]},{"s":"小學而大遺","w":"遺","a":"遺漏","t":["送給","遺留","留下"]},{"s":"吾未見其明也","w":"明","a":"明智","t":["照耀","明亮","明白"]},{"s":"不恥相師","w":"相","a":"互相","t":["宰相","看","相貌"]},{"s":"不恥相師","w":"師","a":"學習","t":["軍隊","老師","眾人"]},{"s":"士大夫之族","w":"族","a":"類","t":["家族","滅族","宗族"]},{"s":"道相似也","w":"道","a":"學問","t":["方法","原因","道路"]},{"s":"位卑則足羞","w":"卑","a":"低下","t":["出身低微","卑鄙","謙卑"]},{"s":"位卑則足羞","w":"羞","a":"羞恥","t":["不屑","進獻","羞澀"]},{"s":"官盛則近諛","w":"盛","a":"顯赫","t":["盛大","旺盛","盛裝"]},{"s":"官盛則近諛","w":"諛","a":"諂媚","t":["片刻","諛辭","須臾"]},{"s":"師道之不復","w":"復","a":"恢復","t":["再","返回","報復"]},{"s":"君子不齒","w":"不齒","a":"不屑同列","t":["不提及牙齒","不屑提及","恥與為伍"]},{"s":"今其智乃反不能及","w":"及","a":"比得上","t":["趁着","到達","和"]},{"s":"聖人無常師","w":"常","a":"固定","t":["常常","平常","常道"]},{"s":"術業有專攻","w":"專攻","a":"專長","t":["專一","功績","學問"]},{"s":"不拘於時","w":"拘","a":"拘限","t":["羞恥","拘捕","約束"]},{"s":"不拘於時","w":"時","a":"時俗","t":["時機","時常","季節"]},{"s":"余嘉其能行古道","w":"嘉","a":"讚許","t":["卓越","美好","尊敬"]},{"s":"余嘉其能行古道","w":"行","a":"踐行","t":["踐踏","行為","行走"]},{"s":"作《師說》以貽之","w":"貽","a":"贈送","t":["遺留","貽誤","嘉許"]}]},{"id":"xishan","no":"08","title":"始得西山宴遊記","from":"柳宗元","items":[{"s":"故為之文以志","w":"志","a":"記述","t":["志向","記住","歌頌"]},{"s":"居是州","w":"是","a":"此","t":["對","於是","正確"]},{"s":"然後知吾嚮之未始遊","w":"嚮","a":"過往","t":["向","面向","鄉里"]},{"s":"自余為僇人","w":"僇","a":"刑辱","t":["殺戮","侮辱","獲罪"]},{"s":"恒惴慄","w":"恒","a":"恆常","t":["永恆","極度","平常"]},{"s":"恒惴慄","w":"惴慄","a":"恐懼不安","t":["坐立不安","顫抖","憂傷"]},{"s":"其隙也","w":"隙","a":"空閒","t":["空間","縫隙","嫌隙"]},{"s":"日與其徒上高山","w":"徒","a":"同伴","t":["白白地","只","僕人"]},{"s":"窮迴溪","w":"窮","a":"走盡","t":["盡頭","困厄","窮究"]},{"s":"窮迴溪","w":"迴","a":"迂迴曲折","t":["曲折","返回","迴旋"]},{"s":"幽泉怪石","w":"幽","a":"幽靜","t":["幽暗","囚禁","深遠"]},{"s":"到則披草而坐","w":"披","a":"撥開","t":["穿上","披露","披散"]},{"s":"意有所極","w":"極","a":"至","t":["盡頭","極端","極點"]},{"s":"夢亦同趣","w":"趣","a":"趨向","t":["意趣","催促","旨趣"]},{"s":"覺而起","w":"覺","a":"醒來","t":["感覺","覺察","覺醒"]},{"s":"緣染溪","w":"緣","a":"沿着","t":["貼近","緣故","緣分"]},{"s":"斫榛莽","w":"斫","a":"砍伐","t":["撥開","攻擊","收集"]},{"s":"窮山之高而止","w":"窮","a":"窮盡","t":["盡頭","困厄","窮究"]},{"s":"箕踞而遨","w":"遨","a":"遊賞","t":["遨遊","放縱","遊蕩"]},{"s":"皆在衽席之下","w":"衽席","a":"坐席","t":["臥席","宴席","枕席"]},{"s":"攢蹙累積","w":"攢","a":"聚集","t":["積蓄","簇擁","湊集"]},{"s":"攢蹙累積","w":"蹙","a":"緊迫","t":["緊縮","迫促","皺眉"]},{"s":"攢蹙累積","w":"累","a":"堆疊","t":["牽連","勞累","累積"]},{"s":"莫得遯隱","w":"遯","a":"遁","t":["逃隱","迴避","退隱"]},{"s":"縈青繚白","w":"縈","a":"環繞","t":["繚繞","牽掛","纏縛"]},{"s":"縈青繚白","w":"繚","a":"繚繞","t":["繚亂","圍","纏縛"]},{"s":"外與天際","w":"際","a":"交接","t":["邊際","時機","會合處"]},{"s":"引觴滿酌","w":"引","a":"拿取","t":["引誘","倒酒","引用"]},{"s":"引觴滿酌","w":"觴","a":"酒杯","t":["拿取","受傷","倒酒"]},{"s":"心凝形釋","w":"凝","a":"凝聚","t":["凝固","凝視","專注"]},{"s":"心凝形釋","w":"釋","a":"釋放","t":["釋懷","解釋","放下"]}]},{"id":"yueyang","no":"09","title":"岳陽樓記","from":"范仲淹","items":[{"s":"屬予作文以記之","w":"屬","a":"囑咐","t":["委託","隸屬","類別"]},{"s":"滕子京謫守巴陵郡","w":"謫","a":"貶官","t":["譴責","流放","責罰"]},{"s":"越明年","w":"越","a":"到了","t":["之後","超越","墜越"]},{"s":"百廢具興","w":"具","a":"俱","t":["極","器具","具備"]},{"s":"增其舊制","w":"制","a":"規模","t":["制度","控制","製作"]},{"s":"予觀夫巴陵勝狀","w":"勝","a":"優美","t":["引人入勝","勝利","勝過"]},{"s":"予觀夫巴陵勝狀","w":"狀","a":"狀貌","t":["壯闊","情狀","上訴"]},{"s":"前人之述備矣","w":"備","a":"完備","t":["具備","防備","準備"]},{"s":"遷客騷人","w":"遷","a":"遷謫","t":["變化","遷移","變遷"]},{"s":"若夫霪雨霏霏","w":"霪","a":"過量","t":["連綿","沉溺","過雨"]},{"s":"連月不開","w":"開","a":"放晴","t":["開啓","開闢","打開"]},{"s":"陰風怒號","w":"號","a":"呼嘯","t":["吹","名號","號令"]},{"s":"檣傾楫摧","w":"檣","a":"船桅","t":["旗杆","牆垣","牆壁"]},{"s":"檣傾楫摧","w":"傾","a":"傾側","t":["傾慕","傾盡","倒塌"]},{"s":"檣傾楫摧","w":"楫","a":"船槳","t":["聚集","舟楫","划槳"]},{"s":"檣傾楫摧","w":"摧","a":"摧毀","t":["划槳","傾側","挫敗"]},{"s":"薄暮冥冥","w":"薄","a":"迫近","t":["稀薄","淡","矇矓"]},{"s":"薄暮冥冥","w":"暮","a":"傍晚","t":["暮色","昏暗","深夜"]},{"s":"薄暮冥冥","w":"冥冥","a":"昏暗","t":["昏昧","陰間","默默"]},{"s":"則有去國懷鄉","w":"去","a":"離開","t":["擺脫","拋棄","除去"]},{"s":"至若春和景明","w":"景","a":"日光","t":["景色","大","影"]},{"s":"至若春和景明","w":"明","a":"明亮","t":["照耀","明智","明白"]},{"s":"波瀾不驚","w":"驚","a":"起","t":["害怕","震動","驚擾"]},{"s":"沙鷗翔集","w":"翔","a":"飛翔","t":["迴飛","詳盡","安詳"]},{"s":"沙鷗翔集","w":"集","a":"聚集","t":["停歇","編集","集會"]},{"s":"岸芷汀蘭","w":"汀","a":"小洲","t":["水邊平地","汀線","香草"]},{"s":"郁郁青青","w":"郁郁","a":"香氣濃盛","t":["茂盛","文采","憂鬱"]},{"s":"而或長煙一空","w":"空","a":"消散","t":["空虛","天空","空洞"]},{"s":"則有心曠神怡","w":"曠","a":"開朗","t":["空曠","荒廢","曠廢"]},{"s":"則有心曠神怡","w":"怡","a":"愉快","t":["輕鬆","平靜","適合"]},{"s":"寵辱皆忘","w":"寵","a":"得寵","t":["榮寵","寵愛","尊崇"]},{"s":"寵辱皆忘","w":"辱","a":"受辱","t":["恥辱","侮辱","委屈"]},{"s":"把酒臨風","w":"把","a":"持","t":["把守","將","把持"]},{"s":"把酒臨風","w":"臨","a":"迎","t":["抵抗","到","臨時"]},{"s":"或異二者之為","w":"或","a":"或許","t":["有人","不同","偶爾"]},{"s":"不以物喜","w":"以","a":"因為","t":["因此","用","認為"]},{"s":"微斯人","w":"微","a":"沒有","t":["如果","微小","稍微"]},{"s":"吾誰與歸","w":"歸","a":"歸依","t":["跟從","返回","歸還"]}]},{"id":"liuguo","no":"10","title":"六國論","from":"蘇洵","items":[{"s":"率賂秦耶","w":"率","a":"全部","t":["一概","帶領","輕率"]},{"s":"固不在戰矣","w":"固","a":"本來","t":["鞏固","堅決","堅固"]},{"s":"非兵不利","w":"兵","a":"兵器","t":["士兵","軍事","戰爭"]},{"s":"非兵不利","w":"利","a":"鋒利","t":["利用","便利","利益"]},{"s":"戰不善","w":"戰","a":"作戰","t":["打仗","戰慄","爭鬥"]},{"s":"戰不善","w":"善","a":"優勝","t":["擅長","善良","友好"]},{"s":"弊在賂秦","w":"弊","a":"弊端","t":["困乏","滅亡","疲弊"]},{"s":"弊在賂秦","w":"賂","a":"賄賂","t":["財物","贈送","贈賄"]},{"s":"賂秦而力虧","w":"力","a":"國力","t":["氣力","努力","力量"]},{"s":"賂秦而力虧","w":"虧","a":"損耗","t":["虧欠","虧缺","疲弱"]},{"s":"破滅之道也","w":"道","a":"原因","t":["方法","學問","道路"]},{"s":"六國互喪","w":"互","a":"相繼","t":["互相","交替","交錯"]},{"s":"六國互喪","w":"喪","a":"滅亡","t":["喪事","喪失","哀傷"]},{"s":"不賂者以賂者喪","w":"以","a":"因為","t":["因此","用","認為"]},{"s":"不能獨完","w":"獨","a":"獨自","t":["難道","唯獨","孤獨"]},{"s":"不能獨完","w":"完","a":"保全","t":["完成","完備","完好"]},{"s":"諸侯之所亡與戰敗而亡者","w":"亡","a":"失去","t":["逃亡","出走","死亡"]},{"s":"思厥先祖父","w":"厥","a":"六國後人的","t":["其","厥疾","氣厥"]},{"s":"暴霜露","w":"暴","a":"暴露","t":["曬乾","曬","殘暴"]},{"s":"舉以予人","w":"舉","a":"皆","t":["支撐","舉薦","舉起"]},{"s":"暴秦之欲無厭","w":"厭","a":"滿足","t":["厭惡","厭倦","嫌棄"]},{"s":"奉之彌繁","w":"彌","a":"越加","t":["頻繁","滿","彌縫"]},{"s":"故不戰而強弱勝負已判矣","w":"判","a":"分明","t":["判定","判決","分辨"]},{"s":"至於顛覆","w":"顛覆","a":"滅亡","t":["傾倒","推翻","顛倒"]},{"s":"猶抱薪救火","w":"猶","a":"像","t":["還","猶豫","尚且"]},{"s":"與嬴而不助五國也","w":"與","a":"親附","t":["給予","約定","和"]},{"s":"始有遠略","w":"遠","a":"長遠","t":["疏遠","遙遠","影響深遠"]},{"s":"始有遠略","w":"略","a":"計策","t":["侵奪","簡略","省略"]},{"s":"斯用兵之效也","w":"斯","a":"這樣","t":["他(燕國)","則","是非"]},{"s":"始速禍焉","w":"始","a":"才","t":["開始","當初","加速"]},{"s":"始速禍焉","w":"速","a":"加速","t":["招災","迅速","催促"]},{"s":"李牧連卻之","w":"連","a":"接連","t":["斷斷續續","聯合","牽連"]},{"s":"李牧連卻之","w":"卻","a":"擊退","t":["退後","但是","拒絕"]},{"s":"洎牧以讒誅","w":"洎","a":"及至","t":["因為","注入","自"]},{"s":"惜其用武而不終也","w":"不終","a":"不能堅持到底","t":["不能堅守盟約","不得善終","最後沒有結束"]},{"s":"向使三國各愛其地","w":"向使","a":"假使","t":["一向使令","面向","治國者"]},{"s":"向使三國各愛其地","w":"愛","a":"愛惜","t":["吝惜","親愛","愛好"]},{"s":"則勝負之數","w":"數","a":"命運","t":["數目","屢次","責難"]},{"s":"當與秦相較","w":"當","a":"假使","t":["應當","面對","當下"]},{"s":"或未易量","w":"量","a":"估量","t":["量力","容量","氣量"]},{"s":"禮天下之奇才","w":"禮","a":"禮待","t":["禮節","禮儀","禮物"]},{"s":"并力西嚮","w":"嚮","a":"向","t":["過往","從前","面向"]},{"s":"則吾恐秦人食之不得下嚥也","w":"嚥","a":"吞嚥","t":["燕國","哽咽","咽住"]},{"s":"而為秦人積威之所劫","w":"劫","a":"威脅","t":["命運","搶奪","災難"]},{"s":"下而從六國破亡之故事","w":"故事","a":"舊事","t":["故事","事情","典故"]}]},{"id":"tangshi","no":"11","title":"詩三首","from":"唐詩","items":[{"s":"山居秋暝","w":"暝","a":"黃昏","t":["暮色","昏暗","閉眼"]},{"s":"竹喧歸浣女","w":"浣女","a":"洗衣女","t":["洗碗女","浣紗女史","婢女"]},{"s":"隨意春芳歇","w":"隨意","a":"任憑","t":["哪怕","隨便","隨手"]},{"s":"隨意春芳歇","w":"歇","a":"凋謝","t":["休息","停歇","停息"]},{"s":"王孫自可留","w":"留","a":"停留","t":["留守","挽留","收留"]},{"s":"獨酌無相親","w":"酌","a":"飲酒","t":["斟酒","斟酌","斟酌事態"]},{"s":"獨酌無相親","w":"相親","a":"互相親愛","t":["彼此親近","議婚相見","親族"]},{"s":"月既不解飲","w":"解","a":"懂得","t":["解開","解散","解除"]},{"s":"影徒隨我身","w":"徒","a":"徒然","t":["白白地","同志","門徒"]},{"s":"暫伴月將影","w":"將","a":"和","t":["領兵","率領","將要"]},{"s":"行樂須及春","w":"及","a":"趁着","t":["比得上","到達","和"]},{"s":"相期邈雲漢","w":"相期","a":"相約","t":["期望","期限","相待"]},{"s":"相期邈雲漢","w":"邈","a":"遙遠","t":["渺茫","輕視","遠隔"]},{"s":"北極朝廷終不改","w":"終","a":"始終","t":["終於","死亡","終竟"]},{"s":"日暮聊為梁甫吟","w":"聊","a":"姑且","t":["依靠","閒談","談天"]}]},{"id":"songci","no":"12","title":"詞三首","from":"宋詞","items":[{"s":"早生華髮","w":"華","a":"花白","t":["華麗","精華","光華"]},{"s":"千古風流人物","w":"風流","a":"傑出不凡","t":["不羈","放蕩","流風"]},{"s":"故壘西邊","w":"故","a":"舊時","t":["殘舊","緣故","所以"]},{"s":"檣櫓灰飛煙滅","w":"檣","a":"船桅","t":["旗杆","牆垣","牆壁"]},{"s":"檣櫓灰飛煙滅","w":"櫓","a":"船槳","t":["大盾","望樓","櫓船"]},{"s":"一尊還酹江月","w":"尊","a":"樽","t":["倒酒","尊敬","尊貴"]},{"s":"乍煖還寒時候","w":"乍","a":"剛","t":["忽然","欺詐","初看"]},{"s":"最難將息","w":"將息","a":"調養","t":["即將停止","即將休息","歇息"]},{"s":"怎敵他晚來風急","w":"敵","a":"抵擋","t":["仇敵","匹敵","對抗"]},{"s":"如今有誰堪摘","w":"誰","a":"何","t":["作者","誰人","哪個"]},{"s":"如今有誰堪摘","w":"堪","a":"可以","t":["承受","勝任","難堪"]},{"s":"這次第","w":"次第","a":"光景","t":["次序","依次","規模排場"]},{"s":"眾裏尋他千百度","w":"度","a":"次","t":["揣度","估計","法度"]},{"s":"驀然迴首","w":"驀然","a":"突然","t":["不經意","猛然","茫然"]},{"s":"燈火闌珊處","w":"闌珊","a":"暗淡","t":["熄滅","興盛","欄杆"]}]}];</script>
+<script>
+
+var KEY="dse12-vocab-v6";
+var STARKEY="dse12-vocab-stars-v1";
+var UNITS=window.UNITS;
+var L=["A","B","C","D"];
+var state={view:"home",id:null,mix:null,mixPlan:null};
+var mem={done:{},wrong:[],tried:{},pick:{},star:{}};
+try{
+  var raw=localStorage.getItem(KEY);
+  if(!raw) raw=localStorage.getItem("dse12-vocab-v4");
+  if(!raw) raw=localStorage.getItem("dse12-vocab-v3");
+  if(raw){
+    var s=JSON.parse(raw);
+    if(s&&s.done) mem.done=s.done;
+    if(s&&s.wrong) mem.wrong=s.wrong;
+    if(s&&s.tried) mem.tried=s.tried;
+    else{
+      for(var k in mem.done){ if(mem.done.hasOwnProperty(k)) mem.tried[k]=1; }
+    }
+    if(s&&s.pick) mem.pick=s.pick;
+  }
+}catch(e){}
+try{
+  var sr=localStorage.getItem(STARKEY);
+  if(sr){
+    var ss=JSON.parse(sr);
+    if(ss&&typeof ss==="object") mem.star=ss;
+  }
+}catch(e){}
+function save(){
+  try{ localStorage.setItem(KEY,JSON.stringify({done:mem.done,wrong:mem.wrong,tried:mem.tried,pick:mem.pick})); }catch(e){}
+  saveStar();
+}
+function saveStar(){
+  try{ localStorage.setItem(STARKEY,JSON.stringify(mem.star)); }catch(e){}
+}
+function $(id){ return document.getElementById(id); }
+function esc(s){
+  return String(s).split("&").join("&"+"amp;").split("<").join("&"+"lt;").split(">").join("&"+"gt;").split('"').join("&"+"quot;");
+}
+function shuffle(a){
+  a=a.slice();
+  for(var i=a.length-1;i>0;i--){
+    var j=Math.floor(Math.random()*(i+1));
+    var t=a[i]; a[i]=a[j]; a[j]=t;
+  }
+  return a;
+}
+function qid(it){ return (it.uid||"")+"|"+it.s+"|"+it.w; }
+function unitDone(uid){
+  var u=findUnit(uid), n=0, i;
+  if(!u) return 0;
+  for(i=0;i<u.items.length;i++){
+    if(mem.done[uid+"|"+u.items[i].s+"|"+u.items[i].w]) n++;
+  }
+  return n;
+}
+function findUnit(id){
+  for(var i=0;i<UNITS.length;i++) if(UNITS[i].id===id) return UNITS[i];
+  return null;
+}
+function tot(){
+  var s=0,t=0,i;
+  for(i=0;i<UNITS.length;i++){
+    t+=UNITS[i].items.length;
+    s+=unitDone(UNITS[i].id);
+  }
+  return {s:s,t:t};
+}
+function pill(){
+  var x=tot();
+  var p=Math.round(x.s/Math.max(x.t,1)*100);
+  $("pill").innerHTML="12篇 "+p+"%";
+}
+function cheer(p){
+  if(p>=100) return "吓， 點解你會見到呢頁？？？？";
+  if(p>=91) return "成功在望!! (*¯︶¯*)";
+  if(p>=81) return "點解你咁叻lol";
+  if(p>=61) return "繼續加油～～";
+  return "為咗我你要努力啲(｀⌒´メ)";
+}
+function markSent(s,w){
+  var a=esc(s), b=esc(w);
+  if(!b||a.indexOf(b)<0) return a;
+  return a.replace(b,"<u class='mark'>"+b+"</u>");
+}
+function bank(list){
+  var out=[], i, opts;
+  for(i=0;i<list.length;i++){
+    opts=shuffle([list[i].a].concat((list[i].t||[]).slice(0,3)));
+    out.push({
+      uid:list[i].uid,s:list[i].s,w:list[i].w,a:list[i].a,t:list[i].t,exam:list[i].exam||"",
+      opts:opts
+    });
+  }
+  return out;
+}
+function allItems(){
+  var out=[], i, j, u;
+  for(i=0;i<UNITS.length;i++){
+    u=UNITS[i];
+    for(j=0;j<u.items.length;j++){
+      out.push({uid:u.id,s:u.items[j].s,w:u.items[j].w,a:u.items[j].a,t:u.items[j].t,exam:u.items[j].exam||""});
+    }
+  }
+  return out;
+}
+function allDone(){
+  return undone().length===0 && allItems().length>0;
+}
+function undone(){
+  var all=allItems(), out=[], i;
+  for(i=0;i<all.length;i++){
+    if(!mem.tried[qid(all[i])]) out.push(all[i]);
+  }
+  return out;
+}
+function allMsg(){
+  return "多謝你咁努力真係做曬佢～～欣賞你～～有咩唔識可以再問我，唔係中文都得，我可是很厲害的🤣";
+}
+function navOn(){
+  var btns=document.querySelectorAll("nav [data-v]"), i;
+  for(i=0;i<btns.length;i++){
+    btns[i].className=(btns[i].getAttribute("data-v")===(state.view==="mixset"?"mix":state.view) && !state.id)?"on":"";
+  }
+}
+function render(){
+  pill();
+  navOn();
+  if(state.view==="home" && !state.id) $("app").innerHTML=homeHTML();
+  else if(state.view==="home") $("app").innerHTML=textHTML();
+  else if(state.view==="mix") $("app").innerHTML=mixHTML();
+  else if(state.view==="mixset") $("app").innerHTML=mixSetHTML();
+  else if(state.view==="star") $("app").innerHTML=starHTML();
+  else $("app").innerHTML=wrongHTML();
+  bind();
+}
+function homeHTML(){
+  var h="", i, u, n, d, p, left=undone().length;
+  h+="<section class='hero'><h2>12篇 · 詞解選擇</h2>";
+  h+="<p>題目取自教育局12篇章pdf</p>";
+  if(allDone()){
+    h+="<div class='result'><b>"+allMsg()+"</b></div>";
+  }
+  h+="<div class='toolbar'><button class='pri' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='mix20'>隨機 20 題</button>";
+  h+="<input type='number' id='randN' min='1' max='484' value='20' style='width:72px;min-height:40px;border:1px solid #eadff4;border-radius:10px;padding:6px 8px;font-size:16px'>";
+  h+="<button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='mixN'>隨機 N 題</button>";
+  h+="<button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='mixset'>自訂抽題</button>";
+  h+="<span class='chip'>未做 "+left+" 題</span></div></section>";
+  h+="<div class='grid'>";
+  for(i=0;i<UNITS.length;i++){
+    u=UNITS[i]; n=u.items.length; d=unitDone(u.id); p=Math.round(d/Math.max(n,1)*100);
+    h+="<article class='card'>";
+    h+="<a class='cardlink' href='#u-"+u.id+"' onclick='return act(this)' ontouchend='return act(this)' data-act='open' data-id='"+u.id+"'>";
+    h+="<div class='no'>UNIT "+esc(u.no)+"</div><h3>"+esc(u.title)+"</h3>";
+    h+="<div class='no'>"+esc(u.from)+" · "+n+" 題　"+p+"%</div>";
+    h+="<div class='bar'><i style='width:"+p+"%'></i></div></a>";
+    h+="<button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='resetUnit' data-id='"+u.id+"' style='margin-top:8px'>重設本篇</button></article>";
+  }
+  return h+"</div>";
+}
+function quizHTML(items){
+  var h="", i, j, it, o, id, tried, good, picked, cls, fb, lock;
+  for(i=0;i<items.length;i++){
+    it=items[i];
+    id=qid(it);
+    tried=!!mem.tried[id];
+    good=!!mem.done[id];
+    picked=mem.pick[id]||"";
+    lock=tried?" data-lock='1' data-good='"+(good?"1":"0")+"'":"";
+    h+="<div class='q' data-qid='"+esc(id)+"' data-ans='"+esc(it.a)+"' data-s='"+esc(it.s)+"' data-w='"+esc(it.w)+"' data-uid='"+esc(it.uid||"")+"'"+lock+">";
+    h+="<button type='button' class='star"+(mem.star[id]?" on":"")+"' onclick='return act(this)' ontouchend='return act(this)' data-act='star' aria-label='標記'>★</button>";
+    h+="<div class='stem'>"+(i+1)+". 解釋下列句子中有標示的詞語。"+(it.exam?"　公開試 "+esc(it.exam):"")+"</div>";
+    h+="<blockquote class='quote'>"+markSent(it.s,it.w)+"</blockquote>";
+    for(j=0;j<it.opts.length;j++){
+      o=it.opts[j];
+      cls="opt";
+      if(tried && o===it.a) cls+=" ok";
+      if(tried && picked && o===picked && !good) cls+=" bad";
+      h+="<button type='button' class='"+cls+"' onclick='return act(this)' ontouchend='return act(this)' data-act='pick' data-v='"+esc(o)+"'>"+L[j]+". "+esc(o)+"</button>";
+    }
+    fb="";
+    if(tried){
+      if(good) fb="<div class='feedback ok'>正確。此處應解作「"+esc(it.a)+"」。</div>";
+      else fb="<div class='feedback bad'>不正確。正確答案為「"+esc(it.a)+"」。</div>";
+    }else{
+      fb="<div class='feedback'></div>";
+    }
+    h+=fb+"</div>";
+  }
+  return h;
+}
+function textHTML(){
+  var u=findUnit(state.id);
+  var list=[], i;
+  for(i=0;i<u.items.length;i++){
+    list.push({uid:u.id,s:u.items[i].s,w:u.items[i].w,a:u.items[i].a,t:u.items[i].t,exam:u.items[i].exam||""});
+  }
+  state.cur=bank(list);
+  return "<div class='toolbar'><button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='back'>返回</button>"+
+    "<span class='chip'>"+esc(u.no)+" "+esc(u.title)+"</span>"+
+    "<span class='chip' id='unitPct'>"+Math.round(unitDone(u.id)/Math.max(u.items.length,1)*100)+"%</span>"+
+    "<button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='resetUnit' data-id='"+u.id+"'>重設本篇</button></div>"+
+    "<section class='panel'>"+quizHTML(state.cur)+"</section>";
+}
+function unitLeft(uid){
+  var all=allItems(), n=0, i;
+  for(i=0;i<all.length;i++){
+    if(all[i].uid===uid && !mem.tried[qid(all[i])]) n++;
+  }
+  return n;
+}
+function mixSetHTML(){
+  var h="<div class='toolbar'><button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='back'>返回</button></div>";
+  h+="<section class='panel'><h2>自訂抽題</h2>";
+  h+="<div class='toolbar'><button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='preset' data-n='5'>每篇 5 題</button>";
+  h+="<button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='preset' data-n='10'>每篇 10 題</button>";
+  h+="<button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='preset' data-n='0'>清零</button>";
+  h+="<input type='number' id='randN' min='1' max='484' value='20' style='width:72px;min-height:40px;border:1px solid #eadff4;border-radius:10px;padding:6px 8px;font-size:16px'>";
+  h+="<button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='mixN'>隨機 N 題</button></div>";
+  var i,u,left;
+  for(i=0;i<UNITS.length;i++){
+    u=UNITS[i]; left=unitLeft(u.id);
+    h+="<div class='mixrow'>";
+    h+="<label><input type='checkbox' class='mixon' data-id='"+u.id+"' "+(left?"checked":"")+"> "+esc(u.no)+" "+esc(u.title)+"</label>";
+    h+="<span class='chip'>未做 "+left+"</span>";
+    h+="<input type='number' class='mixn' data-id='"+u.id+"' min='0' max='"+u.items.length+"' value='"+(left?Math.min(5,left):0)+"'>";
+    h+="</div>";
+  }
+  h+="<div class='toolbar' style='margin-top:14px'><label><input type='checkbox' id='onlyNew' checked> 只抽未做</label>";
+  h+="<button class='pri' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='startMix'>開始抽題</button></div></section>";
+  return h;
+}
+function checkedIds(){
+  var ons=document.getElementsByClassName("mixon"), ids=[], i;
+  for(i=0;i<ons.length;i++) if(ons[i].checked) ids.push(ons[i].getAttribute("data-id"));
+  return ids;
+}
+function startRandom(n, ids){
+  n=parseInt(n,10); if(!(n>0)) n=20;
+  var fresh=[], used=[], i, j, u, it, out, scope=ids&&ids.length?ids:null;
+  if(!scope){
+    var all=allItems();
+    for(i=0;i<all.length;i++){
+      it=all[i];
+      if(mem.tried[qid(it)]) used.push(it); else fresh.push(it);
+    }
+  }else{
+    for(i=0;i<scope.length;i++){
+      u=findUnit(scope[i]);
+      if(!u) continue;
+      for(j=0;j<u.items.length;j++){
+        it=itemOf(u, u.items[j]);
+        if(mem.tried[qid(it)]) used.push(it); else fresh.push(it);
+      }
+    }
+  }
+  fresh=shuffle(fresh); used=shuffle(used);
+  out=fresh.slice(0, n);
+  if(out.length<n) out=out.concat(used.slice(0, n-out.length));
+  state.mixPlan=null;
+  state.onlyNew=false;
+  state.mix=bank(out);
+  state.view="mix";
+  state.id=null;
+  render();
+}
+function collectPlan(){
+  var ons=document.getElementsByClassName("mixon");
+  var ns=document.getElementsByClassName("mixn");
+  var plan={}, i, id, n, box;
+  for(i=0;i<ons.length;i++){
+    if(!ons[i].checked) continue;
+    id=ons[i].getAttribute("data-id");
+    n=0;
+    for(var j=0;j<ns.length;j++) if(ns[j].getAttribute("data-id")===id) n=parseInt(ns[j].value,10)||0;
+    if(n>0) plan[id]=n;
+  }
+  return plan;
+}
+function itemOf(u, it){
+  return {uid:u.id,s:it.s,w:it.w,a:it.a,t:it.t,exam:it.exam||""};
+}
+function buildMix(plan, onlyNew){
+  var out=[], spare=[], id, pool, donePool, i, take, u, it, need, seen={};
+  function pushUnique(list, it){
+    var k=qid(it);
+    if(seen[k]) return;
+    seen[k]=1;
+    list.push(it);
+  }
+  for(id in plan){
+    if(!plan.hasOwnProperty(id)) continue;
+    u=findUnit(id);
+    if(!u) continue;
+    pool=[]; donePool=[];
+    for(i=0;i<u.items.length;i++){
+      it=itemOf(u, u.items[i]);
+      if(onlyNew && mem.tried[qid(it)]) donePool.push(it);
+      else pool.push(it);
+    }
+    pool=shuffle(pool); donePool=shuffle(donePool);
+    take=Math.min(plan[id], pool.length);
+    for(i=0;i<take;i++) pushUnique(out, pool[i]);
+    need=plan[id]-take;
+    for(i=0;i<donePool.length && need>0;i++){ pushUnique(out, donePool[i]); need--; }
+    for(i=take;i<pool.length;i++) spare.push(pool[i]);
+    for(i=0;i<donePool.length;i++) spare.push(donePool[i]);
+  }
+  if(!out.length){
+    spare=shuffle(allItems());
+    take=0;
+    for(id in plan) if(plan.hasOwnProperty(id)) take+=plan[id];
+    if(!(take>0)) take=20;
+    return spare.slice(0, take);
+  }
+  return shuffle(out);
+}
+function mixHTML(){
+  if(!state.mix){
+    return mixSetHTML();
+  }
+  if(!state.mix.length){
+    return "<div class='toolbar'><button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='mixset'>返回設定</button></div>"+
+      "<section class='panel'><p>題庫係空嘅，抽唔到題。</p></section>";
+  }
+  return "<div class='toolbar'><button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='mixset'>改設定</button>"+
+    "<span class='chip'>抽題 "+state.mix.length+"</span><span class='chip' id='unitPct'>0%</span>"+
+    "<button class='pri' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='remix'>按同一設定再抽</button></div>"+
+    "<section class='panel'>"+quizHTML(state.mix)+"</section>";
+}
+function resolveUid(it){
+  if(it.uid && findUnit(it.uid)) return it.uid;
+  var i, j, u;
+  for(i=0;i<UNITS.length;i++){
+    u=UNITS[i];
+    for(j=0;j<u.items.length;j++){
+      if(u.items[j].s===it.s && u.items[j].w===it.w) return u.id;
+    }
+  }
+  return "";
+}
+function wrongHTML(){
+  var h="<div class='toolbar'><button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='back'>返回</button>"+
+    "<button class='pri' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='redoAllWrong'>重做全部錯題</button>"+
+    "<button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='clr'>清空全部錯題</button></div>";
+  if(!mem.wrong.length){
+    return h+"<section class='panel'><p>尚無錯題。</p></section>";
+  }
+  var groups={}, i, it, uid, u, j, list;
+  for(i=0;i<UNITS.length;i++) groups[UNITS[i].id]=[];
+  groups["other"]=[];
+  for(i=0;i<mem.wrong.length;i++){
+    it=mem.wrong[i];
+    uid=resolveUid(it);
+    if(!groups[uid]) groups[uid]=[];
+    groups[uid].push(it);
+  }
+  for(i=0;i<UNITS.length;i++){
+    u=UNITS[i];
+    list=groups[u.id]||[];
+    h+="<h2>"+esc(u.no)+"　"+esc(u.title)+"　"+list.length+" 題</h2>";
+    if(!list.length){
+      h+="<section class='panel'><p>本篇暫無錯題。</p></section>";
+      continue;
+    }
+    h+="<div class='toolbar'><button class='pri' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='redoWrong' data-id='"+u.id+"'>重做本篇錯題</button>"+
+      "<button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='clrUnitWrong' data-id='"+u.id+"'>清空本篇錯題</button></div>";
+    h+="<section class='panel'>";
+    for(j=0;j<list.length;j++){
+      it=list[j];
+      h+="<div class='q'><blockquote class='quote'>"+markSent(it.s,it.w)+"</blockquote>"+
+         "<div class='feedback ok'>應解作「"+esc(it.a)+"」。</div>"+
+         "<button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='redoOne' data-uid='"+esc(it.uid||u.id)+"' data-s='"+esc(it.s)+"' data-w='"+esc(it.w)+"'>重做呢題</button></div>";
+    }
+    h+="</section>";
+  }
+  return h;
+}
+function starList(){
+  var out=[], k, it;
+  for(k in mem.star){
+    if(!mem.star.hasOwnProperty(k)) continue;
+    it=mem.star[k];
+    if(it&&it.s) out.push(it);
+  }
+  return out;
+}
+function starHTML(){
+  var list=starList(), h="<div class='toolbar'><button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='back'>返回</button>"+
+    "<button class='pri' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='redoAllStar'>重做全部標記</button></div>";
+  if(!list.length) return h+"<section class='panel'><p>尚未標記題目。喺題目右上角撳 ★ 即可標記。</p></section>";
+  var groups={}, i, it, uid, u, j, arr;
+  for(i=0;i<UNITS.length;i++) groups[UNITS[i].id]=[];
+  for(i=0;i<list.length;i++){
+    it=list[i];
+    uid=resolveUid(it);
+    if(!groups[uid]) groups[uid]=[];
+    groups[uid].push(it);
+  }
+  for(i=0;i<UNITS.length;i++){
+    u=UNITS[i];
+    arr=groups[u.id]||[];
+    h+="<h2>"+esc(u.no)+"　"+esc(u.title)+"　"+arr.length+" 題</h2>";
+    if(!arr.length){
+      h+="<section class='panel'><p>本篇暫無標記。</p></section>";
+      continue;
+    }
+    h+="<div class='toolbar'><button class='pri' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='redoStar' data-id='"+u.id+"'>重做本篇標記</button></div>";
+    h+="<section class='panel'>";
+    for(j=0;j<arr.length;j++){
+      it=arr[j];
+      h+="<div class='q' data-qid='"+esc(qid(it))+"' data-s='"+esc(it.s)+"' data-w='"+esc(it.w)+"' data-ans='"+esc(it.a)+"' data-uid='"+esc(it.uid||u.id)+"'>";
+      h+="<button type='button' class='star on' onclick='return act(this)' ontouchend='return act(this)' data-act='star'>★</button>";
+      h+="<blockquote class='quote'>"+markSent(it.s,it.w)+"</blockquote>";
+      h+="<div class='feedback ok'>應解作「"+esc(it.a)+"」。</div>";
+      h+="<button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='redoOne' data-uid='"+esc(it.uid||u.id)+"' data-s='"+esc(it.s)+"' data-w='"+esc(it.w)+"'>重做呢題</button></div>";
+    }
+    h+="</section>";
+  }
+  return h;
+}
+function findItem(uid,s,w){
+  var u=findUnit(uid), i, it;
+  if(u){
+    for(i=0;i<u.items.length;i++){
+      it=u.items[i];
+      if(it.s===s && it.w===w) return itemOf(u, it);
+    }
+  }
+  for(i=0;i<UNITS.length;i++){
+    u=UNITS[i];
+    for(var j=0;j<u.items.length;j++){
+      it=u.items[j];
+      if(it.s===s && it.w===w) return itemOf(u, it);
+    }
+  }
+  return null;
+}
+function unlockItem(it){
+  var id=(it.uid||"")+"|"+it.s+"|"+it.w;
+  delete mem.tried[id];
+  delete mem.pick[id];
+  delete mem.done[id];
+  var keep=[], i;
+  for(i=0;i<mem.wrong.length;i++){
+    if(!(mem.wrong[i].s===it.s && mem.wrong[i].w===it.w)) keep.push(mem.wrong[i]);
+  }
+  mem.wrong=keep;
+}
+function redoList(list){
+  var full=[], i, it;
+  for(i=0;i<list.length;i++){
+    it=findItem(list[i].uid, list[i].s, list[i].w);
+    if(!it) continue;
+    unlockItem(it);
+    full.push(it);
+  }
+  if(!full.length) return;
+  save();
+  state.mixPlan=null;
+  state.onlyNew=false;
+  state.mix=bank(full);
+  state.view="mix";
+  state.id=null;
+  render();
+}
+function toggleStar(btn){
+  var q=btn.parentNode;
+  var id=q.getAttribute("data-qid");
+  if(!id) return;
+  if(mem.star[id]){
+    delete mem.star[id];
+    btn.className="star";
+  }else{
+    mem.star[id]={
+      uid:q.getAttribute("data-uid")||"",
+      s:q.getAttribute("data-s")||"",
+      w:q.getAttribute("data-w")||"",
+      a:q.getAttribute("data-ans")||""
+    };
+    btn.className="star on";
+  }
+  saveStar();
+  if(state.view==="star") render();
+}
+
+var lastAct=0;
+function act(el){
+  if(!el) return false;
+  var now=Date.now();
+  if(now-lastAct<350) return false;
+  lastAct=now;
+  var a=el.getAttribute("data-act");
+  if(a==="open"){ state.view="home"; state.id=el.getAttribute("data-id"); render(); }
+  else if(a==="mix20"){ startRandom(20); }
+  else if(a==="mixN"){
+    var box=document.getElementById("randN");
+    var ids=checkedIds();
+    startRandom(parseInt(box&&box.value,10)||20, ids);
+  }
+  else if(a==="mixset"){ state.view="mixset"; state.mix=null; state.id=null; render(); }
+  else if(a==="startMix"){
+    state.mixPlan=collectPlan();
+    var only=document.getElementById("onlyNew");
+    state.onlyNew=!only || only.checked;
+    var hasPlan=false, k;
+    for(k in state.mixPlan) if(state.mixPlan.hasOwnProperty(k)) hasPlan=true;
+    var box0=document.getElementById("randN");
+    var want=parseInt(box0&&box0.value,10)||20;
+    var ids=checkedIds();
+    if(!hasPlan){ startRandom(want, ids); }
+    else{
+      var drawn=buildMix(state.mixPlan, state.onlyNew);
+      if(!drawn.length){ startRandom(want, ids); }
+      else{ state.mix=bank(drawn); state.view="mix"; render(); }
+    }
+  }
+  else if(a==="preset"){
+    var n=parseInt(el.getAttribute("data-n"),10)||0;
+    var boxes=document.getElementsByClassName("mixon");
+    var nums=document.getElementsByClassName("mixn");
+    var i, id, left;
+    for(i=0;i<boxes.length;i++){
+      id=boxes[i].getAttribute("data-id");
+      left=unitLeft(id);
+      boxes[i].checked=true;
+      nums[i].value=n?Math.min(n,left):0;
+    }
+  }
+  else if(a==="back"){ state.view="home"; state.id=null; render(); }
+  else if(a==="remix"){ state.view="mixset"; render(); }
+  else if(a==="clr"){ clearWrong(); }
+  else if(a==="clrUnitWrong"){ clearUnitWrong(el.getAttribute("data-id")); }
+  else if(a==="resetUnit"){ resetUnit(el.getAttribute("data-id")||state.id); }
+  else if(a==="star"){ toggleStar(el); }
+  else if(a==="pick"){ pick(el); }
+  else if(a==="closeRes"){
+    var box=document.getElementById("resultBox");
+    if(box) box.style.display="none";
+  }
+  else if(a==="redoWrong"){ redoWrong(el.getAttribute("data-id")); }
+  else if(a==="redoStar"){ redoStar(el.getAttribute("data-id")); }
+  else if(a==="redoOne"){ redoOne(el.getAttribute("data-uid"), el.getAttribute("data-s"), el.getAttribute("data-w")); }
+  else if(a==="redoAllWrong"){ redoAllWrong(); }
+  else if(a==="redoAllStar"){ redoAllStar(); }
+  return false;
+}
+function bind(){
+  if(false) $("app").onclick=function(e){
+    var t=e.target;
+    while(t && t!==$("app") && !t.getAttribute("data-act")) t=t.parentNode;
+    if(!t || t===$("app")) return;
+    var act=t.getAttribute("data-act");
+    if(act==="open"){ state.id=t.getAttribute("data-id"); render(); }
+    else if(act==="mix20"){ startRandom(20); }
+    else if(act==="mixN"){
+      var box=document.getElementById("randN");
+      var ids=checkedIds();
+      startRandom(parseInt(box&&box.value,10)||20, ids);
+    }
+    else if(act==="mixset"){ state.view="mixset"; state.mix=null; state.id=null; render(); }
+    else if(act==="startMix"){
+      state.mixPlan=collectPlan();
+      var only=document.getElementById("onlyNew");
+      state.onlyNew=!only || only.checked;
+      var hasPlan=false, k;
+      for(k in state.mixPlan) if(state.mixPlan.hasOwnProperty(k)) hasPlan=true;
+      var box0=document.getElementById("randN");
+      var want=parseInt(box0&&box0.value,10)||20;
+      var ids=checkedIds();
+      if(!hasPlan){
+        startRandom(want, ids);
+      }else{
+        var drawn=buildMix(state.mixPlan, state.onlyNew);
+        if(!drawn.length){ startRandom(want, ids); return; }
+        state.mix=bank(drawn);
+        state.view="mix"; render();
+      }
+    }
+    else if(act==="preset"){
+      var n=parseInt(t.getAttribute("data-n"),10)||0;
+      var boxes=document.getElementsByClassName("mixon");
+      var nums=document.getElementsByClassName("mixn");
+      var i, id, left;
+      for(i=0;i<boxes.length;i++){
+        id=boxes[i].getAttribute("data-id");
+        left=unitLeft(id);
+        boxes[i].checked = n>0 && left>0;
+      }
+      for(i=0;i<nums.length;i++){
+        id=nums[i].getAttribute("data-id");
+        left=unitLeft(id);
+        nums[i].value = n===0 ? 0 : Math.min(n, left||findUnit(id).items.length);
+      }
+    }
+    else if(act==="back"){ state.view="home"; state.id=null; render(); }
+    else if(act==="remix"){
+      if(state.mixPlan){ state.mix=bank(buildMix(state.mixPlan, state.onlyNew!==false)); render(); }
+      else { state.view="mixset"; state.mix=null; render(); }
+    }
+    else if(act==="clr"){ clearWrong(); render(); }
+    else if(act==="redoAllWrong"){ redoList(mem.wrong.slice()); }
+    else if(act==="redoAllStar"){ redoList(starList()); }
+    else if(act==="redoWrong"){
+      var uid=t.getAttribute("data-id"), list=[], i;
+      for(i=0;i<mem.wrong.length;i++) if(resolveUid(mem.wrong[i])===uid) list.push(mem.wrong[i]);
+      redoList(list);
+    }
+    else if(act==="redoStar"){
+      var uid2=t.getAttribute("data-id"), all=starList(), list2=[], i2;
+      for(i2=0;i2<all.length;i2++) if(resolveUid(all[i2])===uid2) list2.push(all[i2]);
+      redoList(list2);
+    }
+    else if(act==="redoOne"){
+      redoList([{uid:t.getAttribute("data-uid"), s:t.getAttribute("data-s"), w:t.getAttribute("data-w")}]);
+    }
+    else if(act==="clrUnitWrong"){ clearUnitWrong(t.getAttribute("data-id")); render(); }
+    else if(act==="resetUnit"){ resetUnit(t.getAttribute("data-id")||state.id); }
+    else if(act==="star"){ toggleStar(t); }
+    else if(act==="pick"){ pick(t); }
+    else if(act==="closeRes"){
+      var box=document.getElementById("resultBox");
+      if(box) box.style.display="none";
+    }
+  };
+}
+function resetUnit(uid){
+  if(!uid) return;
+  var u=findUnit(uid);
+  if(!u) return;
+  if(!confirm("確定重設「"+u.title+"」嘅進度？其他篇章唔會郁。")) return;
+  var i, it, id, keep=[], hit, j;
+  for(i=0;i<u.items.length;i++){
+    it=u.items[i];
+    id=uid+"|"+it.s+"|"+it.w;
+    delete mem.tried[id];
+    delete mem.pick[id];
+    delete mem.done[id];
+  }
+  for(i=0;i<mem.wrong.length;i++){
+    it=mem.wrong[i];
+    hit=false;
+    if(it.uid===uid) hit=true;
+    else{
+      for(j=0;j<u.items.length;j++){
+        if(u.items[j].s===it.s && u.items[j].w===it.w) hit=true;
+      }
+    }
+    if(!hit) keep.push(it);
+  }
+  mem.wrong=keep;
+  save();
+  render();
+}
+
+function nagIfEgg(q){
+  var s=q.getAttribute("data-s")||"";
+  var w=q.getAttribute("data-w")||"";
+  var key=s+"|"+w;
+  var eggs={
+    "假輿馬者|輿":1,
+    "假輿馬者|假":1,
+    "造次必於是|造次":1,
+    "日暮聊為梁甫吟|聊":1,
+    "引觴滿酌|觴":1
+  };
+  if(!eggs[key]) return;
+  if(document.getElementById("eggBox")) return;
+  var box=document.createElement("div");
+  box.id="eggBox";
+  box.className="egg";
+  box.innerHTML="<box><b>又錯多次...嬲你了😒 😒 😒</b><button class='pri' type='button' id='eggOk'>我會改了</button></box>";
+  document.body.appendChild(box);
+  document.getElementById("eggOk").onclick=function(){
+    var n=document.getElementById("eggBox");
+    if(n) n.parentNode.removeChild(n);
+  };
+}
+function pick(btn){
+  var q=btn.parentNode;
+  if(q.getAttribute("data-lock")==="1") return;
+  q.setAttribute("data-lock","1");
+  var ans=q.getAttribute("data-ans");
+  var ok=btn.getAttribute("data-v")===ans;
+  var btns=q.getElementsByClassName("opt"), i;
+  for(i=0;i<btns.length;i++){
+    if(btns[i].getAttribute("data-v")===ans) btns[i].className="opt ok";
+  }
+  if(!ok) btn.className="opt bad";
+  var fb=q.getElementsByClassName("feedback")[0];
+  if(ok){
+    fb.className="feedback ok";
+    fb.innerHTML="正確。此處應解作「"+esc(ans)+"」。";
+    q.setAttribute("data-good","1");
+    mem.done[q.getAttribute("data-qid")]=1;
+  }else{
+    fb.className="feedback bad";
+    fb.innerHTML="不正確。正確答案為「"+esc(ans)+"」。";
+    q.setAttribute("data-good","0");
+    nagIfEgg(q);
+    var id=q.getAttribute("data-qid").split("|");
+    var rec={uid:id[0],s:id[1],w:id[2],a:ans};
+    var seen=false;
+    for(i=0;i<mem.wrong.length;i++) if(mem.wrong[i].s===rec.s && mem.wrong[i].w===rec.w) seen=true;
+    if(!seen){ mem.wrong.unshift(rec); if(mem.wrong.length>400) mem.wrong.length=400; }
+  }
+  mem.tried[q.getAttribute("data-qid")]=1;
+  mem.pick[q.getAttribute("data-qid")]=btn.getAttribute("data-v");
+  save();
+  pill();
+  finishIfDone(q.parentNode);
+}
+function clearUnitWrong(uid){
+  if(!uid) return;
+  var i, it, id, keep=[];
+  for(i=0;i<mem.wrong.length;i++){
+    it=mem.wrong[i];
+    if(resolveUid(it)===uid){
+      id=uid+"|"+it.s+"|"+it.w;
+      delete mem.tried[id];
+      delete mem.pick[id];
+      delete mem.done[id];
+    }else keep.push(it);
+  }
+  mem.wrong=keep;
+  save();
+}
+function clearWrong(){
+  var i, it, id;
+  for(i=0;i<mem.wrong.length;i++){
+    it=mem.wrong[i];
+    id=(it.uid||"")+"|"+it.s+"|"+it.w;
+    delete mem.tried[id];
+    delete mem.pick[id];
+    delete mem.done[id];
+  }
+  mem.wrong=[];
+  save();
+}
+function finishIfDone(panel){
+  if(!panel) return;
+  var qs=panel.getElementsByClassName("q"), i, locked=0, good=0;
+  for(i=0;i<qs.length;i++){
+    if(qs[i].getAttribute("data-lock")==="1") locked++;
+    if(qs[i].getAttribute("data-good")==="1") good++;
+  }
+  var chip=document.getElementById("unitPct");
+  if(chip && qs.length) chip.innerHTML=Math.round(good/qs.length*100)+"%";
+  if(!qs.length || locked<qs.length) return;
+  if(document.getElementById("resultBox")) return;
+  var p=Math.round(good/qs.length*100);
+  var extra=allDone() ? "<p style='margin:10px 0 0;line-height:1.7'>"+allMsg()+"</p>" : "";
+  var box=document.createElement("div");
+  box.id="resultBox";
+  box.className="result";
+  box.innerHTML="<b>"+cheer(p)+"</b><span>本篇成績 "+p+"%（"+good+" / "+qs.length+"）</span>"+extra+
+    "<div class='toolbar' style='margin:12px 0 0;justify-content:center'><button class='pri' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='closeRes'>繼續睇題</button><button class='ghost' type='button' onclick='return act(this)' ontouchend='return act(this)' data-act='back'>返回篇章</button></div>";
+  panel.insertBefore(box, panel.firstChild);
+  try{ box.scrollIntoView({behavior:"smooth",block:"start"}); }catch(e){ box.scrollIntoView(); }
+}
+function boot(){
+  try{
+    var home=$("goHome"), reset=$("resetAll");
+    if(home) home.onclick=function(){ state.view="home"; state.id=null; render(); };
+    if(reset) reset.onclick=function(){
+      if(!confirm("確定重設全部進度與錯題？")) return;
+      mem.done={}; mem.wrong=[]; mem.tried={}; mem.pick={};
+      try{ localStorage.removeItem(KEY); }catch(e){}
+      state.mix=null; state.id=null; state.view="home"; render();
+    };
+    var navs=document.querySelectorAll("nav [data-v]"), i;
+    for(i=0;i<navs.length;i++){
+      navs[i].onclick=function(){
+        state.view=this.getAttribute("data-v");
+        state.id=null;
+        if(state.view==="mix"){ state.view="mixset"; state.mix=null; }
+        render();
+      };
+    }
+    window.__act=function(t){
+      var app=$("app");
+      if(app && app.onclick) app.onclick({target:t});
+    };
+    render();
+  }catch(err){
+    var app=$("app");
+    if(app) app.innerHTML="<section class='panel'><p>題目載入失敗。請關閉頁面再開一次。</p></section>";
+  }
+}
+window.addEventListener("hashchange", function(){
+  var h=location.hash||"";
+  if(h.indexOf("#u-")===0){ state.view="home"; state.id=h.slice(3); render(); }
+});
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", boot);
+else boot();
+
+</script>
+</body>
+</html>
